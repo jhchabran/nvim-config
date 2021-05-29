@@ -18,6 +18,7 @@ map('t', '<C-g>', "<cmd>lua require('FTerm').toggle()<CR>")
 local wk = require("which-key")
 wk.register({
 	w = { "<cmd>:w<CR>", "Save current buffer" },
+	W = { "<cmd>:wq<CR>", "Save current buffer and quit" },
 	["."] = { function() require('telescope.builtin').file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative"},
   [":"] = { "<cmd>Telescope commands", "Find command" },
   b = {
