@@ -11,6 +11,8 @@ opt('b', 'expandtab', true)                           -- Use spaces instead of t
 opt('b', 'shiftwidth', indent)                        -- Size of an indent
 opt('b', 'smartindent', true)                         -- Insert indents automatically
 opt('b', 'tabstop', indent)                           -- Number of spaces tabs count for
+opt('o', 'mouse', 'a')                                -- Useful when browsing
+opt('o', 'clipboard', 'unnamedplus')                  -- Put those yanks in my os clipboards
 opt('o', 'completeopt', 'menuone,noselect')           -- Completion options (for compe)
 opt('o', 'hidden', true)                              -- Enable modified buffers in background
 opt('o', 'ignorecase', true)                          -- Ignore case
