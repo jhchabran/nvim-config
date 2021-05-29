@@ -18,7 +18,7 @@ map('t', '<C-g>', "<cmd>lua require('FTerm').toggle()<CR>")
 local wk = require("which-key")
 wk.register({
 	w = { "<cmd>:w<CR>", "Save current buffer" },
-	W = { "<cmd>:wq<CR>", "Save current buffer and quit" },
+	['<S-w>'] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
 	["."] = { function() require('telescope.builtin').file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative"},
   [":"] = { "<cmd>Telescope commands", "Find command" },
   b = {
@@ -66,10 +66,10 @@ wk.register({
 	g = {
 		name = "Git",
     a = { "<cmd>:Gw<CR>", "Git add current buffer" },
-    b = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
+    b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
+    ['<S-b>'] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
     c = { "<cmd>:Git commit<CR>", "Git commit" },
-    b = { "<cmd>Telescope git_commits<CR>", "Git log" },
-    G = { "<cmd>Telescope git_branches<CR>", "Show branches" },
+    ['<S-c>'] = { "<cmd>Telescope git_commits<CR>", "Git log" },
     g = { "<cmd>:Git<CR>", "Git status" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
     z = { 
