@@ -33,8 +33,9 @@ wk.register({
 	c = {
 		name = "Code / LSP",
     [" "] = { "<cmd>Telescope treesitter<CR>", "Treesitter jump" },
-		a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "action" },
-		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "definition"},
+		a = { "<cmd>Telescope lsp_code_actions<CR>", "Code actions" },
+		c = { "<cmd>Telescope lsp_workspace_symbols<CR>", "Workspace symbols" },
+		d = { "<cmd>Telescope lsp_definitions<CR>", "Definitions" },
 		e = {
 			name = "diagnostic",
 			p = {"<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous"},
@@ -42,11 +43,13 @@ wk.register({
 		},
 		f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "formatting"},
 		h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover"},
+		i = { "<cmd>Telescope lsp_implementations<CR>", "Implementations" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename"},
-		x = { "<cmd>lua vim.lsp.buf.references()<CR>", "references"},
-		c = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "document symbol"},
+		['R'] = { "<cmd>Telescope lsp_references<CR>", "References" },
     q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
-    l = { "<cmd>Telescope quickfix<CR>", "Loclist" },
+    l = { "<cmd>Telescope loclist<CR>", "Loclist" },
+		x = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Document diagnostics" },
+		['X'] = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "Workspace diagnostics" },
 	},
   e = {
     name = "Easy motion",
@@ -89,7 +92,8 @@ wk.register({
     h = { "<cmd>Telescope help_tags<CR>", "Inline help" },
     m = { "<cmd>Telescope man_pages<CR>", "Inline help" },
     t = { "<cmd>Telescope colorscheme<CR>", "Inline help" },
-    r = { require('jh.utils').reload_my_code, "Force reload 'jh.*' lua modules" },
+    r = { require('jh.utils').reload_my_code, "Reload 'jh.*' lua modules" },
+    ['R'] = { "<cmd>Telescope reloader<CR>", "Reload a module" },
 	},
   n = {
     name = "Notes",
