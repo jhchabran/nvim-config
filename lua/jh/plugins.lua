@@ -25,6 +25,8 @@ paq {'tpope/vim-repeat'}
 paq {'tpope/vim-vinegar'}
 paq {'easymotion/vim-easymotion'}       -- jump everywhere like a madman
 paq {'vimwiki/vimwiki'}
+paq {'kyazdani42/nvim-web-devicons'}    -- all the icons
+paq {'hoob3rt/lualine.nvim'}            -- status line with goodies
 
 -- languages support
 paq {'fatih/vim-go'}
@@ -68,3 +70,5 @@ vim.g.EasyMotion_smartcase = 1
 
 -- Use markdown for vimwiki
 vim.g.vimwiki_list = {{ path = '~/Notes', syntax = 'markdown', ext = '.md' }}
+
+require('lualine').setup({options = {theme = 'solarized'}})
