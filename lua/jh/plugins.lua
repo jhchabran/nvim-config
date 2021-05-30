@@ -33,6 +33,12 @@ paq {'fatih/vim-go'}
 require('lspconfig').gopls.setup{}
 paq {'npxbr/glow.nvim', run = "go get github.com/charmbracelet/glow"}
 
+require('telescope').setup({
+  defaults = {
+    prompt_position = "top",
+  },
+})
+
 -- misc setups
 require('FTerm').setup()
 
