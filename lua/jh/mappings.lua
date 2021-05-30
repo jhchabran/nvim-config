@@ -20,16 +20,15 @@ wk.register({
 	w = { "<cmd>:w<CR>", "Save current buffer" },
 	['<S-w>'] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
 	["."] = { function() require('telescope.builtin').file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative"},
-  [":"] = { "<cmd>Telescope commands", "Find command" },
+  [":"] = { "<cmd>Telescope commands<CR>", "Find command" },
   b = {
     name = "Buffers",
-    b = { "<cmd>Telescope buffers<CR>", "find buffer" },
-    a = { "<c-^>", "switch back to previous buffer" },
-    ['<Tab>'] = { "<c-^>", "switch back to previous buffer" },
+    b = { "<cmd>Telescope buffers<CR>", "Find buffer" },
+    a = { "<c-^>", "Switch back to previous buffer" },
+    ['<Tab>'] = { "<c-^>", "Switch back to previous buffer" },
     w = { "<cmd>:bw<CR>", "close and save current buffer" },
-    d = { "<cmd>:bd<CR>", "delete current buffer" },
-    -- =
-    --
+    d = { "<cmd>:bd<CR>", "Delete current buffer" },
+    x = { require('jh.notes').open_scratch, "Open scratch buffer" },
   },
 	c = {
 		name = "Code / LSP",
@@ -90,9 +89,11 @@ wk.register({
     h = { "<cmd>Telescope help_tags<CR>", "Inline help" },
     m = { "<cmd>Telescope man_pages<CR>", "Inline help" },
     t = { "<cmd>Telescope colorscheme<CR>", "Inline help" },
+    r = { require('jh.utils').reload_my_code, "Force reload 'jh.*' lua modules" },
 	},
   n = {
-    name = "Notes"
+    name = "Notes",
+    f = { require('jh.notes').find_notes, "Find notes" },
   },
 	o = {
 		name = "Others",
@@ -101,10 +102,7 @@ wk.register({
 	p = {
 		name = "Project", -- optional group name
 		f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-		--    n = { "New File" }, -- just a label. don't create any mapping
-		--    e = "Edit File", -- same as above
-		--    ["1"] = "which_key_ignore",  -- special label to hide it in the popup
-		--    b = { function() print("bar") end, "Foobar" } -- you can also pass functions!
+    x = { require('jh.notes').open_current_project_notes, "Open project notes" },
 	},
   s = {
     name = "Search",

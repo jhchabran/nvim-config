@@ -1,4 +1,3 @@
-
 vim.cmd 'packadd paq-nvim'               -- load the package manager
 local paq = require('paq-nvim').paq      -- a convenient alias
 paq {'savq/paq-nvim', opt = true}        -- paq-nvim manages itself
@@ -25,6 +24,7 @@ paq {'tpope/vim-commentary'}
 paq {'tpope/vim-repeat'}             
 paq {'tpope/vim-vinegar'}
 paq {'easymotion/vim-easymotion'}       -- jump everywhere like a madman
+paq {'vimwiki/vimwiki'}
 
 -- languages support
 paq {'fatih/vim-go'}
@@ -65,3 +65,6 @@ vim.g.EasyMotion_do_mapping = 0
 -- Colemak user here, use my homerow and above
 vim.g.EasyMotion_keys = 'tnseriaoplfuwydhpj'
 vim.g.EasyMotion_smartcase = 1
+
+-- Use markdown for vimwiki
+vim.g.vimwiki_list = {{ path = '~/Notes', syntax = 'markdown', ext = '.md' }}
