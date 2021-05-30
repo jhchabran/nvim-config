@@ -74,6 +74,8 @@ wk.register({
     ['<S-c>'] = { "<cmd>Telescope git_commits<CR>", "Git log" },
     g = { "<cmd>:Git<CR>", "Git status" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
+    p = { "<cmd>:Git push<CR>", "Git push" },
+    w = { "<cmd>:Gw<CR>", "Git add %" },
     z = { 
       name = "Stashes", 
       l = { "<cmd>Telescope git_stash<CR>", "List stashes" },
