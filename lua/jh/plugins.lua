@@ -4,13 +4,13 @@ return require('packer').startup(function(use)
 
   -- incremental syntax parsing, the mother of modernity
   use {
-    'nvim-treesitter/nvim-treesitter', 
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function() 
+    config = function()
       local ts = require 'nvim-treesitter.configs'
       ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
     end
-  }  
+  }
   -- LSP goodies
   use {
     'onsails/lspkind-nvim', 'neovim/nvim-lspconfig', -- '~/projects/personal/lsp-status.nvim',
@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
   -- autocompletion
   use {
     'hrsh7th/nvim-compe',
-    config = function() 
+    config = function()
       require('compe').setup {
         enabled = true;
         autocomplete = true;
@@ -52,17 +52,28 @@ return require('packer').startup(function(use)
         }
       }
     end
-  }               
+  }
+  -- trailing whitespaces
+  use {
+    'ntpeters/vim-better-whitespace',
+    config = function()
+      -- strip only if I touched the line
+      vim.g.strip_only_modified_lines = 1
+      vim.g.strip_whitespace_on_save = 1
+      vim.g.strip_whitespace_confirm = 0
+    end
+  }
+
   -- snippets
-  use {'hrsh7th/vim-vsnip'}                
-  use {'hrsh7th/vim-vsnip-integ'}          
+  use {'hrsh7th/vim-vsnip'}
+  use {'hrsh7th/vim-vsnip-integ'}
   use {'junegunn/fzf', run = vim.fn['fzf#install']}
   use {'junegunn/fzf.vim'}
   use {'ojroques/nvim-lspfuzzy'}
   -- discoverable bingings
-  use {'folke/which-key.nvim'}            
+  use {'folke/which-key.nvim'}
   -- config lua stuff for me please
-  use {'folke/lua-dev.nvim'}              
+  use {'folke/lua-dev.nvim'}
   -- A great UI plugin to pick things
   use {
     'nvim-telescope/telescope.nvim',
@@ -77,10 +88,10 @@ return require('packer').startup(function(use)
     end
   }
   -- a theme engine
-  use {'tjdevries/colorbuddy.nvim'}       
+  use {'tjdevries/colorbuddy.nvim'}
   -- display a lightbulb when there is a code action available
-  use {'kosayoda/nvim-lightbulb'}         
-  -- git gutter 
+  use {'kosayoda/nvim-lightbulb'}
+  -- git gutter
   use {
     'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
     config = function() require('gitsigns').setup() end
@@ -88,35 +99,35 @@ return require('packer').startup(function(use)
   -- floating terminal
   use {
     'numtostr/FTerm.nvim',
-    config = function() 
+    config = function()
       require('FTerm').setup()
     end
-  }             
+  }
   -- tpope, the legend
-  use {'tpope/vim-fugitive'}              
-  use {'tpope/vim-commentary'}            
-  use {'tpope/vim-repeat'}             
+  use {'tpope/vim-fugitive'}
+  use {'tpope/vim-commentary'}
+  use {'tpope/vim-repeat'}
   use {'tpope/vim-vinegar'}
   -- kangaroo based motions, jump everywhere
   use {
     'easymotion/vim-easymotion',
-    config = function() 
+    config = function()
       -- disable easy motion default mappings, they eat all leader keys otherwise
       vim.g.EasyMotion_do_mapping = 0
       -- Colemak user here, use my homerow and above
       vim.g.EasyMotion_keys = 'tnseriaoplfuwydhpj'
       vim.g.EasyMotion_smartcase = 1
     end
-  }       
+  }
   -- all the icons
-  use {'kyazdani42/nvim-web-devicons'}    
+  use {'kyazdani42/nvim-web-devicons'}
   -- status line with goodies
   use {
     'hoob3rt/lualine.nvim',
-    config = function() 
+    config = function()
       require('lualine').setup({options = {theme = 'solarized'}})
     end
-  }           
+  }
   -- popup markdown preview
   use {'npxbr/glow.nvim', run = ":GlowInstall"}
   -- best language plugin ever created
@@ -124,5 +135,5 @@ return require('packer').startup(function(use)
 
   -- my stuff ----------------------------------
   -- theme
-  use {'~/code/src/github.com/jhchabran/monarized'}            
+  use {'~/code/src/github.com/jhchabran/monarized'}
 end)

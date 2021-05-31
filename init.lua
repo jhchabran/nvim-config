@@ -16,8 +16,9 @@ opt('o', 'clipboard', 'unnamedplus')                  -- Put those yanks in my o
 opt('o', 'completeopt', 'menuone,noselect')           -- Completion options (for compe)
 opt('o', 'hidden', true)                              -- Enable modified buffers in background
 opt('o', 'ignorecase', true)                          -- Ignore case
+opt('o', 'incsearch', true)                           -- Make search behave like modern browsers
 opt('o', 'joinspaces', false)                         -- No double spaces with join after a dot
-opt('o', 'scrolloff', 4 )                             -- Lines of context
+opt('o', 'scrolloff', 10)                             -- Lines of context
 opt('o', 'shiftround', true)                          -- Round indent
 opt('o', 'sidescrolloff', 8 )                         -- Columns of context
 opt('o', 'smartcase', true)                           -- Don't ignore case with capitals
@@ -28,7 +29,7 @@ opt('o', 'wildmode', 'list:longest')                  -- Command-line completion
 opt('w', 'list', false)                               -- Show some invisible characters (tabs...)
 opt('w', 'number', false)                             -- Print line number
 opt('w', 'relativenumber', false)                     -- Relative line numbers
-opt('w', 'wrap', false)                               -- Disable line wrap
+opt('w', 'wrap', true)                                -- Enable line wrap
 opt('o', 'cmdheight', 2)                              -- More space to display messages
 
 vim.g['python3_host_prog'] = '~/.asdf/shims/python3'  -- Use this python binary

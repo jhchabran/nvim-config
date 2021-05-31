@@ -1,0 +1,8 @@
+- Go
+  - [ ] Run last test
+- Markdown
+  - [ ] `spc spc t`: insert `[ ]` 
+    - or use a snippet?
+- Mappings 
+  - [ ] `spc o q`: toggle quickfix  
+  - [ ] `spc p b`: telescope buffers scoped on project root and project notes

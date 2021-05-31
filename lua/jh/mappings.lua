@@ -34,7 +34,7 @@ wk.register({
 		name = "Code / LSP",
     [" "] = { "<cmd>Telescope treesitter<CR>", "Treesitter jump" },
 		a = { "<cmd>Telescope lsp_code_actions<CR>", "Code actions" },
-		c = { "<cmd>Telescope lsp_workspace_symbols<CR>", "Workspace symbols" },
+		c = { "<cmd>Telescope lsp_document_symbols<CR>", "Document symbols" },
 		d = { "<cmd>Telescope lsp_definitions<CR>", "Definitions" },
 		e = {
 			name = "diagnostic",
@@ -77,8 +77,8 @@ wk.register({
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
     p = { "<cmd>:Git push<CR>", "Git push" },
     w = { "<cmd>:Gw<CR>", "Git add %" },
-    z = { 
-      name = "Stashes", 
+    z = {
+      name = "Stashes",
       l = { "<cmd>Telescope git_stash<CR>", "List stashes" },
       z = { "<cmd>:Git stash<CR>", "run git stash" },
     },
@@ -120,8 +120,8 @@ wk.register({
   t = {
     name = "Tabs",
     t = { "<cmd>:tabnew<CR>", "New tab" },
-    n = { "<cmd>:tabn<CR>", "Next tab" }, 
-    N = { "<cmd>:tabp<CR>", "Prev tab" }, 
+    n = { "<cmd>:tabn<CR>", "Next tab" },
+    N = { "<cmd>:tabp<CR>", "Prev tab" },
     d = { "<cmd>:tabclose<CR>", "Close tab" },
   }
 }, { prefix = "<leader>" })
