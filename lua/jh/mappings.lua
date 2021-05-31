@@ -38,6 +38,9 @@ wk.register({
 		d = { "<cmd>Telescope lsp_definitions<CR>", "Definitions" },
 		e = {
 			name = "diagnostic",
+      d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Document diagnostics" },
+      w = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "Workspace diagnostics" },
+
 			p = {"<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous"},
 			n = {"<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next"},
 		},
@@ -48,8 +51,6 @@ wk.register({
 		['R'] = { "<cmd>Telescope lsp_references<CR>", "References" },
     q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
     l = { "<cmd>Telescope loclist<CR>", "Loclist" },
-		x = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Document diagnostics" },
-		['X'] = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "Workspace diagnostics" },
 	},
   e = {
     name = "Easy motion",
