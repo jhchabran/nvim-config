@@ -1,80 +1,128 @@
-vim.cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq      -- a convenient alias
-paq {'savq/paq-nvim', opt = true}        -- paq-nvim manages itself
+return require('packer').startup(function(use)
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
 
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'neovim/nvim-lspconfig'}
-paq {'hrsh7th/nvim-compe'}               -- autocompletion
-paq {'hrsh7th/vim-vsnip'}                -- snippets
-paq {'hrsh7th/vim-vsnip-integ'}          
-paq {'junegunn/fzf', run = vim.fn['fzf#install']}
-paq {'junegunn/fzf.vim'}
-paq {'ojroques/nvim-lspfuzzy'}
-paq {'folke/which-key.nvim'}            -- discoverable bingings
-paq {'nvim-lua/popup.nvim'}
-paq {'nvim-lua/plenary.nvim'}
-paq {'nvim-telescope/telescope.nvim'}   -- is that really a TUI app?
-paq {'tjdevries/colorbuddy.nvim'}       -- a theme engine
-paq {'jhchabran/monarized'}             -- my own theme
-paq {'kosayoda/nvim-lightbulb'}         -- display a lightbulb when there is a code action available
-paq {'lewis6991/gitsigns.nvim'}         -- git gutter 
-paq {'numtostr/FTerm.nvim'}             -- floating terminal
-paq {'tpope/vim-fugitive'}              -- git all the things
-paq {'tpope/vim-commentary'}            
-paq {'tpope/vim-repeat'}             
-paq {'tpope/vim-vinegar'}
-paq {'easymotion/vim-easymotion'}       -- jump everywhere like a madman
-paq {'vimwiki/vimwiki'}
-paq {'kyazdani42/nvim-web-devicons'}    -- all the icons
-paq {'hoob3rt/lualine.nvim'}            -- status line with goodies
+  -- incremental syntax parsing, the mother of modernity
+  use {
+    'nvim-treesitter/nvim-treesitter', 
+    run = ':TSUpdate',
+    config = function() 
+      local ts = require 'nvim-treesitter.configs'
+      ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+    end
+  }  
+  -- LSP goodies
+  use {
+    'onsails/lspkind-nvim', 'neovim/nvim-lspconfig', -- '~/projects/personal/lsp-status.nvim',
+    'glepnir/lspsaga.nvim', -- 'folke/trouble.nvim'
+  }
+  -- Debugger
+  use {'mfussenegger/nvim-dap', opt = true}
+  use {
+    'puremourning/vimspector',
+    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
+    disable = true
+  }
+  -- autocompletion
+  use {
+    'hrsh7th/nvim-compe',
+    config = function() 
+      require('compe').setup {
+        enabled = true;
+        autocomplete = true;
+        debug = false;
+        min_length = 1;
+        preselect = 'enable';
+        throttle_time = 80;
+        source_timeout = 200;
+        incomplete_delay = 400;
+        max_abbr_width = 100;
+        max_kind_width = 100;
+        max_menu_width = 100;
+        documentation = true;
 
--- languages support
-paq {'fatih/vim-go'}
-require('lspconfig').gopls.setup{}
-paq {'npxbr/glow.nvim', run = "go get github.com/charmbracelet/glow"}
+        source = {
+          path = true;
+          buffer = false;
+          calc = true;
+          nvim_lsp = true;
+          nvim_lua = true;
+          vsnip = true;
+          ultisnips = true;
+        }
+      }
+    end
+  }               
+  -- snippets
+  use {'hrsh7th/vim-vsnip'}                
+  use {'hrsh7th/vim-vsnip-integ'}          
+  use {'junegunn/fzf', run = vim.fn['fzf#install']}
+  use {'junegunn/fzf.vim'}
+  use {'ojroques/nvim-lspfuzzy'}
+  -- discoverable bingings
+  use {'folke/which-key.nvim'}            
+  -- config lua stuff for me please
+  use {'folke/lua-dev.nvim'}              
+  -- A great UI plugin to pick things
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+    config = function()
+      require('telescope').setup({
+        defaults = {
+          prompt_position = "top",
+          sorting_strategy = "ascending",
+        },
+      })
+    end
+  }
+  -- a theme engine
+  use {'tjdevries/colorbuddy.nvim'}       
+  -- display a lightbulb when there is a code action available
+  use {'kosayoda/nvim-lightbulb'}         
+  -- git gutter 
+  use {
+    'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
+    config = function() require('gitsigns').setup() end
+  }
+  -- floating terminal
+  use {
+    'numtostr/FTerm.nvim',
+    config = function() 
+      require('FTerm').setup()
+    end
+  }             
+  -- tpope, the legend
+  use {'tpope/vim-fugitive'}              
+  use {'tpope/vim-commentary'}            
+  use {'tpope/vim-repeat'}             
+  use {'tpope/vim-vinegar'}
+  -- kangaroo based motions, jump everywhere
+  use {
+    'easymotion/vim-easymotion',
+    config = function() 
+      -- disable easy motion default mappings, they eat all leader keys otherwise
+      vim.g.EasyMotion_do_mapping = 0
+      -- Colemak user here, use my homerow and above
+      vim.g.EasyMotion_keys = 'tnseriaoplfuwydhpj'
+      vim.g.EasyMotion_smartcase = 1
+    end
+  }       
+  -- all the icons
+  use {'kyazdani42/nvim-web-devicons'}    
+  -- status line with goodies
+  use {
+    'hoob3rt/lualine.nvim',
+    config = function() 
+      require('lualine').setup({options = {theme = 'solarized'}})
+    end
+  }           
+  -- popup markdown preview
+  use {'npxbr/glow.nvim', run = ":GlowInstall"}
+  -- best language plugin ever created
+  use {'fatih/vim-go'}
 
-require('telescope').setup({
-  defaults = {
-    prompt_position = "top",
-  },
-})
-
--- misc setups
-require('FTerm').setup()
-
-require('compe').setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
-
-  source = {
-    path = true;
-    buffer = false;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-  };
-}
-
--- disable easy motion default mappings, they eat all leader keys otherwise
-vim.g.EasyMotion_do_mapping = 0
-
--- Colemak user here, use my homerow and above
-vim.g.EasyMotion_keys = 'tnseriaoplfuwydhpj'
-vim.g.EasyMotion_smartcase = 1
-
--- Use markdown for vimwiki
-vim.g.vimwiki_list = {{ path = '~/Notes', syntax = 'markdown', ext = '.md' }}
-
-require('lualine').setup({options = {theme = 'solarized'}})
+  -- my stuff ----------------------------------
+  -- theme
+  use {'~/code/src/github.com/jhchabran/monarized'}            
+end)
