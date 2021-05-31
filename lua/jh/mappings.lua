@@ -86,10 +86,10 @@ wk.register({
 		name = "Help and misc helpers",
 		p = {
 			name = "Packages",
-			i = { "<cmd>PaqInstall<CR>", "Install packages" },
-			u = { "<cmd>PaqUpdate<CR>", "Update packages" },
-			c = { "<cmd>PaqClean<CR>", "Clean packages" },
-			l = { "<cmd>PaqList<CR>", "List packages" }
+			c = { "<cmd>PackerClean<CR>", "Clean packages" },
+			s = { "<cmd>PackerSync<CR>", "Install packages" },
+			u = { "<cmd>PackerUpdate<CR>", "Update packages" },
+			['S'] = { "<cmd>PackerStatus<CR>", "List packages" }
 		},
     h = { "<cmd>Telescope help_tags<CR>", "Inline help" },
     m = { "<cmd>Telescope man_pages<CR>", "Inline help" },
