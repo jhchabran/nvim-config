@@ -40,6 +40,7 @@ require("jh.plugins")
 require("jh.lsp")
 require("jh.mappings")
 require("jh.go")
+require("jh.lua")
 require("jh.markdown")
 
 require('colorbuddy').colorscheme('monarized')
