@@ -150,6 +150,8 @@ wk.register({
 	o = {
 		name = "Others",
 		t = { "<cmd>lua require('FTerm').toggle()<CR>", "open terminal" },
+    q = { "<cmd>:<Plug>(qf_qf_toggle)<CR>" },
+    l = { "<cmd>:<Plug>(qf_loc_toggle)<CR>" },
 	},
 	p = {
 		name = "Project", -- optional group name
@@ -171,7 +173,6 @@ wk.register({
   },
   z = {
     name = "Toggles",
-    q = { "<cmd>:<Plug>(qf_qf_toggle)<CR>" },
-    l = { "<cmd>:<Plug>(qf_loc_toggle)<CR>" },
+    l = { "<cmd>set invnumber<CR>", "Line numbers" }
   }
 }, { prefix = "<leader>" })
