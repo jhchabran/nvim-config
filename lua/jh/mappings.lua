@@ -59,6 +59,8 @@ map('i', '<C-g>', "compe#close('<C-g>')", {expr = true, silent = true})
 
 -- Close term with C-g when in terminal mode
 map('t', '<C-g>', "<cmd>lua require('FTerm').toggle()<CR>")
+-- and also if the gloabal binding is called again when its opened
+map('t', '<leader>ot', "<cmd>lua require('FTerm').close()<CR>")
 
 local wk = require("which-key")
 wk.register({
