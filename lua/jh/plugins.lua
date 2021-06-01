@@ -48,7 +48,6 @@ return require('packer').startup(function(use)
           nvim_lsp = true;
           nvim_lua = true;
           vsnip = true;
-          ultisnips = true;
         }
       }
     end
@@ -67,9 +66,13 @@ return require('packer').startup(function(use)
   -- snippets
   use {'hrsh7th/vim-vsnip'}
   use {'hrsh7th/vim-vsnip-integ'}
+  use {'golang/vscode-go'}
+
+  -- fast fuzzy finder
   use {'junegunn/fzf', run = vim.fn['fzf#install']}
   use {'junegunn/fzf.vim'}
   use {'ojroques/nvim-lspfuzzy'}
+
   -- discoverable bingings
   use {'folke/which-key.nvim'}
   -- config lua stuff for me please
@@ -104,10 +107,12 @@ return require('packer').startup(function(use)
     end
   }
   -- tpope, the legend
-  use {'tpope/vim-fugitive'}
-  use {'tpope/vim-commentary'}
-  use {'tpope/vim-repeat'}
-  use {'tpope/vim-vinegar'}
+  use {'tpope/vim-fugitive'}   -- git
+  use {'tpope/vim-commentary'} -- comments
+  use {'tpope/vim-repeat'}     -- repeat commands
+  use {'tpope/vim-vinegar'}    -- press - for local filebrowser
+  use {'tpope/vim-surround'}   -- cs)] turns surrounding ) into ]
+
   -- kangaroo based motions, jump everywhere
   use {
     'easymotion/vim-easymotion',
@@ -119,6 +124,10 @@ return require('packer').startup(function(use)
       vim.g.EasyMotion_smartcase = 1
     end
   }
+
+  -- quickfix enhancements
+  use { 'romainl/vim-qf' }
+
   -- all the icons
   use {'kyazdani42/nvim-web-devicons'}
   -- status line with goodies
@@ -130,8 +139,14 @@ return require('packer').startup(function(use)
   }
   -- popup markdown preview
   use {'npxbr/glow.nvim', run = ":GlowInstall"}
+
   -- best language plugin ever created
-  use {'fatih/vim-go'}
+  use {
+    'fatih/vim-go',
+    config = function()
+      vim.g.go_auto_type_info = 1
+    end
+  }
 
   -- my stuff ----------------------------------
   -- theme

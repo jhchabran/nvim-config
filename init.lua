@@ -13,7 +13,7 @@ opt('b', 'smartindent', true)                         -- Insert indents automati
 opt('b', 'tabstop', indent)                           -- Number of spaces tabs count for
 opt('o', 'mouse', 'a')                                -- Useful when browsing
 opt('o', 'clipboard', 'unnamedplus')                  -- Put those yanks in my os clipboards
-opt('o', 'completeopt', 'menuone,noselect')           -- Completion options (for compe)
+opt('o', 'completeopt', 'menuone,noinsert,noselect')           -- Completion options (for compe)
 opt('o', 'hidden', true)                              -- Enable modified buffers in background
 opt('o', 'ignorecase', true)                          -- Ignore case
 opt('o', 'incsearch', true)                           -- Make search behave like modern browsers
@@ -31,6 +31,7 @@ opt('w', 'number', false)                             -- Print line number
 opt('w', 'relativenumber', false)                     -- Relative line numbers
 opt('w', 'wrap', true)                                -- Enable line wrap
 opt('o', 'cmdheight', 2)                              -- More space to display messages
+opt('o', 'timeoutlen', 400)                           -- Don't wait more that 400ms for normal mode commands
 
 vim.g['python3_host_prog'] = '~/.asdf/shims/python3'  -- Use this python binary
 
