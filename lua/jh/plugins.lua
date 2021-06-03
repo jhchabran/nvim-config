@@ -17,12 +17,7 @@ return require('packer').startup(function(use)
     'glepnir/lspsaga.nvim', -- 'folke/trouble.nvim'
   }
   -- Debugger
-  use {'mfussenegger/nvim-dap', opt = true}
-  use {
-    'puremourning/vimspector',
-    setup = [[vim.g.vimspector_enable_mappings = 'HUMAN']],
-    disable = true
-  }
+  use { 'puremourning/vimspector' }
   -- autocompletion
   use {
     'hrsh7th/nvim-compe',

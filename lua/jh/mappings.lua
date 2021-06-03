@@ -99,6 +99,19 @@ wk.register({
     q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
     l = { "<cmd>Telescope loclist<CR>", "Loclist" },
 	},
+  d = {
+    name = "Debugger",
+    q = { "<cmd>VimspectorReset<CR>", "Quit debugging" },
+    -- e = { "<cmd>VimspectorEval<CR>", "Eval" },
+    c = { "<cmd>call vimspector#Continue()<CR>", "Continue" },
+    ['S'] = { "vimspector#Stop()<CR>", "Stop" },
+    r = { "<cmd>call vimspector#Restart()<CR>", "Restart" },
+    p = { "<cmd>call vimspector#Pause()<CR>", "Pause" },
+    t = { "<cmd>call vimspector#ToggleBreakpoint()<CR>", "Toggle Breakpoint" },
+    i = { "<cmd>call vimspector#StepInto()<CR>", "Step into" },
+    n = { "<cmd>call vimspector#StepOver()<CR>", "Step over" },
+    o = { "<cmd>call vimspector#StepOut()<CR>", "Step out" },
+  },
   e = {
     name = "Easy motion",
     [' '] = {"<Plug>(easymotion-bd-jk)", "Jump Lines"},
@@ -106,7 +119,7 @@ wk.register({
     ["n"] = { "<Plug>(easymotion-j)", "Jump to lines below" },
     ["e"] = { "<Plug>(easymotion-k)", "Jump to lines above" },
     ["h"] = { "<Plug>(easymotion-linebackward)", "Jump backward" },
-    ["i>"] = { "<Plug>(easymotion-lineforward)", "Jump forward" },
+    ["i"] = { "<Plug>(easymotion-lineforward)", "Jump forward" },
   },
 
 	f = {
@@ -117,11 +130,12 @@ wk.register({
 		name = "Git",
     a = { "<cmd>:Gw<CR>", "Git add current buffer" },
     b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
-    ['<S-b>'] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
+    ['B'] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
     c = { "<cmd>:Git commit<CR>", "Git commit" },
-    ['<S-c>'] = { "<cmd>Telescope git_commits<CR>", "Git log" },
+    ['C'] = { "<cmd>Telescope git_commits<CR>", "Git log" },
     g = { "<cmd>:Git<CR>", "Git status" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
+    -- ['M'] = TODO diff between this branch and main, with the above ui
     p = { "<cmd>:Git push<CR>", "Git push" },
     w = { "<cmd>:Gw<CR>", "Git add %" },
     z = {
@@ -151,9 +165,9 @@ wk.register({
   },
 	o = {
 		name = "Others",
-		t = { "<cmd>lua require('FTerm').toggle()<CR>", "open terminal" },
-    q = { "<cmd>:<Plug>(qf_qf_toggle)<CR>" },
-    l = { "<cmd>:<Plug>(qf_loc_toggle)<CR>" },
+		t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
+    q = { "<Plug>(qf_qf_toggle)<CR>", "Toggle Quickfix" },
+    l = { "<Plug>(qf_loc_toggle)<CR>", "Toggle Loclist" },
 	},
 	p = {
 		name = "Project", -- optional group name
