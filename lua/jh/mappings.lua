@@ -57,12 +57,14 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 map('i', '<C-g>', "compe#close('<C-g>')", {expr = true, silent = true})
 
--- Close term with C-g when in terminal mode
-map('t', '<C-g>', "<cmd>lua require('FTerm').toggle()<CR>")
--- and also if the gloabal binding is called again when its opened
-map('t', '<leader>ot', "<cmd>lua require('FTerm').close()<CR>")
-
 local wk = require("which-key")
+
+-- terminal mode bindings
+wk.register({
+  ['<C-g>'] = {"<cmd>lua require('FTerm').toggle()<CR>", "Close the terminal"},
+}, {mode = "t"})
+
+-- normal mode bindings
 wk.register({
 	w = { "<cmd>:w<CR>", "Save current buffer" },
 	['<S-w>'] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
@@ -165,7 +167,7 @@ wk.register({
   },
 	o = {
 		name = "Others",
-		t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
+		t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal"},
     q = { "<Plug>(qf_qf_toggle)<CR>", "Toggle Quickfix" },
     l = { "<Plug>(qf_loc_toggle)<CR>", "Toggle Loclist" },
 	},
@@ -188,7 +190,7 @@ wk.register({
     d = { "<cmd>:tabclose<CR>", "Close tab" },
   },
   z = {
-    name = "Toggles",
+    name = "Settings Toggles",
     l = { "<cmd>set invnumber<CR>", "Line numbers" }
   }
 }, { prefix = "<leader>" })
