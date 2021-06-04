@@ -36,6 +36,11 @@ opt('o', 'timeoutlen', 400)                           -- Don't wait more that 40
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" }   -- remember stuff across sessions
 vim.api.nvim_command('noswapfile')                    -- I have OCD file saving issues anyway
 
+-- restore cursor position
+vim.cmd(([[
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+]]))
+
 vim.g['python3_host_prog'] = '~/.asdf/shims/python3'  -- Use this python binary
 
 -- set leader to space early
