@@ -1,9 +1,11 @@
-local lspconfig = require('lspconfig')
-lspconfig.gopls.setup{}
+local lspconfig = require("lspconfig")
+lspconfig.gopls.setup {}
 
 vim.cmd(([[
 autocmd FileType go lua whichkeyGo()
 ]]))
+
+-- TODO(JH)
 
 _G.whichkeyGo = function()
   local wk = require("which-key")
@@ -17,17 +19,17 @@ _G.whichkeyGo = function()
       r = { "<cmd>GoRun<CR>", "go run" },
       t = {
         name = "Test",
-        a = { "<cmd>GoTest ./...<CR>", "go test ./..."},
-        s = { "<cmd>GoTestFunc<CR>", "go test -s [current test]"},
+        a = { "<cmd>GoTest ./...<CR>", "go test ./..." },
+        s = { "<cmd>GoTestFunc<CR>", "go test -s [current test]" },
       },
       c = {
         name = "Coverage",
-        c = { "<cmd>GoCoverage<cmd>", "annotate with coverage"},
-        t = { "<cmd>GoCoverageToggle", "toggle coverage display"},
-        C = { "<cmd>GoCoverageClear<cmd>", "clear coverage"},
-        b = { "<cmd>GoCoverageBrowser<cmd>", "open coverage in a browser"},
+        c = { "<cmd>GoCoverage<CR>", "annotate with coverage" },
+        t = { "<cmd>GoCoverageToggle<CR>", "toggle coverage display" },
+        C = { "<cmd>GoCoverageClear<CR>", "clear coverage" },
+        b = { "<cmd>GoCoverageBrowser<CR>", "open coverage in a browser" },
       },
-      a = { "<cmd>GoAlternate<CR>", "alternate impl and test"},
+      a = { "<cmd>GoAlternate<CR>", "alternate impl and test" },
     },
-  }, { prefix = "<leader>"})
+  }, { prefix = "<leader>" })
 end
