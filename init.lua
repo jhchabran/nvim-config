@@ -41,6 +41,11 @@ vim.cmd(([[
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 ]]))
 
+-- recompile automatically when editing plugins.lua
+vim.cmd(([[
+autocmd BufWritePost plugins.lua PackerCompile
+]]))
+
 vim.g['python3_host_prog'] = '~/.asdf/shims/python3'  -- Use this python binary
 
 -- set leader to space early

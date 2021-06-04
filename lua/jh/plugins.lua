@@ -120,6 +120,51 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- Comment keywords
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup({
+         signs = false,
+         keywords = {
+           TODO = { icon = " ", color = "warning" },
+           HACK = { icon = " ", color = "warning" },
+           WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+           PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+           NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+         },
+         highlight = {
+           pattern = [[.*<(KEYWORDS)\s*]],
+           keyword = "bg",
+           after = "fg",
+           comments_only = true,
+         },
+
+         search = {
+           pattern = [[\b(KEYWORDS)(\s+|$|\(\w+\))]]
+         }
+       })
+     end
+   }
+
+  -- Sessions
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup({
+      })
+    end
+  }
+  use {
+    'rmagatti/session-lens',
+    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+    config = function()
+      require('session-lens').setup({
+      })
+    end
+  }
+
   -- quickfix enhancements
   use { 'romainl/vim-qf' }
 

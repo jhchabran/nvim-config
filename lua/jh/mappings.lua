@@ -180,7 +180,9 @@ wk.register({
 	},
 	p = {
 		name = "Project", -- optional group name
-		f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+		f = { "<cmd>Telescope find_files<cr>", "Find File" },
+		p = { "<cmd>Telescope session-lens search_session<cr>", "Find File" },
+    t = { "<cmd>TodoTelescope<CR>", "List project TODOs" },
     x = { require('jh.notes').open_current_project_notes, "Open project notes" },
 	},
   s = {
