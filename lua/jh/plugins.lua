@@ -123,8 +123,10 @@ return require('packer').startup(function(use)
   -- quickfix enhancements
   use { 'romainl/vim-qf' }
 
-  -- all the icons
+  -- File tree
   use {'kyazdani42/nvim-web-devicons'}
+  use {'kyazdani42/nvim-tree.lua'}
+
   -- status line with goodies
   use {
     'hoob3rt/lualine.nvim',

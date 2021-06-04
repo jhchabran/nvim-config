@@ -176,6 +176,7 @@ wk.register({
 		t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal"},
     q = { "<Plug>(qf_qf_toggle)<CR>", "Toggle Quickfix" },
     l = { "<Plug>(qf_loc_toggle)<CR>", "Toggle Loclist" },
+    p = { "<cmd>NvimTreeToggle<CR>", "Open project drawer" },
 	},
 	p = {
 		name = "Project", -- optional group name
