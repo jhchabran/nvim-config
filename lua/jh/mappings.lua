@@ -64,6 +64,12 @@ wk.register({
   ['<C-g>'] = {"<cmd>lua require('FTerm').toggle()<CR>", "Close the terminal"},
 }, {mode = "t"})
 
+-- fugitive additional mappings
+vim.cmd(([[
+autocmd FileType fugitiveblame nmap <buffer> q gq
+autocmd FileType fugitive nmap <buffer> q gq
+]]))
+
 -- normal mode bindings
 wk.register({
 	w = { "<cmd>:w<CR>", "Save current buffer" },
