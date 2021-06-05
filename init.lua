@@ -1,3 +1,9 @@
+-- small global helper to inspect things
+function _G.dump(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  print(unpack(objects))
+end
+
 -- https://github.com/neovim/neovim/pull/13479
 local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
@@ -34,7 +40,7 @@ opt("o", "cmdheight", 2) -- More space to display messages
 opt("o", "timeoutlen", 400) -- Don't wait more that 400ms for normal mode commands
 
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" } -- remember stuff across sessions
-vim.api.nvim_command("noswapfile") -- I have OCD file saving issues anyway
+vim.api.nvim_command("set noswapfile") -- I have OCD file saving issues anyway
 
 -- restore cursor position
 vim.cmd(([[
