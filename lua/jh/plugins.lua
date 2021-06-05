@@ -66,17 +66,17 @@ return require("packer").startup(function(use)
   use { "folke/which-key.nvim" }
   -- config lua stuff for me please
   use { "folke/lua-dev.nvim" }
-  use {
-    "lukas-reineke/format.nvim",
-    config = function()
-      require"format".setup { lua = { { cmd = { "lua-format -i" } } } }
+  -- use {
+  --   "lukas-reineke/format.nvim",
+  --   config = function()
+  --     require"format".setup { lua = { { cmd = { "lua-format -i" } } } }
 
-      vim.cmd(([[
-      autocmd BufWritePost * FormatWrite
-      ]]))
+  --     vim.cmd(([[
+  --     autocmd BufWritePost * FormatWrite
+  --     ]]))
 
-    end,
-  }
+  --   end,
+  -- }
 
   -- A great UI plugin to pick things
   use {
@@ -158,8 +158,12 @@ return require("packer").startup(function(use)
   -- popup markdown preview
   use { "npxbr/glow.nvim", run = ":GlowInstall" }
 
+  -- Go stuff
   -- best language plugin ever created
   use { "fatih/vim-go", config = function() vim.g.go_auto_type_info = 1 end }
+  -- linter that use the diagnostics api
+  -- use { "mfussenegger/nvim-lint" }
+  use { "/Users/tech/code/src/github.com/mfussenegger/nvim-lint" }
 
   -- my stuff ----------------------------------
   -- theme

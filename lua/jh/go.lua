@@ -1,18 +1,35 @@
 local lspconfig = require("lspconfig")
-lspconfig.gopls.setup {}
+lspconfig.gopls.setup {
+  codelens = { generate = true, gc_details = true },
+  experimentalWorkspaceModule = true,
+  semanticTokens = true,
+  experimentalPostfixCompletions = true,
+}
 
 vim.cmd(([[
 autocmd FileType go lua whichkeyGo()
 ]]))
 
--- TODO(JH)
+-- don't use vim-go because it doesn't use the diagnostics api (it uses quickfix), which is less fancy.
+-- vim.g.go_metalinter_autosave = 0
+vim.g.go_fold_enable = { "block", "import", "varconst", "package_comment" }
+-- vim.g.go_metalinter_command = "golangci-lint"
+require("lint").linters_by_ft = { go = { "golangcilint" } }
+
+vim.cmd(([[
+augroup GoLinters
+  autocmd!
+  autocmd FileType go autocmd BufWritePost <buffer> lua require('lint').try_lint()
+augroup end
+]]))
 
 _G.whichkeyGo = function()
   local wk = require("which-key")
-  local buf = vim.api.nvim_get_current_buf()
+  -- local buf = vim.api.nvim_get_current_buf()
   wk.register({
     [" "] = {
       name = "Go",
+      a = { "<cmd>GoAlternate<CR>", "alternate impl and test" },
       i = { "<cmd>GoInstall<CR>", "go install" },
       b = { "<cmd>GoBuild<CR>", "go build" },
       d = { "<cmd>GoDoc<CR>", "go doc" },
@@ -29,7 +46,10 @@ _G.whichkeyGo = function()
         C = { "<cmd>GoCoverageClear<CR>", "clear coverage" },
         b = { "<cmd>GoCoverageBrowser<CR>", "open coverage in a browser" },
       },
-      a = { "<cmd>GoAlternate<CR>", "alternate impl and test" },
+      z = {
+        name = "Toggles",
+        -- m = { function() if vim.g.go_metalinter_autosave == 1 then vim.g.go_metalinter_autosave = 0 else vim.g.go_metalinter_autosave = 1 end, "Toggle metalinter" },
+      },
     },
   }, { prefix = "<leader>" })
 end
