@@ -179,7 +179,7 @@ wk.register({
     name = "Search",
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search in current buffer" },
     p = { "<cmd>Telescope live_grep<CR>", "Find in project" },
-    c = { "<cmd>:nohlsearch<CR>:echo 'Search highlight cleared'<CR>", "Clear search" },
+    c = { "<cmd>let @/ = \"\"<CR>:echo 'Search highlight cleared'<CR>", "Clear search" },
   },
   t = {
     name = "Tabs",
