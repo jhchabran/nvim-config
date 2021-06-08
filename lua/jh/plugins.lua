@@ -52,6 +52,9 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- align stuff
+  use { 'junegunn/vim-easy-align' }
+
   -- snippets
   use { "hrsh7th/vim-vsnip" }
   use { "hrsh7th/vim-vsnip-integ" }
@@ -90,16 +93,17 @@ return require("packer").startup(function(use)
   use { "tjdevries/colorbuddy.nvim" }
   -- display a lightbulb when there is a code action available
   use { "kosayoda/nvim-lightbulb" }
-  -- git gutter
+  -- git stuff
   use {
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = function() require("gitsigns").setup() end,
   }
+  use { 'TimUntersberger/neogit' }
+  use { "tpope/vim-fugitive" }
   -- floating terminal
   use { "numtostr/FTerm.nvim", config = function() require("FTerm").setup() end }
   -- tpope, the legend
-  use { "tpope/vim-fugitive" } -- git
   use { "tpope/vim-commentary" } -- comments
   use { "tpope/vim-repeat" } -- repeat commands
   use { "tpope/vim-vinegar" } -- press - for local filebrowser

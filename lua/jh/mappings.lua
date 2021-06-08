@@ -129,15 +129,17 @@ wk.register({
   f = { name = "Files", r = { "<cmd>Telescope oldfiles<CR>", "Recent files" } },
   g = {
     name = "Git",
-    a = { "<cmd>:Gw<CR>", "Git add current buffer" },
+    -- a = { "<cmd>:Gw<CR>", "Git add current buffer" },
     b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
     ["B"] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
-    c = { "<cmd>:Git commit<CR>", "Git commit" },
+    c = { "<cmd>:Neogit commi<CR>", "Git commit" },
+    -- c = { "<cmd>:Git commit<CR>", "Git commit" },
     ["C"] = { "<cmd>Telescope git_commits<CR>", "Git log" },
-    g = { "<cmd>:Git<CR>", "Git status" },
+    g = { "<cmd>:Neogit<CR>", "Git status" },
+    -- g = { "<cmd>:Git<CR>", "Git status" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
     -- ['M'] = TODO diff between this branch and main, with the above ui
-    p = { "<cmd>:Git push<CR>", "Git push" },
+    -- p = { "<cmd>:Git push<CR>", "Git push" },
     w = { "<cmd>:Gw<CR>", "Git add %" },
     z = {
       name = "Stashes",
