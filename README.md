@@ -36,5 +36,7 @@ List of languages that this configuration accomodates for:
 
 ## Aesthetics
 
+![](./screenshot.jpg)
+
 - Theme: [monarized](https://github.com/jhchabran/monarized), a washed down Solarized theme with less colors being used, while retaining colors where it matters (diff, UI, errors).
 - Font: `Jetbrains Mono Thin` for normal text and `Jetbrains Mono Light` for bold.
