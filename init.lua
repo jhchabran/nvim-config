@@ -33,7 +33,7 @@ opt("o", "splitright", true) -- Put new windows right of current
 opt("o", "termguicolors", true) -- True color support
 opt("o", "wildmode", "list:longest") -- Command-line completion mode
 opt("w", "list", false) -- Show some invisible characters (tabs...)
-opt("w", "number", false) -- Print line number
+opt("w", "number", true) -- Print line number
 opt("w", "relativenumber", false) -- Relative line numbers
 opt("w", "wrap", true) -- Enable line wrap
 opt("o", "cmdheight", 2) -- More space to display messages

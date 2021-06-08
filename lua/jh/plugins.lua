@@ -154,7 +154,37 @@ return require("packer").startup(function(use)
   use { "kyazdani42/nvim-tree.lua" }
 
   -- status line with goodies
-  use { "hoob3rt/lualine.nvim", config = function() require("lualine").setup({ options = { theme = "solarized" } }) end }
+  use { "hoob3rt/lualine.nvim", config = function()
+    require("lualine").setup({
+      options = {
+        icons_enabled = true,
+        theme = 'solarized',
+        component_separators = {'', ''},
+        section_separators = {'', ''},
+        disabled_filetypes = {}
+      },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch'},
+        lualine_c = {{'filename', path = 1, color = { fg = '#fff' }}, {'diff', colored = false }},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {{'filename', path = 1}},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {
+      },
+      extensions = {}
+    })
+  end }
+
   -- popup markdown preview
   use { "npxbr/glow.nvim", run = ":GlowInstall" }
 
