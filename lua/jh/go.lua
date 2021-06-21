@@ -38,6 +38,7 @@ _G.whichkeyGo = function()
         name = "Test",
         a = { "<cmd>GoTest ./...<CR>", "go test ./..." },
         s = { "<cmd>GoTestFunc<CR>", "go test -s [current test]" },
+        d = { "<cmd>call vimspector#LaunchWithSettings( #{ configuration: 'single test', TestName: go#util#TestName() } )<CR>", "Debug current test" },
       },
       c = {
         name = "Coverage",

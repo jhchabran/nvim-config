@@ -40,3 +40,46 @@ List of languages that this configuration accomodates for:
 
 - Theme: [monarized](https://github.com/jhchabran/monarized), a washed down Solarized theme with less colors being used, while retaining colors where it matters (diff, UI, errors).
 - Font: `Jetbrains Mono Thin` for normal text and `Jetbrains Mono Light` for bold.
+
+## Vimspector configurations
+
+Vimspector requires specific configurations to know how to launch debuggers in various scenarios. 
+
+### Go
+
+`cat $HOME/.local/share/nvim/site/pack/packer/start/vimspector/configurations/macos/go`
+
+```json
+{
+  "configurations": {
+    "run": {
+      "adapter": "vscode-go",
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "debug",
+        "dlvToolPath": "$HOME/code/bin/dlv"
+      }
+    },
+    "test package": {
+      "adapter": "vscode-go",
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "test",
+        "dlvToolPath": "$HOME/code/bin/dlv"
+      }
+    },
+    "single test": {
+      "adapter": "vscode-go",
+      "configuration": {
+        "request": "launch",
+        "program": "${fileDirname}",
+        "mode": "test",
+        "dlvToolPath": "$HOME/code/bin/dlv",
+        "args": [ "-test.run", "${TestName}" ]
+      }
+    }
+  }
+}
+```
