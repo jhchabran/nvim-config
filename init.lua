@@ -4,40 +4,33 @@ function _G.dump(...)
   print(unpack(objects))
 end
 
--- https://github.com/neovim/neovim/pull/13479
-local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
-
-local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= "o" then scopes["o"][key] = value end
-end
 
 local indent = 2
-opt("b", "expandtab", true) -- Use spaces instead of tabs
-opt("b", "shiftwidth", indent) -- Size of an indent
-opt("b", "smartindent", true) -- Insert indents automatically
-opt("b", "tabstop", indent) -- Number of spaces tabs count for
-opt("o", "mouse", "a") -- Useful when browsing
-opt("o", "clipboard", "unnamedplus") -- Put those yanks in my os clipboards
-opt("o", "completeopt", "menuone,noinsert,noselect") -- Completion options (for compe)
-opt("o", "hidden", true) -- Enable modified buffers in background
-opt("o", "ignorecase", true) -- Ignore case
-opt("o", "incsearch", true) -- Make search behave like modern browsers
-opt("o", "joinspaces", false) -- No double spaces with join after a dot
-opt("o", "scrolloff", 10) -- Lines of context
-opt("o", "shiftround", true) -- Round indent
-opt("o", "sidescrolloff", 8) -- Columns of context
-opt("o", "smartcase", true) -- Don't ignore case with capitals
-opt("o", "splitbelow", true) -- Put new windows below current
-opt("o", "splitright", true) -- Put new windows right of current
-opt("o", "termguicolors", true) -- True color support
-opt("o", "wildmode", "list:longest") -- Command-line completion mode
-opt("w", "list", false) -- Show some invisible characters (tabs...)
-opt("w", "number", true) -- Print line number
-opt("w", "relativenumber", false) -- Relative line numbers
-opt("w", "wrap", true) -- Enable line wrap
-opt("o", "cmdheight", 2) -- More space to display messages
-opt("o", "timeoutlen", 400) -- Don't wait more that 400ms for normal mode commands
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.shiftwidth = indent -- Size of an indent
+vim.opt.smartindent = true -- Insert indents automatically
+vim.opt.tabstop = indent -- Number of spaces tabs count for
+vim.opt.mouse = "a" -- Useful when browsing
+vim.opt.clipboard = "unnamedplus" -- Put those yanks in my os clipboards
+vim.opt.completeopt = "menuone,noinsert,noselect" -- Completion options (for compe)
+vim.opt.hidden = true -- Enable modified buffers in background
+vim.opt.ignorecase = true -- Ignore case
+vim.opt.incsearch = true -- Make search behave like modern browsers
+vim.opt.joinspaces = false -- No double spaces with join after a dot
+vim.opt.scrolloff = 10 -- Lines of context
+vim.opt.shiftround = true -- Round indent
+vim.opt.sidescrolloff = 8 -- Columns of context
+vim.opt.smartcase = true -- Don't ignore case with capitals
+vim.opt.splitbelow = true -- Put new windows below current
+vim.opt.splitright = true -- Put new windows right of current
+vim.opt.termguicolors = true -- True color support
+vim.opt.wildmode = "list:longest" -- Command-line completion mode
+vim.opt.list = false -- Show some invisible characters (tabs...)
+vim.opt.number = true -- Print line number
+vim.opt.relativenumber = false -- Relative line numbers
+vim.opt.wrap = true -- Enable line wrap
+vim.opt.cmdheight = 2 -- More space to display messages
+vim.opt.timeoutlen = 400 -- Don't wait more that 400ms for normal mode commands
 
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" } -- remember stuff across sessions
 vim.api.nvim_command("set noswapfile") -- I have OCD file saving issues anyway
@@ -64,4 +57,40 @@ require("jh.go")
 require("jh.lua")
 require("jh.markdown")
 
+-- tweaked version of the snippet at https://neovim.io/doc/user/tabpage.html
+vim.cmd([[
+	function MyTabLine()
+	  let s = ''
+	  for i in range(tabpagenr('$'))
+	    " select the highlighting
+	    if i + 1 == tabpagenr()
+	      let s .= '%#TabLineSel#'
+	    else
+	      let s .= '%#TabLine#'
+	    endif
+
+	    " set the tab page number (for mouse clicks)
+	    let s .= '%' . (i + 1) . 'T'
+
+	    " the label is made by MyTabLabel()
+	    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+	  endfor
+
+	  " after the last tab fill with TabLineFill and reset tab page nr
+	  let s .= '%#TabLineFill#%T'
+
+	  return s
+	endfunction
+
+	function MyTabLabel(n)
+	  let buflist = tabpagebuflist(a:n)
+	  let winnr = tabpagewinnr(a:n)
+	  return bufname(buflist[winnr - 1]) . '(' . tabpagewinnr(a:n, '$') . ')'
+	endfunction
+
+  set tabline=%!MyTabLine()
+]])
+
 require("colorbuddy").colorscheme("monarized")
+
+
