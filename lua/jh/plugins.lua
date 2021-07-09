@@ -124,16 +124,28 @@ return require("packer").startup(function(use)
   use { "chrisbra/Colorizer" }
   -- display a lightbulb when there is a code action available
   use { "kosayoda/nvim-lightbulb" }
+
   -- git stuff
+  -- link to various forges
+  use {
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function() require"gitlinker".setup() end
+  }
+  -- display status in the margin
   use {
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
     config = function() require("gitsigns").setup() end,
   }
+  -- magit, the one true UX for git
   use { 'TimUntersberger/neogit' }
+  -- still useful for some commmands
   use { "tpope/vim-fugitive" }
+
   -- floating terminal
   use { "numtostr/FTerm.nvim", config = function() require("FTerm").setup() end }
+
   -- tpope, the legend
   use { "tpope/vim-commentary" } -- comments
   use { "tpope/vim-repeat" } -- repeat commands
