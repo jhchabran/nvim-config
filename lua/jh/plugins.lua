@@ -86,11 +86,42 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
     config = function()
-      require("telescope").setup({ defaults = { prompt_position = "top", sorting_strategy = "ascending" } })
+      local actions = require('telescope.actions')
+      require("telescope").setup({
+        defaults = {
+          layout_config = {
+            prompt_position = "top"
+          },
+          sorting_strategy = "ascending",
+          mappings = {
+            i = {
+              ["<c-g>"] = actions.close,
+            },
+            n = {
+              ["<c-g>"] = actions.close,
+            },
+          }
+        },
+        pickers = {
+          buffers = {
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ["<c-d>"] = actions.delete_buffer,
+              },
+              n = {
+                ["<c-d>"] = actions.delete_buffer,
+              }
+            }
+          }
+        }
+      })
     end,
   }
   -- a theme engine
   use { "tjdevries/colorbuddy.nvim" }
+  -- a small plugin to HL hex colors on the fly, it makes it easier to tweak themes
+  use { "chrisbra/Colorizer" }
   -- display a lightbulb when there is a code action available
   use { "kosayoda/nvim-lightbulb" }
   -- git stuff
@@ -187,7 +218,6 @@ return require("packer").startup(function(use)
       },
       extensions = {}
     })
-  end }
   end}
 
   -- indent guide
@@ -195,6 +225,8 @@ return require("packer").startup(function(use)
 
   -- popup markdown preview
   use { "npxbr/glow.nvim", run = ":GlowInstall" }
+  -- do not lose me on ^D
+  use { "psliwka/vim-smoothie" }
 
   -- Go stuff
   -- best language plugin ever created
@@ -206,4 +238,5 @@ return require("packer").startup(function(use)
   -- my stuff ----------------------------------
   -- theme
   use { "~/code/src/github.com/jhchabran/monarized" }
+  use 'marko-cerovac/material.nvim'
 end)
