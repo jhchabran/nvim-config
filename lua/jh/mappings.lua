@@ -66,6 +66,15 @@ autocmd FileType fugitiveblame nmap <buffer> q gq
 autocmd FileType fugitive nmap <buffer> q gq
 ]]))
 
+-- lightspeed is a bit tricky with macros
+-- https://github.com/ggandor/lightspeed.nvim/issues/14
+vim.cmd(([[
+nmap <expr> f reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_f" : "f"
+nmap <expr> F reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_F" : "F"
+nmap <expr> t reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_t" : "t"
+nmap <expr> T reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_T" : "T"
+]]))
+
 -- normal mode bindings
 wk.register({
   w = { "<cmd>:w<CR>", "Save current buffer" },
@@ -117,15 +126,16 @@ wk.register({
     n = { "<cmd>call vimspector#StepOver()<CR>", "Step over" },
     o = { "<cmd>call vimspector#StepOut()<CR>", "Step out" },
   },
-  e = {
-    name = "Easy motion",
-    [" "] = { "<Plug>(easymotion-bd-jk)", "Jump Lines" },
-    -- Colemak here, those are my hjkl keys
-    ["n"] = { "<Plug>(easymotion-j)", "Jump to lines below" },
-    ["e"] = { "<Plug>(easymotion-k)", "Jump to lines above" },
-    ["h"] = { "<Plug>(easymotion-linebackward)", "Jump backward" },
-    ["i"] = { "<Plug>(easymotion-lineforward)", "Jump forward" },
-  },
+  -- trying lightspeed for now
+  -- e = {
+  --   name = "Easy motion",
+  --   [" "] = { "<Plug>(easymotion-bd-jk)", "Jump Lines" },
+  --   -- Colemak here, those are my hjkl keys
+  --   ["n"] = { "<Plug>(easymotion-j)", "Jump to lines below" },
+  --   ["e"] = { "<Plug>(easymotion-k)", "Jump to lines above" },
+  --   ["h"] = { "<Plug>(easymotion-linebackward)", "Jump backward" },
+  --   ["i"] = { "<Plug>(easymotion-lineforward)", "Jump forward" },
+  -- },
 
   f = { name = "Files", r = { "<cmd>Telescope oldfiles<CR>", "Recent files" } },
   g = {

@@ -141,16 +141,17 @@ return require("packer").startup(function(use)
   use { "tpope/vim-surround" } -- cs)] turns surrounding ) into ]
 
   -- kangaroo based motions, jump everywhere
-  use {
-    "easymotion/vim-easymotion",
-    config = function()
-      -- disable easy motion default mappings, they eat all leader keys otherwise
-      vim.g.EasyMotion_do_mapping = 0
-      -- Colemak user here, use my homerow and above
-      vim.g.EasyMotion_keys = "tnseriaoplfuwydhpj"
-      vim.g.EasyMotion_smartcase = 1
-    end,
-  }
+  use 'ggandor/lightspeed.nvim'
+  -- use {
+  --   "easymotion/vim-easymotion",
+  --   config = function()
+  --     -- disable easy motion default mappings, they eat all leader keys otherwise
+  --     vim.g.EasyMotion_do_mapping = 0
+  --     -- Colemak user here, use my homerow and above
+  --     vim.g.EasyMotion_keys = "tnseriaoplfuwydhpj"
+  --     vim.g.EasyMotion_smartcase = 1
+  --   end,
+  -- }
 
   -- Comment keywords
   use {
