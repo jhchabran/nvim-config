@@ -190,5 +190,9 @@ wk.register({
     N = { "<cmd>:tabp<CR>", "Prev tab" },
     d = { "<cmd>:tabclose<CR>", "Close tab" },
   },
-  z = { name = "Settings Toggles", l = { "<cmd>set invnumber<CR>", "Line numbers" } },
+  z = { name = "Settings Toggles",
+    c = { "<cmd>ColorToggle<CR>", "Toggle hex colors highlighting" },
+    i = { "<cmd>IndentBlanklineToggle!<CR>", "Toggle Indent Guide" },
+    l = { "<cmd>set invnumber<CR>", "Toggle line numbers visibility" },
+  },
 }, { prefix = "<leader>" })

@@ -188,6 +188,10 @@ return require("packer").startup(function(use)
       extensions = {}
     })
   end }
+  end}
+
+  -- indent guide
+  use { "lukas-reineke/indent-blankline.nvim", config = function() vim.g.indent_blankline_enabled = false end}
 
   -- popup markdown preview
   use { "npxbr/glow.nvim", run = ":GlowInstall" }
