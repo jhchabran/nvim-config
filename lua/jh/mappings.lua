@@ -83,11 +83,13 @@ wk.register({
   [":"] = { "<cmd>Telescope commands<CR>", "Find command" },
   b = {
     name = "Buffers",
-    b = { "<cmd>Telescope buffers<CR>", "Find buffer" },
     a = { "<c-^>", "Switch back to previous buffer" },
+    b = { "<cmd>Telescope buffers<CR>", "Find buffer" },
+    d = { "<cmd>:BufDel<CR>", "Delete current buffer" },
+    n = { "<cmd>:bn<CR>", "Next buffer" },
+    p = { "<cmd>:bp<CR>", "Previous buffer" },
     ["<Tab>"] = { "<c-^>", "Switch back to previous buffer" },
     w = { "<cmd>:bw<CR>", "close and save current buffer" },
-    d = { "<cmd>:bd<CR>", "Delete current buffer" },
     x = { require("jh.notes").open_scratch, "Open scratch buffer" },
   },
   c = {
@@ -193,6 +195,7 @@ wk.register({
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search in current buffer" },
     p = { "<cmd>Telescope live_grep<CR>", "Find in project" },
     c = { "<cmd>let @/ = \"\"<CR>:echo 'Search highlight cleared'<CR>", "Clear search" },
+    R = { function() require('spectre').open() end, "Search and replace in current project" },
   },
   t = {
     name = "Tabs",

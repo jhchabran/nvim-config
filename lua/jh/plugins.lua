@@ -52,6 +52,9 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- search and replace in project
+  use { 'windwp/nvim-spectre', requires = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' } }
+
   -- align stuff
   use { 'junegunn/vim-easy-align' }
 
@@ -206,7 +209,7 @@ return require("packer").startup(function(use)
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = 'solarized',
+        theme = 'iceberg_dark',
         component_separators = {'', ''},
         section_separators = {'', ''},
         disabled_filetypes = {}
@@ -232,6 +235,9 @@ return require("packer").startup(function(use)
       extensions = {}
     })
   end}
+
+  -- stop exiting vim because I deleted the last buffer
+  use {'ojroques/nvim-bufdel'}
 
   -- indent guide
   use { "lukas-reineke/indent-blankline.nvim", config = function() vim.g.indent_blankline_enabled = false end}
