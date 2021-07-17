@@ -128,16 +128,14 @@ wk.register({
     n = { "<cmd>call vimspector#StepOver()<CR>", "Step over" },
     o = { "<cmd>call vimspector#StepOut()<CR>", "Step out" },
   },
-  -- trying lightspeed for now
-  -- e = {
-  --   name = "Easy motion",
-  --   [" "] = { "<Plug>(easymotion-bd-jk)", "Jump Lines" },
-  --   -- Colemak here, those are my hjkl keys
-  --   ["n"] = { "<Plug>(easymotion-j)", "Jump to lines below" },
-  --   ["e"] = { "<Plug>(easymotion-k)", "Jump to lines above" },
-  --   ["h"] = { "<Plug>(easymotion-linebackward)", "Jump backward" },
-  --   ["i"] = { "<Plug>(easymotion-lineforward)", "Jump forward" },
-  -- },
+  e = {
+    name = "Easy movements",
+    [" "] = { "<cmd>HopPattern<CR>", "Jump to pattern" },
+    -- Colemak user here, those are my hjkl keys
+    ["n"] = { "<cmd>HopLine<CR>", "Jump to lines" },
+    ["e"] = { "<cmd>HopWord<CR>", "Jump to words" },
+    ["i"] = { "<cmd>HopChar1<CR>", "Jump to characters" },
+  },
 
   f = { name = "Files", r = { "<cmd>Telescope oldfiles<CR>", "Recent files" } },
   g = {
@@ -205,8 +203,10 @@ wk.register({
     d = { "<cmd>:tabclose<CR>", "Close tab" },
   },
   z = { name = "Settings Toggles",
-    c = { "<cmd>ColorToggle<CR>", "Toggle hex colors highlighting" },
-    i = { "<cmd>IndentBlanklineToggle!<CR>", "Toggle Indent Guide" },
-    l = { "<cmd>set invnumber<CR>", "Toggle line numbers visibility" },
+    c = { "<cmd>ColorToggle<CR>", "Hex colors highlighting" },
+    i = { "<cmd>IndentBlanklineToggle!<CR>", "Indent Guide" },
+    l = { "<cmd>set invnumber<CR>", "Line numbers visibility" },
+    z = { "<cmd>ZenMode<CR>", "Zen Mode" },
+    ['Z'] = { "<cmd>Twilight<CR>", "Dim unfocused code" },
   },
 }, { prefix = "<leader>" })
