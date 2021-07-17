@@ -214,7 +214,7 @@ return require("packer").startup(function(use)
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = 'iceberg_dark',
+        theme = require('monarized.lualine'),
         component_separators = {'', ''},
         section_separators = {'', ''},
         disabled_filetypes = {}
@@ -261,6 +261,11 @@ return require("packer").startup(function(use)
 
   -- my stuff ----------------------------------
   -- theme
-  use { "~/code/src/github.com/jhchabran/monarized" }
+  use { "~/code/src/github.com/jhchabran/monarized", config = function()
+    -- update lualine theme when changing styles
+    vim.g.monarized_lualine = true
+    -- update kitty background and foreground when changing styles
+    vim.g.monarized_kitty_colors = true
+  end}
   use 'marko-cerovac/material.nvim'
 end)

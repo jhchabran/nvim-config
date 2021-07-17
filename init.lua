@@ -91,7 +91,5 @@ vim.cmd([[
   set tabline=%!MyTabLine()
 ]])
 
--- vim.g.monarized_style = 'dark_gold'
 require("colorbuddy").colorscheme("monarized")
-
-
+require("monarized").set_style("dark")

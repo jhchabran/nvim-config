@@ -1,5 +1,3 @@
-- Go
-  - [ ] Run last test
 - Markdown
   - [ ] `spc spc t`: insert `[ ]` 
     - or use a snippet?
