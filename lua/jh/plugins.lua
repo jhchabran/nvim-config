@@ -15,7 +15,6 @@ return require("packer").startup(function(use)
   use {
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig", -- '~/projects/personal/lsp-status.nvim',
-    "glepnir/lspsaga.nvim", -- 'folke/trouble.nvim'
   }
   -- Debugger
   use { "puremourning/vimspector" }
@@ -127,6 +126,15 @@ return require("packer").startup(function(use)
   use { "chrisbra/Colorizer" }
   -- display a lightbulb when there is a code action available
   use { "kosayoda/nvim-lightbulb" }
+
+  -- zen mode
+  use { "folke/zen-mode.nvim", config = function()
+    require("zen-mode").setup {}
+  end}
+  -- dim code that is not focused
+  use { "folke/twilight.nvim", config = function()
+    require("twilight").setup {}
+  end}
 
   -- git stuff
   -- link to various forges
