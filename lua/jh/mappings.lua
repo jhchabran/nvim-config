@@ -80,7 +80,8 @@ wk.register({
   w = { "<cmd>:w<CR>", "Save current buffer" },
   ["<S-w>"] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
   ["."] = { function() require("telescope.builtin").file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative" },
-  [":"] = { "<cmd>Telescope commands<CR>", "Find command" },
+  [":"] = { "<cmd>Telescope command_history<CR>", "Find recent command" },
+  [";"] = { "<cmd>Telescope commands<CR>", "Find command" },
   b = {
     name = "Buffers",
     a = { "<c-^>", "Switch back to previous buffer" },
