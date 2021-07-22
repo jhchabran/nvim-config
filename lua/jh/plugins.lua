@@ -150,7 +150,11 @@ return require("packer").startup(function(use)
     config = function() require("gitsigns").setup() end,
   }
   -- magit, the one true UX for git
-  use { 'TimUntersberger/neogit' }
+  use { 'TimUntersberger/neogit', config = function()
+    require("neogit").setup {
+      disable_commit_confirmation = true,
+    }
+  end}
   -- still useful for some commmands
   use { "tpope/vim-fugitive" }
 
