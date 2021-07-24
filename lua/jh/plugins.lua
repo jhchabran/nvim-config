@@ -109,10 +109,10 @@ return require("packer").startup(function(use)
             sort_lastused = true,
             mappings = {
               i = {
-                ["<c-d>"] = actions.delete_buffer,
+                ["<c-g>"] = actions.delete_buffer,
               },
               n = {
-                ["<c-d>"] = actions.delete_buffer,
+                ["<c-g>"] = actions.delete_buffer,
               }
             }
           }
@@ -270,6 +270,8 @@ return require("packer").startup(function(use)
     vim.g.monarized_lualine = true
     -- update kitty background and foreground when changing styles
     vim.g.monarized_kitty_colors = true
+
+    require('telescope').load_extension("monarized")
   end}
   use 'marko-cerovac/material.nvim'
 end)
