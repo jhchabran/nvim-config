@@ -14,7 +14,8 @@ return require("packer").startup(function(use)
   -- LSP goodies
   use {
     "onsails/lspkind-nvim",
-    "neovim/nvim-lspconfig", -- '~/projects/personal/lsp-status.nvim',
+    "neovim/nvim-lspconfig",
+    "ray-x/lsp_signature.nvim",
   }
   -- Debugger
   use { "puremourning/vimspector" }
@@ -109,10 +110,10 @@ return require("packer").startup(function(use)
             sort_lastused = true,
             mappings = {
               i = {
-                ["<c-g>"] = actions.delete_buffer,
+                ["<c-d>"] = actions.delete_buffer,
               },
               n = {
-                ["<c-g>"] = actions.delete_buffer,
+                ["<c-d>"] = actions.delete_buffer,
               }
             }
           }
@@ -260,8 +261,8 @@ return require("packer").startup(function(use)
   -- best language plugin ever created
   use { "fatih/vim-go", config = function() vim.g.go_auto_type_info = 1 end }
   -- linter that use the diagnostics api
-  -- use { "mfussenegger/nvim-lint" }
-  use { "/Users/tech/code/src/github.com/mfussenegger/nvim-lint" }
+  use { "mfussenegger/nvim-lint" }
+  -- use { "/Users/tech/code/src/github.com/mfussenegger/nvim-lint" }
 
   -- my stuff ----------------------------------
   -- theme

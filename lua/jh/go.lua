@@ -4,6 +4,16 @@ lspconfig.gopls.setup {
   experimentalWorkspaceModule = true,
   semanticTokens = true,
   experimentalPostfixCompletions = true,
+  on_attach = function(client, bufnr)
+    require("lsp_signature").on_attach({
+      hint_prefix = " ",
+      zindex = 50,
+      bind = true,
+      handler_opts = {
+        border = "none"
+      }
+    })
+  end
 }
 
 vim.cmd(([[

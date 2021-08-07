@@ -26,3 +26,6 @@ require("lspkind").init({
   },
 })
 
+vim.cmd(([[
+autocmd CursorHold * lua vim.lsp.buf.hover()
+]]))
