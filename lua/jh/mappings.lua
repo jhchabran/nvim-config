@@ -66,14 +66,9 @@ autocmd FileType fugitiveblame nmap <buffer> q gq
 autocmd FileType fugitive nmap <buffer> q gq
 ]]))
 
--- lightspeed is a bit tricky with macros
--- https://github.com/ggandor/lightspeed.nvim/issues/14
-vim.cmd(([[
-nmap <expr> f reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_f" : "f"
-nmap <expr> F reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_F" : "F"
-nmap <expr> t reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_t" : "t"
-nmap <expr> T reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_T" : "T"
-]]))
+-- treesitter-unit
+vim.api.nvim_set_keymap('v', '<Space>', ':lua require"treesitter-unit".select()<CR>', {noremap=true})
+vim.api.nvim_set_keymap('o', '<Space>', ':<c-u>lua require"treesitter-unit".select()<CR>', {noremap=true})
 
 -- normal mode bindings
 wk.register({
@@ -113,7 +108,12 @@ wk.register({
     j = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace symbols" },
     r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
     ["R"] = { "<cmd>Telescope lsp_references<CR>", "References" },
-    q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
+    q = {
+      name = "Quickfix",
+      q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
+      n = { "<cmd>cn<CR>", "Next error" },
+      p = { "<cmd>cp<CR>", "Previous error"},
+    },
     l = { "<cmd>Telescope loclist<CR>", "Loclist" },
   },
   d = {
@@ -145,6 +145,12 @@ wk.register({
     b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
     ["B"] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
     c = { "<cmd>:Neogit commit<CR>", "Git commit" },
+    d = {
+      name = "Diffing",
+      c = { "<cmd>Git diff HEAD~1<CR>", "last commit" },
+      d = { "<cmd>Git diff %<CR>", "current file with current branch" },
+      m = { "<cmd>Git diff main %<CR>", "current file with main branch" },
+    },
     -- c = { "<cmd>:Git commit<CR>", "Git commit" },
     l = { "<cmd>Telescope git_commits<CR>", "Git log" },
     g = { "<cmd>:Neogit<CR>", "Git status" },
@@ -199,10 +205,10 @@ wk.register({
   },
   t = {
     name = "Tabs",
-    t = { "<cmd>:tabnew<CR>", "New tab" },
+    c = { "<cmd>:tabnew<CR>", "Create tab" },
     n = { "<cmd>:tabn<CR>", "Next tab" },
     N = { "<cmd>:tabp<CR>", "Prev tab" },
-    d = { "<cmd>:tabclose<CR>", "Close tab" },
+    q = { "<cmd>:tabclose<CR>", "Close tab" },
   },
   z = { name = "Settings Toggles",
     c = { "<cmd>ColorToggle<CR>", "Hex colors highlighting" },

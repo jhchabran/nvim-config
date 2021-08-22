@@ -11,6 +11,8 @@ return require("packer").startup(function(use)
       ts.setup { ensure_installed = "maintained", highlight = { enable = true } }
     end,
   }
+  -- language specific selections, based on treesitter
+  use 'David-Kunz/treesitter-unit'
   -- LSP goodies
   use {
     "onsails/lspkind-nvim",
@@ -212,7 +214,39 @@ return require("packer").startup(function(use)
 
   -- File tree
   use { "kyazdani42/nvim-web-devicons" }
-  use { "kyazdani42/nvim-tree.lua" }
+  use { "kyazdani42/nvim-tree.lua", config = function()
+    -- vim.cmd(([[
+    -- let g:nvim_tree_icons = {
+    -- \ 'default': '',
+    -- \ 'symlink': '',
+    -- \ 'git': {
+    -- \   'unstaged': "✗",
+    -- \   'staged': "✓",
+    -- \   'unmerged': "",
+    -- \   'renamed': "➜",
+    -- \   'untracked': "﹖",
+    -- \   'deleted': "",
+    -- \   'ignored': "…"
+    -- \  },
+    -- \ 'folder': {
+    -- \   'arrow_open': "",
+    -- \   'arrow_closed': "",
+    -- \   'default': "",
+    -- \   'open': "",
+    -- \   'empty': "",
+    -- \   'empty_open': "",
+    -- \   'symlink': "",
+    -- \   'symlink_open': "",
+    -- \   },
+    -- \   'lsp': {
+    -- \     'hint': "",
+    -- \     'info': "",
+    -- \     'warning': "",
+    -- \     'error': "",
+    -- \   }
+    -- \ }
+    -- ]]))
+  end}
 
   -- status line with goodies
   use { "hoob3rt/lualine.nvim", config = function()
@@ -253,7 +287,7 @@ return require("packer").startup(function(use)
   use { "lukas-reineke/indent-blankline.nvim", config = function() vim.g.indent_blankline_enabled = false end}
 
   -- popup markdown preview
-  use { "npxbr/glow.nvim", run = ":GlowInstall" }
+  use { "npxbr/glow.nvim" } -- , run = ":GlowInstall" }
   -- do not lose me on ^D
   use { "psliwka/vim-smoothie" }
 
