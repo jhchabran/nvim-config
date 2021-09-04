@@ -72,6 +72,7 @@ vim.api.nvim_set_keymap('o', '<Space>', ':<c-u>lua require"treesitter-unit".sele
 
 -- normal mode bindings
 wk.register({
+  ["<Enter>"] = { function() require("telescope.builtin").resume() end, "Resume last picker" },
   w = { "<cmd>:w<CR>", "Save current buffer" },
   ["<S-w>"] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
   ["."] = { function() require("telescope.builtin").file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative" },
