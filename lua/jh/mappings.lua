@@ -71,7 +71,8 @@ vim.api.nvim_set_keymap('v', '<Space>', ':lua require"treesitter-unit".select()<
 vim.api.nvim_set_keymap('o', '<Space>', ':<c-u>lua require"treesitter-unit".select()<CR>', {noremap=true})
 
 -- normal mode bindings
-wk.register({
+local map_normal_leader
+map_normal_leader = {
   ["<Enter>"] = { function() require("telescope.builtin").resume() end, "Resume last picker" },
   w = { "<cmd>:w<CR>", "Save current buffer" },
   ["<S-w>"] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
@@ -175,6 +176,10 @@ wk.register({
       u = { "<cmd>PackerUpdate<CR>", "Update packages" },
       ["S"] = { "<cmd>PackerStatus<CR>", "List packages" },
     },
+    ["_"] = {
+      function() _G.dump(require("jh.utils").dump_which_key_markdown(map_normal_leader)) end,
+      "Copy in the OS clipboard a markdown dump of all leader mappings"
+    },
     h = { "<cmd>Telescope help_tags<CR>", "Inline help" },
     m = { "<cmd>Telescope man_pages<CR>", "Man pages" },
     t = { "<cmd>Telescope colorscheme<CR>", "Color schemes" },
@@ -218,4 +223,5 @@ wk.register({
     z = { "<cmd>ZenMode<CR>", "Zen Mode" },
     ['Z'] = { "<cmd>Twilight<CR>", "Dim unfocused code" },
   },
-}, { prefix = "<leader>" })
+}
+wk.register(map_normal_leader, { prefix = "<leader>" })
