@@ -305,6 +305,8 @@ return require("packer").startup(function(use)
     vim.g.monarized_lualine = true
     -- update kitty background and foreground when changing styles
     vim.g.monarized_kitty_colors = true
+    -- -- no italic for me
+    vim.g.monarized_italic = nil
 
     require('telescope').load_extension("monarized")
   end}
