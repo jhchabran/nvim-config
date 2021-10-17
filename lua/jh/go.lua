@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
 lspconfig.gopls.setup {
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   codelens = { generate = true, gc_details = true },
   experimentalWorkspaceModule = true,
   semanticTokens = true,
@@ -18,6 +19,12 @@ lspconfig.gopls.setup {
 
 vim.cmd(([[
 autocmd FileType go lua whichkeyGo()
+autocmd FileType go lua require'cmp'.setup.buffer {
+\   sources = {
+\     { name = 'vsnip' },
+\     { name = 'nvim_lsp' },
+\   },
+\ }
 ]]))
 
 -- don't use vim-go because it doesn't use the diagnostics api (it uses quickfix), which is less fancy.

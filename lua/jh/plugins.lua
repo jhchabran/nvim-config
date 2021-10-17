@@ -18,31 +18,113 @@ return require("packer").startup(function(use)
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig",
     "ray-x/lsp_signature.nvim",
+    'williamboman/nvim-lsp-installer',
+    config = function()
+      local lsp_installer = require("nvim-lsp-installer")
+
+      lsp_installer.on_server_ready(function(server)
+        local opts = {}
+        -- (optional) Customize the options passed to the server
+        -- if server.name == "tsserver" then
+        --     opts.root_dir = function() ... end
+        -- end
+        -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+          server:setup(opts)
+          vim.cmd [[ do User LspAttachBuffers ]]
+        end)
+      end
   }
   -- Debugger
   use { "puremourning/vimspector" }
   -- autocompletion
   use {
-    "hrsh7th/nvim-compe",
+    "hrsh7th/nvim-cmp",
+    requires = {
+      {"onsails/lspkind-nvim"},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-vsnip'},
+      {'hrsh7th/vim-vsnip'},
+      {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-nvim-lua'},
+    },
     config = function()
-      require("compe").setup {
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = "enable",
-        throttle_time = 80,
-        source_timeout = 200,
-        incomplete_delay = 400,
-        max_abbr_width = 100,
-        max_kind_width = 100,
-        max_menu_width = 100,
-        documentation = true,
+      local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
 
-        source = { path = true, buffer = false, calc = true, nvim_lsp = true, nvim_lua = true, vsnip = true },
-      }
-    end,
+      local feedkey = function(key, mode)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+      end
+
+      local cmp = require('cmp')
+      local lspkind = require('lspkind')
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end
+        },
+        formatting = {
+          format = lspkind.cmp_format(),
+        },
+        sources = {
+          { name = 'buffer' },
+          { name = 'path' },
+        },
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
+        },
+        mapping = {
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-u>'] = cmp.mapping.scroll_docs(4),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif vim.fn["vsnip#available"]() == 1 then
+              feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+              feedkey("<Plug>(vsnip-jump-prev)", "")
+            end
+          end, { "i", "s" }),
+          -- ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-g>'] = cmp.mapping.close(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        },
+      })
+    end
   }
+  -- use {
+  --   "hrsh7th/nvim-compe",
+  --   config = function()
+  --     require("compe").setup {
+  --       enabled = true,
+  --       autocomplete = true,
+  --       debug = false,
+  --       min_length = 1,
+  --       preselect = "enable",
+  --       throttle_time = 80,
+  --       source_timeout = 200,
+  --       incomplete_delay = 400,
+  --       max_abbr_width = 100,
+  --       max_kind_width = 100,
+  --       max_menu_width = 100,
+  --       documentation = true,
+
+  --       source = { path = true, buffer = false, calc = true, nvim_lsp = true, nvim_lua = true, vsnip = true },
+  --     }
+  --   end,
+  -- }
   -- trailing whitespaces
   use {
     "ntpeters/vim-better-whitespace",
@@ -55,14 +137,13 @@ return require("packer").startup(function(use)
   }
 
   -- search and replace in project
-  use { 'windwp/nvim-spectre', requires = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' } }
+  -- use { 'windwp/nvim-spectre', requires = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' } }
 
   -- align stuff
   use { 'junegunn/vim-easy-align' }
 
   -- snippets
-  use { "hrsh7th/vim-vsnip" }
-  use { "hrsh7th/vim-vsnip-integ" }
+  -- use { "hrsh7th/vim-vsnip" }
   use { "golang/vscode-go" }
 
   -- fast fuzzy finder
@@ -162,7 +243,7 @@ return require("packer").startup(function(use)
   use { "tpope/vim-fugitive" }
 
   -- floating terminal
-  use { "numtostr/FTerm.nvim", config = function() require("FTerm").setup() end }
+  use { "numtostr/FTerm.nvim" }
 
   -- tpope, the legend
   use { "tpope/vim-commentary" } -- comments
@@ -181,25 +262,25 @@ return require("packer").startup(function(use)
   }
 
   -- Comment keywords
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup({
-        signs = false,
-        keywords = {
-          TODO = { icon = " ", color = "warning" },
-          HACK = { icon = " ", color = "warning" },
-          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-          PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        },
-        highlight = { pattern = [[.*<(KEYWORDS)\s*]], keyword = "bg", after = "fg", comments_only = true },
+  -- use {
+  --   "folke/todo-comments.nvim",
+  --   requires = "nvim-lua/plenary.nvim",
+  --   config = function()
+  --     require("todo-comments").setup({
+  --       signs = false,
+  --       keywords = {
+  --         TODO = { icon = " ", color = "warning" },
+  --         HACK = { icon = " ", color = "warning" },
+  --         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+  --         PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+  --         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+  --       },
+  --       highlight = { pattern = [[.*<(KEYWORDS)\s*]], keyword = "bg", after = "fg", comments_only = true },
 
-        search = { pattern = [[\b(KEYWORDS)(\s+|$|\(\w+\))]] },
-      })
-    end,
-  }
+  --       search = { pattern = [[\b(KEYWORDS)(\s+|$|\(\w+\))]] },
+  --     })
+  --   end,
+  -- }
 
   -- Sessions
   use { "rmagatti/auto-session", config = function() require("auto-session").setup({}) end }
@@ -215,6 +296,13 @@ return require("packer").startup(function(use)
   -- File tree
   use { "kyazdani42/nvim-web-devicons" }
   use { "kyazdani42/nvim-tree.lua", config = function()
+    require'nvim-tree'.setup {
+      lsp_diagnostics = true,
+      update_focused_file = {
+        enable = true,
+      }
+    }
+
     -- vim.cmd(([[
     -- let g:nvim_tree_icons = {
     -- \ 'default': '',
