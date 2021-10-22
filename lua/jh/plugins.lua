@@ -342,7 +342,7 @@ return require("packer").startup(function(use)
   end}
 
   -- status line with goodies
-  use { "hoob3rt/lualine.nvim", config = function()
+  use { "nvim-lualine/lualine.nvim", config = function()
     require("lualine").setup({
       options = {
         icons_enabled = true,
