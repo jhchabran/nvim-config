@@ -287,7 +287,12 @@ return require("packer").startup(function(use)
   use {
     "rmagatti/session-lens",
     requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-    config = function() require("session-lens").setup({}) end,
+    config = function()
+      require("session-lens").setup({})
+      require("auto-session").setup {
+        pre_save_cmds = {"NvimTreeClose", function() require('neogit').close() end}
+      }
+    end,
   }
 
   -- quickfix enhancements
