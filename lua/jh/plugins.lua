@@ -13,6 +13,13 @@ return require("packer").startup(function(use)
   }
   -- language specific selections, based on treesitter
   use 'David-Kunz/treesitter-unit'
+  -- Annotations on closing brackets
+  use { 'code-biscuits/nvim-biscuits',
+    requires = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('nvim-biscuits').setup({})
+    end
+  }
   -- LSP goodies
   use {
     "onsails/lspkind-nvim",

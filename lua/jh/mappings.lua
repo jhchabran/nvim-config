@@ -181,6 +181,7 @@ map_normal_leader = {
     q = { "<cmd>:tabclose<CR>", "Close tab" },
   },
   z = { name = "Settings Toggles",
+    b = { function() require('nvim-biscuits').toggle_biscuits() end, "Closing brackets annotations" },
     c = { "<cmd>ColorToggle<CR>", "Hex colors highlighting" },
     i = { "<cmd>IndentBlanklineToggle!<CR>", "Indent Guide" },
     l = { "<cmd>set invnumber<CR>", "Line numbers visibility" },
