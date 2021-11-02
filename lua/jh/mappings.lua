@@ -21,6 +21,21 @@ end
 
 local wk = require("which-key")
 
+-- Reselect visual selection after indenting
+vim.api.nvim_set_keymap('v', '<', '<gv', {noremap=true})
+vim.api.nvim_set_keymap('v', '>', '>gv', {noremap=true})
+
+-- Maintain the cursor position when yanking a visual selection
+-- http://ddrscott.github.io/blog/2016/yank-without-jank/
+vim.api.nvim_set_keymap('v', 'y', 'myy`y', {noremap=true})
+vim.api.nvim_set_keymap('v', 'Y', 'myY`y', {noremap=true})
+
+-- When text is wrapped, move by terminal rows, not lines, unless a count is provided
+vim.cmd(([[
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+]]))
+
 -- terminal mode bindings
 wk.register({ ["<C-g>"] = { "<cmd>lua require('FTerm').toggle()<CR>", "Close the terminal" } }, { mode = "t" })
 
