@@ -43,6 +43,7 @@ wk.register({ ["<C-g>"] = { "<cmd>lua require('FTerm').toggle()<CR>", "Close the
 vim.cmd(([[
 autocmd FileType fugitiveblame nmap <buffer> q gq
 autocmd FileType fugitive nmap <buffer> q gq
+autocmd FileType fugitive nmap <buffer> <Tab> =
 ]]))
 
 -- treesitter-unit
@@ -125,20 +126,18 @@ map_normal_leader = {
     -- a = { "<cmd>:Gw<CR>", "Git add current buffer" },
     b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
     ["B"] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
-    c = { "<cmd>:Neogit commit<CR>", "Git commit" },
+    c = { "<cmd>:Git commit<CR>", "Git commit" },
     d = {
       name = "Diffing",
       c = { "<cmd>Git diff HEAD~1<CR>", "last commit" },
       d = { "<cmd>Git diff %<CR>", "current file with current branch" },
       m = { "<cmd>Git diff main %<CR>", "current file with main branch" },
     },
-    -- c = { "<cmd>:Git commit<CR>", "Git commit" },
     l = { "<cmd>Telescope git_commits<CR>", "Git log" },
-    g = { "<cmd>:Neogit<CR>", "Git status" },
-    -- g = { "<cmd>:Git<CR>", "Git status" },
+    g = { "<cmd>:Git<CR>", "Git status" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
     -- ['M'] = TODO diff between this branch and main, with the above ui
-    -- p = { "<cmd>:Git push<CR>", "Git push" },
+    p = { "<cmd>:Git push<CR>", "Git push" },
     w = { "<cmd>:Gw<CR>", "Git add %" },
     z = {
       name = "Stashes",

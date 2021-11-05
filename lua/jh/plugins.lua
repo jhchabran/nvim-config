@@ -240,13 +240,7 @@ return require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
     config = function() require("gitsigns").setup() end,
   }
-  -- magit, the one true UX for git
-  use { 'TimUntersberger/neogit', config = function()
-    require("neogit").setup {
-      disable_commit_confirmation = true,
-    }
-  end}
-  -- still useful for some commmands
+  -- I like neogit, because I'm a magit fan, but it's too young and fugitive rocks
   use { "tpope/vim-fugitive" }
 
   -- floating terminal
