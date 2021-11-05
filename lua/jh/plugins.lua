@@ -369,6 +369,10 @@ return require("packer").startup(function(use)
   use { "fatih/vim-go", config = function() vim.g.go_auto_type_info = 1 end }
   -- linter that use the diagnostics api
   use { "mfussenegger/nvim-lint" }
+  -- Github stuff within nvim
+  use {'pwntester/octo.nvim', config=function()
+    require"octo".setup()
+  end}
 
   -- my stuff ----------------------------------
   -- theme

@@ -140,6 +140,23 @@ map_normal_leader = {
       z = { "<cmd>:Git stash<CR>", "run git stash" },
     },
   },
+  ['G'] = {
+    name = "GitHub",
+    i = {
+      name = "issues",
+      m = { "<cmd>:Octo issue list mentioned=jhchabran<CR>", "Mentions me"},
+      a = { "<cmd>:Octo issue list assignee=jhchabran<CR>", "Assigned to me"},
+      c = { "<cmd>:Octo issue list createdBy=jhchabran<CR>", "Created by me"},
+      n = { "<cmd>:Octo issue create", "New issue"},
+    },
+    p = {
+      name = "pull-requests",
+      m = { "<cmd>:Octo pr list mentioned=jhchabran<CR>", "Mentions me"},
+      a = { "<cmd>:Octo pr list assignee=jhchabran<CR>", "Assigned to me"},
+      c = { "<cmd>:Octo pr list createdBy=jhchabran<CR>", "Created by me"},
+      n = { "<cmd>:Octo pr create", "New issue"},
+    }
+  },
   h = {
     name = "Help and misc helpers",
     p = {
