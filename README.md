@@ -63,156 +63,129 @@ How to read this:
 The above means that typing `<space>ef` in normal mode will execute _some action_. 
 
 ---
-
-  - `<S-w>`: Save current buffer and quit
-  - `e`: **Easy movements**
-    - `e`: Jump to words
-    - `n`: Jump to lines
-    - ` `: Jump to pattern
-    - `i`: Jump to characters
-  - `.`: open relative
-  - `;`: Find command
-  - `n`: **Notes**
-    - `f`: Find notes
+  - `:`: Find recent command
+  - `b`: **Buffers**
+    - `x`: Open scratch buffer
+    - `a`: Switch back to previous buffer
+    - `b`: Find buffer
+    - `<Tab>`: Switch back to previous buffer
+    - `n`: Next buffer
+    - `d`: Delete current buffer
+    - `p`: Previous buffer
+    - `w`: close and save current buffer
+  - `z`: **Settings Toggles**
+    - `Z`: Dim unfocused code
+    - `z`: Zen Mode
+    - `i`: Indent Guide
+    - `b`: Closing brackets annotations
+    - `l`: Line numbers visibility
+    - `c`: Hex colors highlighting
   - `f`: **Files**
     - `r`: Recent files
-  - `s`: **Search**
-    - `R`: Search and replace in current project
-    - `b`: Fuzzy search in current buffer
-    - `c`: Clear search
-    - `p`: Find in project
-  - `d`: **Debugger**
-    - `s`: Stop
-    - `r`: Restart
-    - `o`: Step out
-    - `c`: Continue
-    - `n`: Step over
-    - `p`: Pause
-    - `t`: Toggle Breakpoint
-    - `i`: Step into
-    - `q`: Quit debugging
+  - `p`: **Project**
+    - `x`: Open project notes
+    - `p`: Find File
+    - `t`: List project TODOs
+    - `f`: Find File
   - `g`: **Git**
-    - `d`: **Diffing**
-      - `d`: current file with current branch
-      - `m`: current file with main branch
-      - `c`: last commit
     - `G`: Current changes
-    - `w`: Git add %
     - `b`: Show branches
+    - `f`: Git fetch
+    - `C`: Git checkout -b
+    - `l`: Git log
+    - `B`: Git Blame
+    - `P`: Git push
+    - `d`: **Diffing**
+      - `m`: current file with main branch
+      - `d`: current file with current branch
+      - `c`: last commit
     - `z`: **Stashes**
       - `z`: run git stash
       - `l`: List stashes
-    - `B`: Git Blame
+    - `p`: Git pull
     - `g`: Git status
-    - `l`: Git log
+    - `w`: Git add %
     - `c`: Git commit
   - `w`: Save current buffer
-  - `b`: **Buffers**
-    - `d`: Delete current buffer
-    - `w`: close and save current buffer
-    - `b`: Find buffer
-    - `x`: Open scratch buffer
-    - `n`: Next buffer
-    - `a`: Switch back to previous buffer
-    - `<Tab>`: Switch back to previous buffer
-    - `p`: Previous buffer
-  - `z`: **Settings Toggles**
-    - `z`: Zen Mode
-    - `l`: Line numbers visibility
-    - `c`: Hex colors highlighting
-    - `Z`: Dim unfocused code
-    - `i`: Indent Guide
-  - `h`: **Help and misc helpers**
-    - `h`: Inline help
-    - `r`: Reload 'jh.*' lua modules
-    - `_`: Copy in the OS clipboard a markdown dump of all leader mappings
-    - `m`: Man pages
-    - `T`: Monarized styles
-    - `t`: Color schemes
-    - `R`: Reload a module
-    - `p`: **Packages**
-      - `s`: Install packages
-      - `u`: Update packages
-      - `S`: List packages
-      - `c`: Clean packages
-  - `:`: Find recent command
-  - `<Enter>`: Resume last picker
-  - `o`: **Others**
-    - `l`: Toggle Loclist
-    - `p`: Open project drawer
-    - `t`: Toggle terminal
-    - `q`: Toggle Quickfix
-  - `t`: **Tabs**
-    - `n`: Next tab
-    - `N`: Prev tab
-    - `q`: Close tab
-    - `c`: Create tab
   - `c`: **Code / LSP**
+    - `j`: Workspace symbols
     - `a`: Code actions
-    - `h`: hover
-    - `r`: rename
-    - `i`: Implementations
+    - `R`: References
+    - ` `: Treesitter jump
+    - `l`: Loclist
     - `q`: **Quickfix**
       - `p`: Previous error
       - `n`: Next error
       - `q`: Quickfix
-    - `R`: References
-    - ` `: Treesitter jump
-    - `l`: Loclist
-    - `j`: Workspace symbols
-    - `c`: Document symbols
+    - `r`: rename
     - `d`: Definitions
+    - `h`: hover
+    - `i`: Implementations
     - `e`: **diagnostic**
       - `d`: Document diagnostics
-      - `n`: next
-      - `w`: Workspace diagnostics
       - `p`: previous
+      - `w`: Workspace diagnostics
+      - `n`: next
     - `f`: formatting
-  - `p`: **Project**
-    - `x`: Open project notes
-    - `t`: List project TODOs
-    - `f`: Find File
-    - `p`: Find File
-
-## Vimspector configurations
-
-Vimspector requires specific configurations to know how to launch debuggers in various scenarios. 
-
-### Go
-
-`cat $HOME/.local/share/nvim/site/pack/packer/start/vimspector/configurations/macos/go`
-
-```json
-{
-  "configurations": {
-    "run": {
-      "adapter": "vscode-go",
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "mode": "debug",
-        "dlvToolPath": "$HOME/code/bin/dlv"
-      }
-    },
-    "test package": {
-      "adapter": "vscode-go",
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "mode": "test",
-        "dlvToolPath": "$HOME/code/bin/dlv"
-      }
-    },
-    "single test": {
-      "adapter": "vscode-go",
-      "configuration": {
-        "request": "launch",
-        "program": "${fileDirname}",
-        "mode": "test",
-        "dlvToolPath": "$HOME/code/bin/dlv",
-        "args": [ "-test.run", "${TestName}" ]
-      }
-    }
-  }
-}
+    - `c`: Document symbols
+  - `o`: **Others**
+    - `p`: Open project drawer
+    - `t`: Toggle terminal
+    - `l`: Toggle Loclist
+    - `q`: Toggle Quickfix
+  - `<S-w>`: Save current buffer and quit
+  - `t`: **Tabs**
+    - `N`: Prev tab
+    - `q`: Close tab
+    - `c`: Create tab
+    - `n`: Next tab
+  - `n`: **Notes**
+    - `f`: Find notes
+  - `G`: **GitHub**
+    - `i`: **issues**
+      - `m`: Mentions me
+      - `a`: Assigned to me
+      - `n`: New issue
+      - `c`: Created by me
+    - `p`: **pull-requests**
+      - `m`: Mentions me
+      - `a`: Assigned to me
+      - `n`: New issue
+      - `c`: Created by me
+  - `d`: **Debugger**
+    - `o`: Step out
+    - `q`: Quit debugging
+    - `n`: Step over
+    - `c`: Continue
+    - `r`: Restart
+    - `i`: Step into
+    - `t`: Toggle Breakpoint
+    - `p`: Pause
+    - `s`: Stop
+  - `;`: Find command
+  - `h`: **Help and misc helpers**
+    - `T`: Monarized styles
+    - `m`: Man pages
+    - `_`: Copy in the OS clipboard a markdown dump of all leader mappings
+    - `R`: Reload a module
+    - `r`: Reload 'jh.*' lua modules
+    - `p`: **Packages**
+      - `S`: List packages
+      - `u`: Update packages
+      - `c`: Clean packages
+      - `s`: Install packages
+    - `t`: Color schemes
+    - `h`: Inline help
+  - `<Enter>`: Resume last picker
+  - `.`: open relative
+  - `e`: **Easy movements**
+    - `e`: Jump to words
+    - `i`: Jump to characters
+    - ` `: Jump to pattern
+    - `n`: Jump to lines
+  - `s`: **Search**
+    - `p`: Find in project
+    - `R`: Search and replace in current project
+    - `b`: Fuzzy search in current buffer
+    - `c`: Clear search
 ```
