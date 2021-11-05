@@ -32,6 +32,8 @@ vim.opt.wrap = true -- Enable line wrap
 vim.opt.cmdheight = 2 -- More space to display messages
 vim.opt.timeoutlen = 400 -- Don't wait more that 400ms for normal mode commands
 vim.opt.updatetime = 700 -- CursorHold use this value to known for how long the cursor is being held
+vim.opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,resize,winpos,terminal"
+
 
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" } -- remember stuff across sessions
 vim.api.nvim_command("set noswapfile") -- I have OCD file saving issues anyway

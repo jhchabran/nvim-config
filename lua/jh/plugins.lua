@@ -284,14 +284,14 @@ return require("packer").startup(function(use)
   -- }
 
   -- Sessions
-  use { "rmagatti/auto-session", config = function() require("auto-session").setup({}) end }
   use {
     "rmagatti/session-lens",
     requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
     config = function()
       require("session-lens").setup({})
       require("auto-session").setup {
-        pre_save_cmds = {"NvimTreeClose", function() require('neogit').close() end}
+        auto_session_suppress_dirs = {"~"},
+        pre_save_cmds = {"NvimTreeClose"},
       }
     end,
   }
