@@ -122,6 +122,10 @@ map_normal_leader = {
     b = { "<cmd>Telescope git_branches<CR>", "Show branches" },
     ["B"] = { "<cmd>Telescope git_bcommits<CR>", "Git Blame" },
     c = { "<cmd>:Git commit<CR>", "Git commit" },
+    ['C'] = { function()
+      local branch = vim.fn.input("Branch name: ", "")
+      vim.cmd(":silent Git cob " .. branch)
+    end ,  "Git checkout -b" },
     d = {
       name = "Diffing",
       c = { "<cmd>Git diff HEAD~1<CR>", "last commit" },
@@ -130,9 +134,11 @@ map_normal_leader = {
     },
     l = { "<cmd>Telescope git_commits<CR>", "Git log" },
     g = { "<cmd>:Git<CR>", "Git status" },
+    f = { "<cmd>:Git fetch<CR>", "Git fetch" },
     G = { "<cmd>Telescope git_status<CR>", "Current changes" },
     -- ['M'] = TODO diff between this branch and main, with the above ui
-    p = { "<cmd>:Git push<CR>", "Git push" },
+    ['P'] = { "<cmd>:Git push<CR>", "Git push" },
+    p = { "<cmd>:Git pull<CR>", "Git pull" },
     w = { "<cmd>:Gw<CR>", "Git add %" },
     z = {
       name = "Stashes",
