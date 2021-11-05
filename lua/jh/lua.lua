@@ -2,7 +2,7 @@ local lspconfig = require('lspconfig')
 
 local luadev = require("lua-dev").setup({
   lspconfig = {
-    -- cmd = {'lua-language-server'},
+    cmd = {'sumneko_lua'},
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   },
 })
