@@ -1,6 +1,6 @@
 vim.cmd(([[
 autocmd FileType markdown lua whichkeyMarkdown()
-autocmd FileType markdown nnoremap <silent><buffer> <CR> :nohlsearch<CR>:.s/- \[ \]/- [x]/<CR>
+autocmd FileType markdown nnoremap <silent><buffer> <CR>:nohlsearch<CR>:.s/- \[ \]/- [x]/<CR>
 ]]))
 
 _G.whichkeyMarkdown = function()
