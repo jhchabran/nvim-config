@@ -384,7 +384,7 @@ return require("packer").startup(function(use)
 
   -- my stuff ----------------------------------
   -- theme
-  use { "~/code/src/github.com/jhchabran/monarized", config = function()
+  use { "~/perso/monarized", config = function()
     -- update lualine theme when changing styles
     vim.g.monarized_lualine = true
     -- update kitty background and foreground when changing styles
