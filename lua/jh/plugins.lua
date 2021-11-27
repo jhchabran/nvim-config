@@ -17,7 +17,9 @@ return require("packer").startup(function(use)
   use { 'code-biscuits/nvim-biscuits',
     requires = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
-      require('nvim-biscuits').setup({})
+      require('nvim-biscuits').setup({
+        cursor_line_only = true
+      })
     end
   }
   -- LSP goodies
