@@ -61,6 +61,7 @@ require("jh.typescript")
 require("jh.lua")
 require("jh.markdown")
 require("jh.firenvim")
+require("jh.zk")
 
 -- tweaked version of the snippet at https://neovim.io/doc/user/tabpage.html
 vim.cmd([[
