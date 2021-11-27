@@ -284,7 +284,7 @@ return require("packer").startup(function(use)
   use { "kyazdani42/nvim-web-devicons" }
   use { "kyazdani42/nvim-tree.lua", config = function()
     require'nvim-tree'.setup {
-      diagnostics = { enable = true },
+      diagnostics = { enable = false },
       update_focused_file = {
         enable = true,
       }

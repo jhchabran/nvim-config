@@ -92,6 +92,7 @@ map_normal_leader = {
       p = { "<cmd>cp<CR>", "Previous error"},
     },
     l = { "<cmd>Telescope loclist<CR>", "Loclist" },
+    w = { "<cmd>:%s/\\s\\+$//<CR>:let @/=''<CR>``", "Delete trailing whitespaces" },
   },
   d = {
     name = "Debugger",
@@ -110,9 +111,9 @@ map_normal_leader = {
     name = "Easy movements",
     [" "] = { "<cmd>HopPattern<CR>", "Jump to pattern" },
     -- Colemak user here, those are my hjkl keys
-    ["n"] = { "<cmd>HopLine<CR>", "Jump to lines" },
     ["e"] = { "<cmd>HopWord<CR>", "Jump to words" },
     ["i"] = { "<cmd>HopChar1<CR>", "Jump to characters" },
+    ["l"] = { "<cmd>HopLineStart<CR>", "Jump to lines" },
   },
 
   f = { name = "Files", r = { "<cmd>Telescope oldfiles<CR>", "Recent files" } },
@@ -194,7 +195,7 @@ map_normal_leader = {
   p = {
     name = "Project", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "Find File" },
-    p = { "<cmd>Telescope session-lens search_session<cr>", "Find File" },
+    -- p = { "<cmd>Telescope session-lens search_session<cr>", "Find File" },
     t = { "<cmd>TodoTelescope<CR>", "List project TODOs" },
     x = { require("jh.notes").open_current_project_notes, "Open project notes" },
   },
