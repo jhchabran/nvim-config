@@ -374,6 +374,12 @@ return require("packer").startup(function(use)
     require"octo".setup()
   end}
 
+  -- Browser stuff
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end 
+}
+
   -- my stuff ----------------------------------
   -- theme
   use { "~/code/src/github.com/jhchabran/monarized", config = function()
