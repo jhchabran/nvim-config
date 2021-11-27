@@ -27,24 +27,9 @@ return require("packer").startup(function(use)
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig",
     "ray-x/lsp_signature.nvim",
-    'williamboman/nvim-lsp-installer',
-    config = function()
-      local lsp_installer = require("nvim-lsp-installer")
-
-      lsp_installer.on_server_ready(function(server)
-        local opts = {}
-        -- (optional) Customize the options passed to the server
-        -- if server.name == "tsserver" then
-        --     opts.root_dir = function() ... end
-        -- end
-        -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-          server:setup(opts)
-          vim.cmd [[ do User LspAttachBuffers ]]
-        end)
-      end
   }
   -- Debugger
-  use { "puremourning/vimspector" }
+  -- use { "puremourning/vimspector" }
   -- autocompletion
   use {
     "hrsh7th/nvim-cmp",
@@ -113,19 +98,6 @@ return require("packer").startup(function(use)
       })
     end
   }
-  -- trailing whitespaces
-  use {
-    "ntpeters/vim-better-whitespace",
-    config = function()
-      -- strip only if I touched the line
-      vim.g.strip_only_modified_lines = 1
-      vim.g.strip_whitespace_on_save = 1
-      vim.g.strip_whitespace_confirm = 0
-    end,
-  }
-
-  -- search and replace in project
-  -- use { 'windwp/nvim-spectre', requires = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' } }
 
   -- align stuff
   use { 'junegunn/vim-easy-align' }
@@ -241,40 +213,6 @@ return require("packer").startup(function(use)
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'arstneodhqwfpjluy' }
     end
-  }
-
-  -- Comment keywords
-  -- use {
-  --   "folke/todo-comments.nvim",
-  --   requires = "nvim-lua/plenary.nvim",
-  --   config = function()
-  --     require("todo-comments").setup({
-  --       signs = false,
-  --       keywords = {
-  --         TODO = { icon = " ", color = "warning" },
-  --         HACK = { icon = " ", color = "warning" },
-  --         WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-  --         PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-  --         NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-  --       },
-  --       highlight = { pattern = [[.*<(KEYWORDS)\s*]], keyword = "bg", after = "fg", comments_only = true },
-
-  --       search = { pattern = [[\b(KEYWORDS)(\s+|$|\(\w+\))]] },
-  --     })
-  --   end,
-  -- }
-
-  -- Sessions
-  use {
-    "rmagatti/session-lens",
-    requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("session-lens").setup({})
-      require("auto-session").setup {
-        auto_session_suppress_dirs = {"~"},
-        pre_save_cmds = {"NvimTreeClose"},
-      }
-    end,
   }
 
   -- quickfix enhancements
