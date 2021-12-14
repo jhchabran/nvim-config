@@ -47,6 +47,7 @@ vim.api.nvim_set_keymap('o', '<Space>', ':<c-u>lua require"treesitter-unit".sele
 
 -- normal mode bindings
 local map_normal_leader
+local map_normal_g
 map_normal_leader = {
   ["<Enter>"] = { function() require("telescope.builtin").resume() end, "Resume last picker" },
   w = { "<cmd>:w<CR>", "Save current buffer" },
@@ -76,22 +77,28 @@ map_normal_leader = {
       d = { "<cmd>Telescope lsp_document_diagnostics<CR>", "Document diagnostics" },
       w = { "<cmd>Telescope lsp_workspace_diagnostics<CR>", "Workspace diagnostics" },
 
-      p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous" },
-      n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next" },
+      p = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "previous" },
+      n = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "next" },
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "formatting" },
     h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover" },
     i = { "<cmd>Telescope lsp_implementations<CR>", "Implementations" },
     j = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace symbols" },
+    l = {
+      name = "Code Lens",
+      l = {"<cmd>lua vim.lsp.codelens.refresh()<CR>", "Run"},
+      e = {"<cmd>lua vim.lsp.codelens.refresh()<CR>", "Refresh"},
+    },
     r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
     ["R"] = { "<cmd>Telescope lsp_references<CR>", "References" },
+    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
     q = {
       name = "Quickfix",
       q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
       n = { "<cmd>cn<CR>", "Next error" },
       p = { "<cmd>cp<CR>", "Previous error"},
     },
-    l = { "<cmd>Telescope loclist<CR>", "Loclist" },
+    ["L"] = { "<cmd>Telescope loclist<CR>", "Loclist" },
     w = { "<cmd>:%s/\\s\\+$//<CR>:let @/=''<CR>``", "Delete trailing whitespaces" },
   },
   d = {
@@ -149,20 +156,11 @@ map_normal_leader = {
   },
   ['G'] = {
     name = "GitHub",
-    i = {
-      name = "issues",
-      m = { "<cmd>:Octo issue list mentioned=jhchabran<CR>", "Mentions me"},
-      a = { "<cmd>:Octo issue list assignee=jhchabran<CR>", "Assigned to me"},
-      c = { "<cmd>:Octo issue list createdBy=jhchabran<CR>", "Created by me"},
-      n = { "<cmd>:Octo issue create", "New issue"},
-    },
-    p = {
-      name = "pull-requests",
-      m = { "<cmd>:Octo pr list mentioned=jhchabran<CR>", "Mentions me"},
-      a = { "<cmd>:Octo pr list assignee=jhchabran<CR>", "Assigned to me"},
-      c = { "<cmd>:Octo pr list createdBy=jhchabran<CR>", "Created by me"},
-      n = { "<cmd>:Octo pr create", "New issue"},
-    }
+    i = { function() require('telescope').extensions.gh.issues() end, "List issues" },
+    p = { function() require('telescope').extensions.gh.pull_requests() end, "List PRs" },
+    c = { "<cmd>!gh pr create -w<CR>", "Create a PR and open it in a browser"},
+    o = { "<cmd>!gh pr view -w<CR>", "Open the PR in a browser"},
+    b = { "<cmd>!gh browse<CR>", "Open the current repo in a browser"},
   },
   h = {
     name = "Help and misc helpers",
@@ -181,7 +179,7 @@ map_normal_leader = {
     m = { "<cmd>Telescope man_pages<CR>", "Man pages" },
     t = { "<cmd>Telescope colorscheme<CR>", "Color schemes" },
     ["T"] = { "<cmd>Telescope monarized<CR>", "Monarized styles" },
-    r = { require("jh.utils").reload_my_code, "Reload 'jh.*' lua modules" },
+    r = { function() require("jh.utils").reload_my_code() end, "Reload 'jh.*' lua modules" },
     ["R"] = { "<cmd>Telescope reloader<CR>", "Reload a module" },
   },
   n = { name = "Notes", f = { require("jh.notes").find_notes, "Find notes" } },
@@ -223,3 +221,14 @@ map_normal_leader = {
   },
 }
 wk.register(map_normal_leader, { prefix = "<leader>" })
+
+map_normal_g = {
+  a = { "<cmd>Telescope lsp_code_actions<CR>", "Code actions" },
+  d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
+  h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Display hover tooltip" },
+  i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation " },
+  t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
+  r = { "<cmd>Telescope lsp_references<CR>", "References" },
+}
+
+wk.register(map_normal_g, { prefix = "g" })

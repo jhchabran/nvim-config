@@ -164,8 +164,34 @@ return require("packer").startup(function(use)
       })
     end,
   }
+
+  use {'nvim-telescope/telescope-ui-select.nvim' }
+  use {
+    'nvim-telescope/telescope-github.nvim',
+    config = function()
+      require('telescope').load_extension('gh')
+    end
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    config = function() require('telescope').load_extension('fzf') end
+  }
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"tami5/sqlite.lua"}
+  }
+
+  -- stop firing vim within vim
+  use "lambdalisue/guise.vim"
+
   -- a theme engine
   use { "tjdevries/colorbuddy.nvim" }
+  -- a cool theme 
+  use 'folke/tokyonight.nvim'
   -- a small plugin to HL hex colors on the fly, it makes it easier to tweak themes
   use { "chrisbra/Colorizer" }
   -- display a lightbulb when there is a code action available
@@ -193,6 +219,7 @@ return require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
     config = function() require("gitsigns").setup() end,
   }
+
   -- I like neogit, because I'm a magit fan, but it's too young and fugitive rocks
   use { "tpope/vim-fugitive" }
 
@@ -266,7 +293,8 @@ return require("packer").startup(function(use)
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        theme = require('monarized.lualine'),
+        -- theme = require('monarized.lualine'),
+        theme = "auto",
         component_separators = {'', ''},
         section_separators = {'', ''},
         disabled_filetypes = {}
@@ -304,21 +332,18 @@ return require("packer").startup(function(use)
   -- do not lose me on ^D
   use { "psliwka/vim-smoothie" }
 
-  -- Go stuff
-  -- best language plugin ever created
-  use { "fatih/vim-go", config = function() vim.g.go_auto_type_info = 1 end }
   -- linter that use the diagnostics api
   use { "mfussenegger/nvim-lint" }
-  -- Github stuff within nvim
-  use {'pwntester/octo.nvim', config=function()
-    require"octo".setup()
-  end}
+  -- Cue will save us from YAML
+  use { 'jjo/vim-cue' }
 
   -- Browser stuff
   use {
     'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end 
-}
+    run = function() vim.fn['firenvim#install'](0) end
+  }
+
+  use { 'camdencheek/sgbrowse' }
 
   -- my stuff ----------------------------------
   -- theme
