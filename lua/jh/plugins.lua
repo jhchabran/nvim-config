@@ -226,8 +226,15 @@ return require("packer").startup(function(use)
   -- floating terminal
   use { "numtostr/FTerm.nvim" }
 
+  -- comments
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+
   -- tpope, the legend
-  use { "tpope/vim-commentary" } -- comments
   use { "tpope/vim-repeat" } -- repeat commands
   use { "tpope/vim-vinegar" } -- press - for local filebrowser
   use { "tpope/vim-surround" } -- cs)] turns surrounding ) into ]
