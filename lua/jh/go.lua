@@ -17,6 +17,23 @@ lspconfig.gopls.setup {
   end
 }
 
+_G.goimports = function(wait_ms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = {only = {"source.organizeImports"}}
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit)
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
+  end
+
+  vim.lsp.buf.formatting_sync()
+end
+
 vim.cmd(([[
 autocmd FileType go lua whichkeyGo()
 autocmd FileType go lua require'cmp'.setup.buffer {
@@ -25,6 +42,8 @@ autocmd FileType go lua require'cmp'.setup.buffer {
 \     { name = 'nvim_lsp' },
 \   },
 \ }
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(2000)
 ]]))
 
 -- don't use vim-go because it doesn't use the diagnostics api (it uses quickfix), which is less fancy.
