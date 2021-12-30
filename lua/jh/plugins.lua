@@ -27,6 +27,31 @@ return require("packer").startup(function(use)
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig",
     "ray-x/lsp_signature.nvim",
+    -- 'jhchabran/litee.nvim', branch = 'keymaps',
+    "~/play/litee.nvim",
+    config = function()
+      -- Litee bindings
+      vim.cmd(([[
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "<Tab>", ":LTExpand<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "zo", ":LTExpand<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "zc", ":LTCollapse<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "zM", ":LTCollapseAll<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "<CR>", ":LTJump<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "t", ":LTJumpTab<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "v", ":LTJumpVSplit<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "s", ":LTJumpSplit<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "h", ":LTHover<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "q", ":q<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", "<", ":vert resize -10<CR>", {})
+      autocmd Filetype litee lua vim.api.nvim_set_keymap("n", ">", ":vert resize +10<CR>", {})
+      ]]))
+
+    require('litee').setup({
+      layout_size = 50,
+      icons = "nerd",
+      disable_default_keymaps = true,
+    })
+    end
   }
   -- Debugger
   -- use { "puremourning/vimspector" }
