@@ -52,7 +52,7 @@ map_normal_leader = {
   ["<Enter>"] = { function() require("telescope.builtin").resume() end, "Resume last picker" },
   w = { "<cmd>:w<CR>", "Save current buffer" },
   ["<S-w>"] = { "<cmd>:wq<CR>", "Save current buffer and quit" },
-  ["."] = { function() require("telescope.builtin").file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative" },
+  ["."] = { function() require("telescope").extensions.file_browser.file_browser({ cwd = vim.fn.expand("%:p:h") }) end, "open relative" },
   [":"] = { "<cmd>Telescope command_history<CR>", "Find recent command" },
   [";"] = { "<cmd>Telescope commands<CR>", "Find command" },
   b = {
@@ -201,6 +201,7 @@ map_normal_leader = {
     name = "Search",
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search in current buffer" },
     p = { "<cmd>Telescope live_grep<CR>", "Find in project" },
+    s = { "<cmd>Telescope live_grep search_dirs=%:p:h<CR>", "Find in project" },
     c = { "<cmd>let @/ = \"\"<CR>:echo 'Search highlight cleared'<CR>", "Clear search" },
     R = { function() require('spectre').open() end, "Search and replace in current project" },
   },

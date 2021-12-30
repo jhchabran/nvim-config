@@ -164,7 +164,9 @@ return require("packer").startup(function(use)
       })
     end,
   }
-
+  use { "nvim-telescope/telescope-file-browser.nvim", config = function()
+    require("telescope").load_extension "file_browser"
+  end}
   use {'nvim-telescope/telescope-ui-select.nvim' }
   use {
     'nvim-telescope/telescope-github.nvim',
