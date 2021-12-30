@@ -1,5 +1,6 @@
 vim.cmd(([[
 if exists('g:started_by_firenvim')
+
   let g:firenvim_config = { 
     \ 'localSettings': {
         \ '.*': {
@@ -10,10 +11,8 @@ if exists('g:started_by_firenvim')
     \ }
   \ }
 
-  set laststatus=0
-
   au BufEnter github.com_*.txt set filetype=markdown
-  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h20
+  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h18
 
   let g:dont_write = v:false
   function! My_Write(timer) abort
@@ -31,5 +30,10 @@ if exists('g:started_by_firenvim')
 
   au TextChanged * ++nested call Delay_My_Write()
   au TextChangedI * ++nested call Delay_My_Write()
+
+  set noshowmode
+  set noruler
+  set laststatus=0
+  set noshowcmd
 endif
 ]]))
