@@ -84,6 +84,12 @@ map_normal_leader = {
     h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "hover" },
     i = { "<cmd>Telescope lsp_implementations<CR>", "Implementations" },
     j = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace symbols" },
+    k = {
+      name = "Call tree",
+      o = { function() require('litee.lsp.wrappers').buf_outgoing_calls() end, "Outgoing calls" },
+      i = { function() require('litee.lsp.wrappers').buf_incoming_calls() end, "Incoming calls" },
+      k = { function()  require('litee.lsp.wrappers').buf_document_symbol() end, "Symbols outline" },
+    },
     l = {
       name = "Code Lens",
       l = {"<cmd>lua vim.lsp.codelens.refresh()<CR>", "Run"},

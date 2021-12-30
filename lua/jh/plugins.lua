@@ -217,8 +217,13 @@ return require("packer").startup(function(use)
 
   -- a theme engine
   use { "tjdevries/colorbuddy.nvim" }
-  -- a cool theme 
+  -- a cool theme
   use 'folke/tokyonight.nvim'
+  use 'shaunsingh/nord.nvim'
+  use 'mhartington/oceanic-next'
+  use 'luisiacc/gruvbox-baby'
+  use 'kvrohit/substrata.nvim'
+
   -- a small plugin to HL hex colors on the fly, it makes it easier to tweak themes
   use { "chrisbra/Colorizer" }
   -- display a lightbulb when there is a code action available
