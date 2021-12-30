@@ -97,5 +97,7 @@ vim.cmd([[
   set tabline=%!MyTabLine()
 ]])
 
-require("colorbuddy").colorscheme("monarized")
-require("monarized").set_style("dark")
+-- require("colorbuddy").colorscheme("monarized")
+-- require("monarized").set_style("dark")
+
+vim.cmd[[colorscheme substrata]]
