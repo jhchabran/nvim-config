@@ -63,129 +63,136 @@ How to read this:
 The above means that typing `<space>ef` in normal mode will execute _some action_. 
 
 ---
-  - `:`: Find recent command
-  - `b`: **Buffers**
-    - `x`: Open scratch buffer
-    - `a`: Switch back to previous buffer
-    - `b`: Find buffer
-    - `<Tab>`: Switch back to previous buffer
-    - `n`: Next buffer
-    - `d`: Delete current buffer
-    - `p`: Previous buffer
-    - `w`: close and save current buffer
-  - `z`: **Settings Toggles**
-    - `Z`: Dim unfocused code
-    - `z`: Zen Mode
-    - `i`: Indent Guide
-    - `b`: Closing brackets annotations
-    - `l`: Line numbers visibility
-    - `c`: Hex colors highlighting
-  - `f`: **Files**
-    - `r`: Recent files
-  - `p`: **Project**
-    - `x`: Open project notes
-    - `p`: Find File
-    - `t`: List project TODOs
-    - `f`: Find File
-  - `g`: **Git**
-    - `G`: Current changes
-    - `b`: Show branches
-    - `f`: Git fetch
-    - `C`: Git checkout -b
-    - `l`: Git log
-    - `B`: Git Blame
-    - `P`: Git push
-    - `d`: **Diffing**
-      - `m`: current file with main branch
-      - `d`: current file with current branch
-      - `c`: last commit
-    - `z`: **Stashes**
-      - `z`: run git stash
-      - `l`: List stashes
-    - `p`: Git pull
-    - `g`: Git status
-    - `w`: Git add %
-    - `c`: Git commit
-  - `w`: Save current buffer
-  - `c`: **Code / LSP**
-    - `j`: Workspace symbols
-    - `a`: Code actions
-    - `R`: References
-    - ` `: Treesitter jump
-    - `l`: Loclist
-    - `q`: **Quickfix**
-      - `p`: Previous error
-      - `n`: Next error
-      - `q`: Quickfix
-    - `r`: rename
-    - `d`: Definitions
-    - `h`: hover
-    - `i`: Implementations
-    - `e`: **diagnostic**
-      - `d`: Document diagnostics
-      - `p`: previous
-      - `w`: Workspace diagnostics
-      - `n`: next
-    - `f`: formatting
-    - `c`: Document symbols
-  - `o`: **Others**
-    - `p`: Open project drawer
-    - `t`: Toggle terminal
-    - `l`: Toggle Loclist
-    - `q`: Toggle Quickfix
-  - `<S-w>`: Save current buffer and quit
-  - `t`: **Tabs**
-    - `N`: Prev tab
-    - `q`: Close tab
-    - `c`: Create tab
-    - `n`: Next tab
   - `n`: **Notes**
     - `f`: Find notes
   - `G`: **GitHub**
-    - `i`: **issues**
-      - `m`: Mentions me
-      - `a`: Assigned to me
-      - `n`: New issue
-      - `c`: Created by me
-    - `p`: **pull-requests**
-      - `m`: Mentions me
-      - `a`: Assigned to me
-      - `n`: New issue
-      - `c`: Created by me
-  - `d`: **Debugger**
-    - `o`: Step out
-    - `q`: Quit debugging
-    - `n`: Step over
-    - `c`: Continue
-    - `r`: Restart
-    - `i`: Step into
-    - `t`: Toggle Breakpoint
-    - `p`: Pause
-    - `s`: Stop
-  - `;`: Find command
+    - `o`: Open the PR in a browser
+    - `p`: List PRs
+    - `b`: Open the current repo in a browser
+    - `i`: List issues
+    - `c`: Create a PR and open it in a browser
+  - `s`: **Search**
+    - `R`: Search and replace in current project
+    - `p`: Find in project
+    - `c`: Clear search
+    - `b`: Fuzzy search in current buffer
+    - `s`: Find in project
+  - `g`: **Git**
+    - `z`: **Stashes**
+      - `l`: List stashes
+      - `z`: run git stash
+    - `B`: Git Blame
+    - `p`: Git pull
+    - `f`: Git fetch
+    - `P`: Git push
+    - `c`: Git commit
+    - `C`: Git checkout -b
+    - `w`: Git add %
+    - `G`: Current changes
+    - `b`: Show branches
+    - `d`: **Diffing**
+      - `C`: current branch against last commit
+      - `D`: current branch
+      - `m`: current file against main branch
+      - `d`: current file against current branch
+      - `M`: current branch against main branch
+      - `c`: current file against last commit
+    - `l`: Git log
+    - `g`: Git status
+  - `w`: Save current buffer
+  - `b`: **Buffers**
+    - `n`: Next buffer
+    - `p`: Previous buffer
+    - `<Tab>`: Switch back to previous buffer
+    - `w`: close and save current buffer
+    - `b`: Find buffer
+    - `d`: Delete current buffer
+    - `x`: Open scratch buffer
+    - `a`: Switch back to previous buffer
   - `h`: **Help and misc helpers**
     - `T`: Monarized styles
-    - `m`: Man pages
-    - `_`: Copy in the OS clipboard a markdown dump of all leader mappings
-    - `R`: Reload a module
-    - `r`: Reload 'jh.*' lua modules
     - `p`: **Packages**
       - `S`: List packages
       - `u`: Update packages
       - `c`: Clean packages
       - `s`: Install packages
     - `t`: Color schemes
+    - `m`: Man pages
+    - `_`: Copy in the OS clipboard a markdown dump of all leader mappings
     - `h`: Inline help
+    - `R`: Reload a module
+    - `r`: Reload 'jh.*' lua modules
+  - `z`: **Settings Toggles**
+    - `Z`: Dim unfocused code
+    - `z`: Zen Mode
+    - `b`: Closing brackets annotations
+    - `c`: Hex colors highlighting
+    - `l`: Line numbers visibility
+    - `i`: Indent Guide
   - `<Enter>`: Resume last picker
-  - `.`: open relative
+  - `<S-w>`: Save current buffer and quit
+  - `f`: **Files**
+    - `r`: Recent files
+  - `c`: **Code / LSP**
+    - `a`: Code actions
+    - `j`: Workspace symbols
+    - `w`: Delete trailing whitespaces
+    - `q`: **Quickfix**
+      - `p`: Previous error
+      - `n`: Next error
+      - `q`: Quickfix
+    - `d`: Definitions
+    - `l`: **Code Lens**
+      - `l`: Run
+      - `e`: Refresh
+    - `r`: rename
+    - `R`: References
+    - `t`: Go to type definition
+    - `c`: Document symbols
+    - `k`: **Call tree**
+      - `k`: Symbols outline
+      - `i`: Incoming calls
+      - `o`: Outgoing calls
+    - `e`: **diagnostic**
+      - `w`: Workspace diagnostics
+      - `p`: previous
+      - `d`: Document diagnostics
+      - `n`: next
+    - `h`: hover
+    - ` `: Treesitter jump
+    - `L`: Loclist
+    - `i`: Implementations
+    - `f`: formatting
+  - `t`: **Tabs**
+    - `n`: Next tab
+    - `N`: Prev tab
+    - `q`: Close tab
+    - `c`: Create tab
   - `e`: **Easy movements**
     - `e`: Jump to words
-    - `i`: Jump to characters
     - ` `: Jump to pattern
-    - `n`: Jump to lines
-  - `s`: **Search**
-    - `p`: Find in project
-    - `R`: Search and replace in current project
-    - `b`: Fuzzy search in current buffer
-    - `c`: Clear search
+    - `l`: Jump to lines
+    - `i`: Jump to characters
+  - `o`: **Others**
+    - `q`: Toggle Quickfix
+    - `p`: Open project drawer
+    - `l`: Toggle Loclist
+    - `t`: Toggle terminal
+  - `:`: Find recent command
+  - `p`: **Project**
+    - `x`: Open project notes
+    - `f`: Find File
+    - `t`: List project TODOs
+  - `;`: Find command
+  - `d`: **Debugger**
+    - `n`: Step over
+    - `p`: Pause
+    - `t`: Toggle Breakpoint
+    - `s`: Stop
+    - `q`: Quit debugging
+    - `o`: Step out
+    - `c`: Continue
+    - `r`: Restart
+    - `i`: Step into
+  - `.`: open relative
 ```
