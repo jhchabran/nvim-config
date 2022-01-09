@@ -2,6 +2,9 @@
 
 A very opinionated configuration, with strong reminiscence of [Doom-Emacs](https://github.com/hlissner/doom-emacs), written in Lua.
 
+The strongest opinion you'll find here is that I tend to bring features within Neovim rather than going back to the shell. I'd rather write Lua than shellscripts. That being said
+you won't find big UI plugins either, they tend to be not very vim'ish enough to my taste.
+
 ## Core Principles
 
 1. Comfort: I use this everyday, it has to be nice and enjoyable.
