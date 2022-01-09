@@ -1,4 +1,4 @@
-# Neovim 0.5 config
+# Neovim 0.6 config
 
 A very opinionated configuration, with strong reminiscence of [Doom-Emacs](https://github.com/hlissner/doom-emacs), written in Lua.
 
