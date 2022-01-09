@@ -13,15 +13,82 @@ return require("packer").startup(function(use)
 
   -- incremental syntax parsing, the mother of modernity
   use {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    requires = {"nvim-treesitter/nvim-treesitter"},
     run = ":TSUpdate",
     config = function()
-      local ts = require "nvim-treesitter.configs"
-      ts.setup { ensure_installed = "maintained", highlight = { enable = true } }
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = "maintained",
+        ignore_install = { "kotlin" },
+        highlight = {
+          enable = true
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            -- mappings for incremental selection (visual mappings)
+            init_selection = "gnn", -- maps in normal mode to init the node/scope selection
+            node_incremental = "grn", -- increment to the upper named parent
+            scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
+            node_decremental = "grm" -- decrement to the previous node
+          }
+        },
+        textobjects = {
+          -- syntax-aware textobjects
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["aC"] = "@class.outer",
+              ["iC"] = "@class.inner",
+              ["ac"] = "@conditional.outer",
+              ["ic"] = "@conditional.inner",
+              ["ae"] = "@block.outer",
+              ["ie"] = "@block.inner",
+              ["al"] = "@loop.outer",
+              ["il"] = "@loop.inner",
+              ["is"] = "@statement.inner",
+              ["as"] = "@statement.outer",
+              ["ad"] = "@comment.outer",
+              ["am"] = "@call.outer",
+              ["im"] = "@call.inner"
+            }
+          }
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]]"] = "@class.outer",
+          },
+          goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+          },
+        },
+      }
+
+      -- use treesitter for the folds.
+      vim.cmd(([[
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+      ]]))
     end,
   }
   -- language specific selections, based on treesitter
-  use 'David-Kunz/treesitter-unit'
+  -- commented because I still don't really use it.
+  -- use 'David-Kunz/treesitter-unit'
   -- Annotations on closing brackets
   use { 'code-biscuits/nvim-biscuits',
     requires = { 'nvim-treesitter/nvim-treesitter' },
