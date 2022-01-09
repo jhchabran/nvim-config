@@ -375,7 +375,12 @@ return require("packer").startup(function(use)
   use { "psliwka/vim-smoothie" }
 
   -- linter that use the diagnostics api
-  use { "mfussenegger/nvim-lint" }
+  use { "mfussenegger/nvim-lint", config = function()
+    require("lint").linters_by_ft = { go = { "golangcilint" }, terraform = { "checkov" }, dockerfile = {"checkov"} }
+    vim.cmd(([[
+    au BufWritePost <buffer> lua require('lint').try_lint()
+    ]]))
+  end}
   -- Cue will save us from YAML
   use { 'jjo/vim-cue' }
 
