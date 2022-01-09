@@ -25,6 +25,10 @@ m.guess_project_name = function(dir)
   return m.last_dir_name(root)
 end
 
+m.current_buffer_parent_dir = function()
+  return vim.fn.expand('%:p:h')
+end
+
 m.reload_my_lua = function() require("plenary.reload").reload_module("jh.", true) end
 
 -- m.dump_mappings = function()
