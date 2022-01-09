@@ -100,4 +100,4 @@ vim.cmd([[
 -- require("colorbuddy").colorscheme("monarized")
 -- require("monarized").set_style("dark")
 
-vim.cmd[[colorscheme substrata]]
+vim.cmd[[colorscheme tokyonight]]
