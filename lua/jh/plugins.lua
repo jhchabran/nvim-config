@@ -130,6 +130,9 @@ return require("packer").startup(function(use)
   -- snippets
   -- use { "hrsh7th/vim-vsnip" }
   use { "golang/vscode-go" }
+  use { 'ray-x/go.nvim', config = function()
+    require('go').setup()
+  end}
 
   -- fast fuzzy finder
   use { "junegunn/fzf", run = vim.fn["fzf#install"] }

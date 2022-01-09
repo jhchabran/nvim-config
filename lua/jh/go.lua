@@ -46,26 +46,13 @@ autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(2000)
 ]]))
 
--- don't use vim-go because it doesn't use the diagnostics api (it uses quickfix), which is less fancy.
--- vim.g.go_metalinter_autosave = 0
-vim.g.go_fold_enable = { "block", "import", "varconst", "package_comment" }
--- vim.g.go_metalinter_command = "golangci-lint"
-require("lint").linters_by_ft = { go = { "golangcilint" } }
-
-vim.cmd(([[
-augroup GoLinters
-  autocmd!
-  autocmd FileType go autocmd BufWritePost <buffer> lua require('lint').try_lint()
-augroup end
-]]))
-
 _G.whichkeyGo = function()
   local wk = require("which-key")
   -- local buf = vim.api.nvim_get_current_buf()
   wk.register({
     [" "] = {
       name = "Go",
-      a = { "<cmd>GoAlternate<CR>", "alternate impl and test" },
+      a = { "<cmd>GoAlt<CR>", "alternate impl and test" },
       i = { "<cmd>GoInstall<CR>", "go install" },
       b = { "<cmd>GoBuild<CR>", "go build" },
       d = { "<cmd>GoDoc<CR>", "go doc" },
