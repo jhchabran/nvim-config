@@ -226,6 +226,7 @@ map_normal_leader = {
     c = { "<cmd>ColorToggle<CR>", "Hex colors highlighting" },
     i = { "<cmd>IndentBlanklineToggle!<CR>", "Indent Guide" },
     l = { "<cmd>set invnumber<CR>", "Line numbers visibility" },
+    s = { function() if vim.opt.laststatus._value == 2 then vim.opt.laststatus = 0 else vim.opt.laststatus = 2 end end, "Toggle status line" },
     z = { "<cmd>ZenMode<CR>", "Zen Mode" },
     ['Z'] = { "<cmd>Twilight<CR>", "Dim unfocused code" },
   },
