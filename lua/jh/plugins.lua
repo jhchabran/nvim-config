@@ -131,6 +131,22 @@ return require("packer").startup(function(use)
   }
   -- Debugger
   -- use { "puremourning/vimspector" }
+  use { 'mfussenegger/nvim-dap' }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}, config = function()
+    require("dapui").setup()
+  end }
+  use { "theHamsta/nvim-dap-virtual-text", requires = {"mfussenegger/nvim-dap"}, config = function() require("nvim-dap-virtual-text").setup() end }
+  use { 'Pocco81/DAPInstall.nvim' }
+  use {
+    -- 'yriveiro/dap-go.nvim',
+    'jhchabran/dap-go.nvim',
+    branch = 'hotfix',
+    -- '~/perso/dap-go.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      require('dap-go').setup()
+    end
+  }
   -- autocompletion
   use {
     "hrsh7th/nvim-cmp",

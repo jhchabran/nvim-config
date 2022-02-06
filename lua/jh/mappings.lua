@@ -109,16 +109,37 @@ map_normal_leader = {
   },
   d = {
     name = "Debugger",
-    q = { "<cmd>VimspectorReset<CR>", "Quit debugging" },
-    -- e = { "<cmd>VimspectorEval<CR>", "Eval" },
-    c = { "<cmd>call vimspector#Continue()<CR>", "Continue" },
-    r = { "<cmd>call vimspector#Restart()<CR>", "Restart" },
-    s = { "vimspector#Stop()<CR>", "Stop" },
-    p = { "<cmd>call vimspector#Pause()<CR>", "Pause" },
-    t = { "<cmd>call vimspector#ToggleBreakpoint()<CR>", "Toggle Breakpoint" },
-    i = { "<cmd>call vimspector#StepInto()<CR>", "Step into" },
-    n = { "<cmd>call vimspector#StepOver()<CR>", "Step over" },
-    o = { "<cmd>call vimspector#StepOut()<CR>", "Step out" },
+    d = { function() require('dapui').toggle() end, "Toggle debbuger" },
+    b = { function() require('dap').toggle_breakpoint() end, "Toggle breakpoint" },
+    c = { function() require('dap').continue() end, "Continue or start debuggger" },
+    n = { function() require('dap').step_over() end, "Step over" },
+    i = { function() require('dap').step_into() end, "Step in" },
+    o = { function() require('dap').step_out() end, "Step out" },
+    u = { function() require("dapui").toggle() end, "Toggle UI" },
+    -- Crude, but does the job
+    t = { function()
+      local dap = require("dap")
+      dap.run({
+        type = "go",
+        name = "",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}",
+        args = {"-test.run", ""},
+      })
+    end, "Debug test" },
+
+
+    -- q = { "<cmd>VimspectorReset<CR>", "Quit debugging" },
+    -- -- e = { "<cmd>VimspectorEval<CR>", "Eval" },
+    -- c = { "<cmd>call vimspector#Continue()<CR>", "Continue" },
+    -- r = { "<cmd>call vimspector#Restart()<CR>", "Restart" },
+    -- s = { "vimspector#Stop()<CR>", "Stop" },
+    -- p = { "<cmd>call vimspector#Pause()<CR>", "Pause" },
+    -- t = { "<cmd>call vimspector#ToggleBreakpoint()<CR>", "Toggle Breakpoint" },
+    -- i = { "<cmd>call vimspector#StepInto()<CR>", "Step into" },
+    -- n = { "<cmd>call vimspector#StepOver()<CR>", "Step over" },
+    -- o = { "<cmd>call vimspector#StepOut()<CR>", "Step out" },
   },
   e = {
     name = "Easy movements",
