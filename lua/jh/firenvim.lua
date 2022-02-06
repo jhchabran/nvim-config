@@ -1,6 +1,5 @@
 vim.cmd(([[
 if exists('g:started_by_firenvim')
-
   let g:firenvim_config = { 
     \ 'localSettings': {
         \ '.*': {
@@ -11,8 +10,9 @@ if exists('g:started_by_firenvim')
     \ }
   \ }
 
+
   au BufEnter github.com_*.txt set filetype=markdown
-  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h18
+  set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h24
 
   let g:dont_write = v:false
   function! My_Write(timer) abort
@@ -30,10 +30,15 @@ if exists('g:started_by_firenvim')
 
   au TextChanged * ++nested call Delay_My_Write()
   au TextChangedI * ++nested call Delay_My_Write()
-
-  set noshowmode
-  set noruler
-  set laststatus=0
-  set noshowcmd
 endif
+
+function! FirenvimOnUIEnter(event) abort
+  if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+  endif
+endfunction
+autocmd UIEnter * call FirenvimOnUIEnter(deepcopy(v:event))
 ]]))

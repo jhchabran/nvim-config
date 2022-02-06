@@ -12,6 +12,8 @@ configs.zk = {
   };
 }
 
-lspconfig.zk.setup({ on_attach = function(client, buffer) 
-  -- Add keybindings here, see https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-end })
+if not vim.g["started_by_firenvim"] then
+  lspconfig.zk.setup({ on_attach = function(client, buffer)
+    -- Add keybindings here, see https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
+  end })
+end
