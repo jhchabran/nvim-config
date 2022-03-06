@@ -280,6 +280,16 @@ return require("packer").startup(function(use)
               }
             }
           }
+        },
+        extensions = {
+          frecency = {
+            default_workspace = ':CWD:',
+            workspaces = {
+              ["work"] = "~/work",
+              ["perso"] = "~/perso",
+              ["play"] = "~/play",
+            }
+          }
         }
       })
     end,
