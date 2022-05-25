@@ -253,6 +253,7 @@ map_normal_leader = {
     z = { "<cmd>ZenMode<CR>", "Zen Mode" },
     ['Z'] = { "<cmd>Twilight<CR>", "Dim unfocused code" },
   },
+  q = { "<cmd>:q<CR>", "Quit stuff" }
 }
 wk.register(map_normal_leader, { prefix = "<leader>" })
 
