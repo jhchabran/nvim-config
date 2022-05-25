@@ -150,7 +150,9 @@ map_normal_leader = {
     ["l"] = { "<cmd>HopLineStart<CR>", "Jump to lines" },
   },
 
-  f = { name = "Files", r = { "<cmd>Telescope frecency default_text=:CWD:<CR>", "Recent files" } },
+  f = { name = "Files",
+    r = { "<cmd>Telescope oldfiles<CR>", "Recent files" }
+  },
   g = {
     name = "Git",
     -- a = { "<cmd>:Gw<CR>", "Git add current buffer" },
