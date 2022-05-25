@@ -42,8 +42,8 @@ autocmd FileType go lua require'cmp'.setup.buffer {
 \     { name = 'nvim_lsp' },
 \   },
 \ }
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(2000)
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 ]]))
 
 _G.whichkeyGo = function()
