@@ -37,6 +37,7 @@ vim.opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,resize,
 vim.opt.foldlevelstart=20
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" } -- remember stuff across sessions
 vim.api.nvim_command("set noswapfile") -- I have OCD file saving issues anyway
+vim.opt.laststatus = 3
 
 -- restore cursor position
 vim.cmd(([[
