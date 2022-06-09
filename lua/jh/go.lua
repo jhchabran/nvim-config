@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+
 lspconfig.gopls.setup {
   capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   codelens = { generate = true, gc_details = true },
@@ -42,8 +43,7 @@ autocmd FileType go lua require'cmp'.setup.buffer {
 \     { name = 'nvim_lsp' },
 \   },
 \ }
-autocmd BufWritePre *.go lua goimports(2000)
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua require('jh.lsp').lsp_formatting(0)
 ]]))
 
 _G.whichkeyGo = function()
@@ -61,7 +61,7 @@ _G.whichkeyGo = function()
         name = "Test",
         a = { "<cmd>GoTest ./...<CR>", "go test ./..." },
         s = { "<cmd>GoTestFunc<CR>", "go test -s [current test]" },
-        d = { "<cmd>call vimspector#LaunchWithSettings( #{ configuration: 'single test', TestName: go#util#TestName() } )<CR>", "Debug current test" },
+        d = { "<cmd>call vimspector#LaunchWithSettings( #{ configuration: 'single test', TestName: input('Enter test name: ') } )<CR>", "Debug current test" },
       },
       c = {
         name = "Coverage",
