@@ -12,80 +12,80 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- incremental syntax parsing, the mother of modernity
-  use {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    requires = {"nvim-treesitter/nvim-treesitter"},
-    run = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = "maintained",
-        ignore_install = { "kotlin" },
-        highlight = {
-          enable = true
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            -- mappings for incremental selection (visual mappings)
-            init_selection = "gnn", -- maps in normal mode to init the node/scope selection
-            node_incremental = "grn", -- increment to the upper named parent
-            scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
-            node_decremental = "grm" -- decrement to the previous node
-          }
-        },
-        textobjects = {
-          -- syntax-aware textobjects
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["aC"] = "@class.outer",
-              ["iC"] = "@class.inner",
-              ["ac"] = "@conditional.outer",
-              ["ic"] = "@conditional.inner",
-              ["ae"] = "@block.outer",
-              ["ie"] = "@block.inner",
-              ["al"] = "@loop.outer",
-              ["il"] = "@loop.inner",
-              ["is"] = "@statement.inner",
-              ["as"] = "@statement.outer",
-              ["ad"] = "@comment.outer",
-              ["am"] = "@call.outer",
-              ["im"] = "@call.inner"
-            }
-          }
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = "@class.outer",
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = "@class.outer",
-          },
-        },
-      }
-
-      -- use treesitter for the folds.
-      vim.cmd(([[
-      set foldmethod=expr
-      set foldexpr=nvim_treesitter#foldexpr()
-      ]]))
-    end,
-  }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter-textobjects',
+  --   requires = {"nvim-treesitter/nvim-treesitter"},
+  --   run = ":TSUpdate",
+  --   config = function()
+  --     require("nvim-treesitter.configs").setup {
+  --       ensure_installed = "maintained",
+  --       ignore_install = { "kotlin" },
+  --       highlight = {
+  --         enable = true
+  --       },
+  --       incremental_selection = {
+  --         enable = true,
+  --         keymaps = {
+  --           -- mappings for incremental selection (visual mappings)
+  --           init_selection = "gnn", -- maps in normal mode to init the node/scope selection
+  --           node_incremental = "grn", -- increment to the upper named parent
+  --           scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
+  --           node_decremental = "grm" -- decrement to the previous node
+  --         }
+  --       },
+  --       textobjects = {
+  --         -- syntax-aware textobjects
+  --         select = {
+  --           enable = true,
+  --           lookahead = true,
+  --           keymaps = {
+  --             ["af"] = "@function.outer",
+  --             ["if"] = "@function.inner",
+  --             ["aC"] = "@class.outer",
+  --             ["iC"] = "@class.inner",
+  --             ["ac"] = "@conditional.outer",
+  --             ["ic"] = "@conditional.inner",
+  --             ["ae"] = "@block.outer",
+  --             ["ie"] = "@block.inner",
+  --             ["al"] = "@loop.outer",
+  --             ["il"] = "@loop.inner",
+  --             ["is"] = "@statement.inner",
+  --             ["as"] = "@statement.outer",
+  --             ["ad"] = "@comment.outer",
+  --             ["am"] = "@call.outer",
+  --             ["im"] = "@call.inner"
+  --           }
+  --         }
+  --       },
+  --       move = {
+  --         enable = true,
+  --         set_jumps = true, -- whether to set jumps in the jumplist
+  --         goto_next_start = {
+  --           ["]m"] = "@function.outer",
+  --           ["]]"] = "@class.outer",
+  --         },
+  --         goto_next_end = {
+  --           ["]M"] = "@function.outer",
+  --           ["]["] = "@class.outer",
+  --         },
+  --         goto_previous_start = {
+  --           ["[m"] = "@function.outer",
+  --           ["[["] = "@class.outer",
+  --         },
+  --         goto_previous_end = {
+  --           ["[M"] = "@function.outer",
+  --           ["[]"] = "@class.outer",
+  --         },
+  --       },
+  --     }
+  --
+  --     -- use treesitter for the folds.
+  --     vim.cmd(([[
+  --     set foldmethod=expr
+  --     set foldexpr=nvim_treesitter#foldexpr()
+  --     ]]))
+  --   end,
+  -- }
   -- language specific selections, based on treesitter
   -- commented because I still don't really use it.
   -- use 'David-Kunz/treesitter-unit'
@@ -98,7 +98,34 @@ return require("packer").startup(function(use)
       })
     end
   }
+  use 'Olical/conjure'
   -- LSP goodies
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+      }
+    end
+  }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      local ls = require("null-ls")
+      ls.setup({
+        sources = {
+          ls.builtins.formatting.stylua,
+          ls.builtins.completion.spell,
+          ls.builtins.code_actions.proselint,
+          ls.builtins.diagnostics.actionlint,
+          ls.builtins.diagnostics.checkmake,
+          ls.builtins.diagnostics.golangci_lint,
+          ls.builtins.diagnostics.shellcheck,
+          ls.builtins.formatting.goimports,
+        },
+      })
+    end
+  }
   use {
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig",
@@ -132,21 +159,13 @@ return require("packer").startup(function(use)
   -- Debugger
   -- use { "puremourning/vimspector" }
   use { 'mfussenegger/nvim-dap' }
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}, config = function()
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "leoluz/nvim-dap-go"}, config = function()
     require("dapui").setup()
+    require('dap-go').setup()
   end }
   use { "theHamsta/nvim-dap-virtual-text", requires = {"mfussenegger/nvim-dap"}, config = function() require("nvim-dap-virtual-text").setup() end }
-  use { 'Pocco81/DAPInstall.nvim' }
-  use {
-    -- 'yriveiro/dap-go.nvim',
-    'jhchabran/dap-go.nvim',
-    branch = 'hotfix',
-    -- '~/perso/dap-go.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} },
-    config = function()
-      require('dap-go').setup()
-    end
-  }
+  -- use { 'Pocco81/DAPInstall.nvim' }
+
   -- autocompletion
   use {
     "hrsh7th/nvim-cmp",
@@ -190,6 +209,8 @@ return require("packer").startup(function(use)
         mapping = {
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-u>'] = cmp.mapping.scroll_docs(4),
+          ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+          ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -250,7 +271,11 @@ return require("packer").startup(function(use)
   -- A great UI plugin to pick things
   use {
     "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
+    requires = {
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
+  },
     config = function()
       local actions = require('telescope.actions')
       require("telescope").setup({
@@ -270,7 +295,6 @@ return require("packer").startup(function(use)
         },
         pickers = {
           buffers = {
-            sort_lastused = true,
             mappings = {
               i = {
                 ["<c-d>"] = actions.delete_buffer,
@@ -295,15 +319,24 @@ return require("packer").startup(function(use)
     end,
   }
   use { "nvim-telescope/telescope-file-browser.nvim", config = function()
-    require("telescope").load_extension "file_browser"
+    require("telescope").load_extension("file_browser")
   end}
-  use {'nvim-telescope/telescope-ui-select.nvim' }
+
+  use { "nvim-telescope/telescope-ui-select.nvim", config = function()
+    require("telescope").load_extension("ui-select")
+  end}
+
+  use { "nvim-telescope/telescope-rg.nvim", config = function()
+    require("telescope").load_extension("live_grep_args")
+  end}
+
   use {
     'nvim-telescope/telescope-github.nvim',
     config = function()
       require('telescope').load_extension('gh')
     end
   }
+
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
@@ -317,11 +350,24 @@ return require("packer").startup(function(use)
     requires = {"tami5/sqlite.lua"}
   }
 
+  use {
+    'nvim-telescope/telescope-dap.nvim',
+    config = function()
+      require('telescope').load_extension('dap')
+    end
+  }
+
+  -- This plugin allows you to select some text using Vim's visual mode, then hit * and # to search
+  -- for it elsewhere in the file. For example, hit V, select a strange sequence of characters like "!",
+  -- and hit star. You'll find all other runs of "!" in the file.
+  use "bronson/vim-visual-star-search"
+
   -- stop firing vim within vim
   use "lambdalisue/guise.vim"
 
   -- a theme engine
   use { "tjdevries/colorbuddy.nvim" }
+  use { "rktjmp/lush.nvim" }
   -- a cool theme
   use 'folke/tokyonight.nvim'
   use 'shaunsingh/nord.nvim'
@@ -437,8 +483,8 @@ return require("packer").startup(function(use)
     require("lualine").setup({
       options = {
         icons_enabled = true,
-        -- theme = require('monarized.lualine'),
-        theme = "auto",
+        theme = require('monarized.lualine'),
+        -- theme = "auto",
         component_separators = {'', ''},
         section_separators = {'', ''},
         disabled_filetypes = {}
@@ -502,11 +548,10 @@ return require("packer").startup(function(use)
     -- update kitty background and foreground when changing styles
     vim.g.monarized_kitty_colors = true
     -- -- no italic for me
-    vim.g.monarized_italic = nil
+    vim.g.monarized_italic = true
 
     require('telescope').load_extension("monarized")
   end}
-  use 'marko-cerovac/material.nvim'
 
   if packer_bootstrap then
     require('packer').sync()
