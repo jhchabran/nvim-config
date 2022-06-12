@@ -326,7 +326,7 @@ return require("packer").startup(function(use)
     require("telescope").load_extension("ui-select")
   end}
 
-  use { "nvim-telescope/telescope-rg.nvim", config = function()
+  use { "nvim-telescope/telescope-live-grep-args.nvim", config = function()
     require("telescope").load_extension("live_grep_args")
   end}
 
