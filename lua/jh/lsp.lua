@@ -26,10 +26,6 @@ require("lspkind").init({
   },
 })
 
-vim.cmd(([[
-autocmd CursorHold * lua vim.lsp.buf.hover()
-]]))
-
 -- avoid accidently jumping to the hover window
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, { focusable = false, border = "rounded" }
