@@ -435,6 +435,13 @@ return require("packer").startup(function(use)
   -- quickfix enhancements
   use { "romainl/vim-qf" }
 
+  -- easily run tests
+  use { "vim-test/vim-test", config = function()
+    vim.cmd(([[
+    let g:test#strategy = "neovim"
+]]))
+  end}
+
   -- File tree
   use { "kyazdani42/nvim-web-devicons" }
   use { "kyazdani42/nvim-tree.lua", config = function()

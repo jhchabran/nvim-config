@@ -97,7 +97,8 @@ map_normal_leader = {
     },
     r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
     ["R"] = { "<cmd>Telescope lsp_references<CR>", "References" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
+    ['T'] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Go to type definition" },
+    ['t'] = { "<cmd>TestNearest<CR>", "Run nearest test" },
     q = {
       name = "Quickfix",
       q = { "<cmd>Telescope quickfix<CR>", "Quickfix" },
