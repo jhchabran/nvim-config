@@ -102,3 +102,4 @@ require("colorbuddy").colorscheme("monarized")
 require("monarized").set_style("dark")
 
 -- vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[packadd cfilter]]
