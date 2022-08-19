@@ -22,6 +22,6 @@ m.open_scratch = function()
   vim.cmd(":split " .. path)
 end
 
-m.find_notes = function() require("telescope.builtin").file_browser({ cwd = m.config.root_path }) end
+m.find_notes = function() require("telescope.builtin").find_files({ cwd = m.config.root_path }) end
 
 return m
