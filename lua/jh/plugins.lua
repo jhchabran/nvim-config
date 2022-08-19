@@ -12,6 +12,45 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- incremental syntax parsing, the mother of modernity
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        auto_install = true,
+        sync_install = false,
+        highlight = {
+          enable = true
+        },
+        ensure_installed = {
+          "go",
+          "gomod",
+          "lua",
+          "fennel",
+          "clojure",
+          "zig",
+          "rust",
+          "scheme",
+          "c",
+          "typescript",
+
+          "sql",
+
+          "make",
+          "bash",
+          "dockerfile",
+          "javascript",
+          "vim",
+
+          "json",
+          "markdown",
+          "html",
+          "toml",
+          "yaml"
+        },
+      }
+    end
+  }
   -- use {
   --   'nvim-treesitter/nvim-treesitter-textobjects',
   --   requires = {"nvim-treesitter/nvim-treesitter"},
@@ -368,12 +407,12 @@ return require("packer").startup(function(use)
   -- a theme engine
   use { "tjdevries/colorbuddy.nvim" }
   use { "rktjmp/lush.nvim" }
-  -- a cool theme
-  use 'folke/tokyonight.nvim'
-  use 'shaunsingh/nord.nvim'
+
+  use 'kaiuri/nvim-juliana'
   use 'mhartington/oceanic-next'
-  use 'luisiacc/gruvbox-baby'
+  use 'folke/tokyonight.nvim'
   use 'kvrohit/substrata.nvim'
+  use { "ellisonleao/gruvbox.nvim" }
 
   -- a small plugin to HL hex colors on the fly, it makes it easier to tweak themes
   use { "chrisbra/Colorizer" }
@@ -381,9 +420,17 @@ return require("packer").startup(function(use)
   use { "kosayoda/nvim-lightbulb" }
 
   -- zen mode
-  use { "folke/zen-mode.nvim", config = function()
-    require("zen-mode").setup {}
-  end}
+  use { "Pocco81/true-zen.nvim", config = function()
+   require("true-zen").setup {
+     integrations = {
+       lualine = true,
+       kitty = {
+         enabled = true,
+         font = "+1"
+       },
+     },
+   }
+   end}
   -- dim code that is not focused
   use { "folke/twilight.nvim", config = function()
     require("twilight").setup {}
@@ -427,7 +474,7 @@ return require("packer").startup(function(use)
     'phaazon/hop.nvim',
     as = 'hop',
     config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
+      -- you can configure hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'arstneodhqwfpjluy' }
     end
   }
@@ -484,6 +531,9 @@ return require("packer").startup(function(use)
     -- \ }
     -- ]]))
   end}
+
+  -- Can't live with when coding in lisp
+  use { "gpanders/nvim-parinfer" }
 
   -- status line with goodies
   use { "nvim-lualine/lualine.nvim", config = function()
@@ -549,6 +599,7 @@ return require("packer").startup(function(use)
 
   -- my stuff ----------------------------------
   -- theme
+  use { "~/perso/lumona" }
   use { "~/perso/monarized", config = function()
     -- update lualine theme when changing styles
     vim.g.monarized_lualine = true
