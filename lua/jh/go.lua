@@ -1,11 +1,13 @@
 local lspconfig = require("lspconfig")
 
 lspconfig.gopls.setup {
-  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
   codelens = { generate = true, gc_details = true },
-  experimentalWorkspaceModule = true,
+  -- experimentalWorkspaceModule = true,
+  -- expandWorkspaceToModule = true,
   semanticTokens = true,
   experimentalPostfixCompletions = true,
+  hints = { assignVariableTypes = true, compositeLiteralFields = true, parameterNames = true, rangeVariableTypes = true },
   on_attach = function(client, bufnr)
     require("lsp_signature").on_attach({
       hint_prefix = " ",
@@ -56,6 +58,7 @@ _G.whichkeyGo = function()
       i = { "<cmd>GoInstall<CR>", "go install" },
       b = { "<cmd>GoBuild<CR>", "go build" },
       d = { "<cmd>GoDoc<CR>", "go doc" },
+      p = { "<cmd>:e ~/play/foo/main.go<CR>", "open playground" },
       r = { "<cmd>GoRun<CR>", "go run" },
       t = {
         name = "Test",
