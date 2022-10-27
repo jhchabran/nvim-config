@@ -37,7 +37,8 @@ vim.opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,resize,
 vim.opt.foldlevelstart=20
 vim.opt.shada = { "!", "'1000", "<50", "s10", "h" } -- remember stuff across sessions
 vim.api.nvim_command("set noswapfile") -- I have OCD file saving issues anyway
-vim.opt.laststatus = 3
+-- vim.opt.laststatus = 3
+vim.opt.cmdheight = 1
 
 -- restore cursor position
 vim.cmd(([[
@@ -98,8 +99,15 @@ vim.cmd([[
   set tabline=%!MyTabLine()
 ]])
 
-require("colorbuddy").colorscheme("monarized")
-require("monarized").set_style("dark")
+-- require("colorbuddy").colorscheme("monarized")
+-- require("monarized").set_style("dark")
 
--- vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme lumona]]
 vim.cmd[[packadd cfilter]]
+
+if vim.g.neovide then
+  vim.g.neovid_cursor_aniimation_length = 0.01
+  vim.g.neovide_cursor_trail_length = 0.05
+  -- vim.g.neovide_cursor_antialiasing = true
+  vim.cmd [[set guifont=DankMono\ Nerd\ Font:h16:l]]
+end

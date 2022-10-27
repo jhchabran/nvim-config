@@ -51,6 +51,7 @@ return require("packer").startup(function(use)
       }
     end
   }
+  use 'nvim-treesitter/nvim-treesitter-context'
   -- use {
   --   'nvim-treesitter/nvim-treesitter-textobjects',
   --   requires = {"nvim-treesitter/nvim-treesitter"},
@@ -129,6 +130,7 @@ return require("packer").startup(function(use)
   -- commented because I still don't really use it.
   -- use 'David-Kunz/treesitter-unit'
   -- Annotations on closing brackets
+  use { 'ziglang/zig.vim'}
   use { 'code-biscuits/nvim-biscuits',
     requires = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
@@ -147,24 +149,24 @@ return require("packer").startup(function(use)
       }
     end
   }
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      local ls = require("null-ls")
-      ls.setup({
-        sources = {
-          ls.builtins.formatting.stylua,
-          ls.builtins.completion.spell,
-          ls.builtins.code_actions.proselint,
-          ls.builtins.diagnostics.actionlint,
-          ls.builtins.diagnostics.checkmake,
-          ls.builtins.diagnostics.golangci_lint,
-          ls.builtins.diagnostics.shellcheck,
-          ls.builtins.formatting.goimports,
-        },
-      })
-    end
-  }
+  -- use {
+  --   'jose-elias-alvarez/null-ls.nvim',
+  --   config = function()
+  --     local ls = require("null-ls")
+  --     ls.setup({
+  --       sources = {
+  --         ls.builtins.formatting.stylua,
+  --         ls.builtins.completion.spell,
+  --         ls.builtins.code_actions.proselint,
+  --         ls.builtins.diagnostics.actionlint,
+  --         ls.builtins.diagnostics.checkmake,
+  --         ls.builtins.diagnostics.golangci_lint,
+  --         ls.builtins.diagnostics.shellcheck,
+  --         ls.builtins.formatting.goimports,
+  --       },
+  --     })
+  --   end
+  -- }
   use {
     "onsails/lspkind-nvim",
     "neovim/nvim-lspconfig",
@@ -421,197 +423,211 @@ return require("packer").startup(function(use)
 
   -- zen mode
   use { "Pocco81/true-zen.nvim", config = function()
-   require("true-zen").setup {
-     integrations = {
-       lualine = true,
-       kitty = {
-         enabled = true,
-         font = "+1"
-       },
-     },
-   }
-   end}
-  -- dim code that is not focused
-  use { "folke/twilight.nvim", config = function()
-    require("twilight").setup {}
-  end}
-
-  -- git stuff
-  -- link to various forges
-  use {
-    'ruifm/gitlinker.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = function() require"gitlinker".setup() end
-  }
-  -- display status in the margin
-  use {
-    "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function() require("gitsigns").setup() end,
-  }
-
-  -- I like neogit, because I'm a magit fan, but it's too young and fugitive rocks
-  use { "tpope/vim-fugitive" }
-
-  -- floating terminal
-  use { "numtostr/FTerm.nvim" }
-
-  -- comments
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
-  }
-
-  -- tpope, the legend
-  use { "tpope/vim-repeat" } -- repeat commands
-  use { "tpope/vim-vinegar" } -- press - for local filebrowser
-  use { "tpope/vim-surround" } -- cs)] turns surrounding ) into ]
-
-  -- kangaroo based motions, jump everywhere
-  use {
-    'phaazon/hop.nvim',
-    as = 'hop',
-    config = function()
-      -- you can configure hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'arstneodhqwfpjluy' }
-    end
-  }
-
-  -- quickfix enhancements
-  use { "romainl/vim-qf" }
-
-  -- easily run tests
-  use { "vim-test/vim-test", config = function()
-    vim.cmd(([[
-    let g:test#strategy = "neovim"
-]]))
-  end}
-
-  -- File tree
-  use { "kyazdani42/nvim-web-devicons" }
-  use { "kyazdani42/nvim-tree.lua", config = function()
-    require'nvim-tree'.setup {
-      diagnostics = { enable = false },
-      update_focused_file = {
-        enable = true,
-      }
+    require("true-zen").setup {
+      integrations = {
+        lualine = true,
+        kitty = {
+          enabled = true,
+          font = "+1"
+        },
+        ataraxis = {
+          shade = "dark", -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
+          backdrop = 0, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
+          minimum_writing_area = { -- minimum size of main window
+            width = 100,
+            height = 44,
+          },
+          padding = { -- padding windows
+            left = 52,
+            right = 52,
+            top = 0,
+            bottom = 0,
+          },
+        },
+      },
     }
+ end}
+ -- dim code that is not focused
+ use { "folke/twilight.nvim", config = function()
+   require("twilight").setup {}
+ end}
 
-    -- vim.cmd(([[
-    -- let g:nvim_tree_icons = {
-    -- \ 'default': '',
-    -- \ 'symlink': '',
-    -- \ 'git': {
-    -- \   'unstaged': "✗",
-    -- \   'staged': "✓",
-    -- \   'unmerged': "",
-    -- \   'renamed': "➜",
-    -- \   'untracked': "﹖",
-    -- \   'deleted': "",
-    -- \   'ignored': "…"
-    -- \  },
-    -- \ 'folder': {
-    -- \   'arrow_open': "",
-    -- \   'arrow_closed': "",
-    -- \   'default': "",
-    -- \   'open': "",
-    -- \   'empty': "",
-    -- \   'empty_open': "",
-    -- \   'symlink': "",
-    -- \   'symlink_open': "",
-    -- \   },
-    -- \   'lsp': {
-    -- \     'hint': "",
-    -- \     'info': "",
-    -- \     'warning': "",
-    -- \     'error': "",
-    -- \   }
-    -- \ }
-    -- ]]))
-  end}
+ -- git stuff
+ -- link to various forges
+ use {
+   'ruifm/gitlinker.nvim',
+   requires = 'nvim-lua/plenary.nvim',
+   config = function() require"gitlinker".setup() end
+ }
+ -- display status in the margin
+ use {
+   "lewis6991/gitsigns.nvim",
+   requires = { "nvim-lua/plenary.nvim" },
+   config = function() require("gitsigns").setup() end,
+ }
 
-  -- Can't live with when coding in lisp
-  use { "gpanders/nvim-parinfer" }
+ -- I like neogit, because I'm a magit fan, but it's too young and fugitive rocks
+ use { "tpope/vim-fugitive" }
 
-  -- status line with goodies
-  use { "nvim-lualine/lualine.nvim", config = function()
-    require("lualine").setup({
-      options = {
-        icons_enabled = true,
-        theme = require('monarized.lualine'),
-        -- theme = "auto",
-        component_separators = {'', ''},
-        section_separators = {'', ''},
-        disabled_filetypes = {}
-      },
-      sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch'},
-        lualine_c = {'%=', {'filename', path = 1, color = { fg = '#fff' }}, {'diff', colored = false }},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'location'}
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {'%=', {'filename', path = 1}},
-        lualine_x = {'location'},
-        lualine_y = {},
-        lualine_z = {}
-      },
-      tabline = {
-      },
-      extensions = {}
-    })
-  end}
+ -- floating terminal
+ use { "numtostr/FTerm.nvim" }
 
-  -- stop exiting vim because I deleted the last buffer
-  use {'ojroques/nvim-bufdel'}
+ -- comments
+ use {
+   'numToStr/Comment.nvim',
+   config = function()
+     require('Comment').setup()
+   end
+ }
 
-  -- indent guide
-  use { "lukas-reineke/indent-blankline.nvim", config = function() vim.g.indent_blankline_enabled = false end}
+ -- tpope, the legend
+ use { "tpope/vim-repeat" } -- repeat commands
+ use { "tpope/vim-vinegar" } -- press - for local filebrowser
+ use { "tpope/vim-surround" } -- cs)] turns surrounding ) into ]
 
-  -- popup markdown preview
-  use { "npxbr/glow.nvim" } -- , run = ":GlowInstall" }
-  -- do not lose me on ^D
-  use { "psliwka/vim-smoothie" }
+ -- kangaroo based motions, jump everywhere
+ use {
+   'phaazon/hop.nvim',
+   as = 'hop',
+   config = function()
+     -- you can configure hop the way you like here; see :h hop-config
+     require'hop'.setup { keys = 'arstneodhqwfpjluy' }
+   end
+ }
 
-  -- linter that use the diagnostics api
-  use { "mfussenegger/nvim-lint", config = function()
-    require("lint").linters_by_ft = { go = { "golangcilint" }, terraform = { "checkov" }, dockerfile = {"checkov"} }
-    vim.cmd(([[
-    au BufWritePost <buffer> lua require('lint').try_lint()
-    ]]))
-  end}
-  -- Cue will save us from YAML
-  use { 'jjo/vim-cue' }
+ -- quickfix enhancements
+ use { "romainl/vim-qf" }
 
-  -- Browser stuff
-  use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
-  }
+ -- easily run tests
+ use { "vim-test/vim-test", config = function()
+   vim.cmd(([[
+   let g:test#strategy = "neovim"
+   ]]))
+ end}
 
-  use { 'camdencheek/sgbrowse' }
+ -- File tree
+ use { "kyazdani42/nvim-web-devicons" }
+ use { "kyazdani42/nvim-tree.lua", config = function()
+   require'nvim-tree'.setup {
+     diagnostics = { enable = false },
+     update_focused_file = {
+       enable = true,
+     }
+   }
 
-  -- my stuff ----------------------------------
-  -- theme
-  use { "~/perso/lumona" }
-  use { "~/perso/monarized", config = function()
-    -- update lualine theme when changing styles
-    vim.g.monarized_lualine = true
-    -- update kitty background and foreground when changing styles
-    vim.g.monarized_kitty_colors = true
-    -- -- no italic for me
-    vim.g.monarized_italic = true
+   -- vim.cmd(([[
+   -- let g:nvim_tree_icons = {
+     -- \ 'default': '',
+     -- \ 'symlink': '',
+     -- \ 'git': {
+       -- \   'unstaged': "✗",
+       -- \   'staged': "✓",
+       -- \   'unmerged': "",
+       -- \   'renamed': "➜",
+       -- \   'untracked': "﹖",
+       -- \   'deleted': "",
+       -- \   'ignored': "…"
+       -- \  },
+       -- \ 'folder': {
+         -- \   'arrow_open': "",
+         -- \   'arrow_closed': "",
+         -- \   'default': "",
+         -- \   'open': "",
+         -- \   'empty': "",
+         -- \   'empty_open': "",
+         -- \   'symlink': "",
+         -- \   'symlink_open': "",
+         -- \   },
+         -- \   'lsp': {
+           -- \     'hint': "",
+           -- \     'info': "",
+           -- \     'warning': "",
+           -- \     'error': "",
+           -- \   }
+           -- \ }
+           -- ]]))
+         end}
 
-    require('telescope').load_extension("monarized")
-  end}
+         -- Can't live with when coding in lisp
+         use { "gpanders/nvim-parinfer" }
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+         -- status line with goodies
+         use { "nvim-lualine/lualine.nvim", config = function()
+           require("lualine").setup({
+             options = {
+               icons_enabled = true,
+               theme = require('monarized.lualine'),
+               -- theme = "auto",
+               component_separators = {'', ''},
+               section_separators = {'', ''},
+               disabled_filetypes = {}
+             },
+             sections = {
+               lualine_a = {'mode'},
+               lualine_b = {'branch'},
+               lualine_c = {'%=', {'filename', path = 1, color = { fg = '#fff' }}, {'diff', colored = false }},
+               lualine_x = {'encoding', 'fileformat', 'filetype'},
+               lualine_y = {'progress'},
+               lualine_z = {'location'}
+             },
+             inactive_sections = {
+               lualine_a = {},
+               lualine_b = {},
+               lualine_c = {'%=', {'filename', path = 1}},
+               lualine_x = {'location'},
+               lualine_y = {},
+               lualine_z = {}
+             },
+             tabline = {
+             },
+             extensions = {}
+           })
+         end}
+
+         -- stop exiting vim because I deleted the last buffer
+         use {'ojroques/nvim-bufdel'}
+
+         -- indent guide
+         use { "lukas-reineke/indent-blankline.nvim", config = function() vim.g.indent_blankline_enabled = false end}
+
+         -- popup markdown preview
+         use { "npxbr/glow.nvim" } -- , run = ":GlowInstall" }
+         -- do not lose me on ^D
+         use { "psliwka/vim-smoothie" }
+
+         -- linter that use the diagnostics api
+         use { "mfussenegger/nvim-lint", config = function()
+           require("lint").linters_by_ft = { go = { "golangcilint" }, terraform = { "checkov" }, dockerfile = {"checkov"} }
+           vim.cmd(([[
+           au BufWritePost <buffer> lua require('lint').try_lint()
+           ]]))
+         end}
+         -- Cue will save us from YAML
+         use { 'jjo/vim-cue' }
+
+         -- Browser stuff
+         use {
+           'glacambre/firenvim',
+           run = function() vim.fn['firenvim#install'](0) end
+         }
+
+         use { 'camdencheek/sgbrowse' }
+
+         -- my stuff ----------------------------------
+         -- theme
+         use { "~/perso/lumona" }
+         use { "~/perso/monarized", config = function()
+           -- update lualine theme when changing styles
+           vim.g.monarized_lualine = true
+           -- update kitty background and foreground when changing styles
+           vim.g.monarized_kitty_colors = true
+           -- -- no italic for me
+           vim.g.monarized_italic = true
+
+           require('telescope').load_extension("monarized")
+         end}
+
+         if packer_bootstrap then
+           require('packer').sync()
+         end
+       end)
