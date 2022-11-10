@@ -55,6 +55,7 @@ vim.g["python3_host_prog"] = "~/.asdf/shims/python3" -- Use this python binary
 -- set leader to space early
 vim.g.mapleader = " "
 
+require("globals")
 require("jh.plugins")
 require("jh.lsp")
 require("jh.mappings")

@@ -1,4 +1,32 @@
 local lspconfig = require("lspconfig")
+local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+local goimports = function(wait_ms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = { only = { "source.organizeImports" } }
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
+  end
+
+  vim.lsp.buf.format()
+end
+
+local format_lsp = function(bufnr)
+  vim.lsp.buf.format {
+    -- Never request tsserver for formatting, because we use prettier/eslint for that
+    filter = function(client)
+      return client.name ~= "tsserver" and client.name ~= "sumneko_lua"
+    end,
+    bufnr = bufnr,
+  }
+end
 
 lspconfig.gopls.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -9,6 +37,24 @@ lspconfig.gopls.setup {
   experimentalPostfixCompletions = true,
   hints = { assignVariableTypes = true, compositeLiteralFields = true, parameterNames = true, rangeVariableTypes = true },
   on_attach = function(client, bufnr)
+    local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+
+    -- formatting
+    if client.supports_method "textDocument/formatting" then
+      vim.api.nvim_clear_autocmds { group = formatting_augroup, buffer = bufnr }
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = formatting_augroup,
+        buffer = bufnr,
+        callback = function()
+          if filetype == "go" then
+            goimports(2000)
+          else
+            format_lsp(bufnr)
+          end
+        end,
+      })
+    end
+    require("inlay-hints").on_attach(client, bufnr)
     require("lsp_signature").on_attach({
       hint_prefix = " ",
       zindex = 50,
