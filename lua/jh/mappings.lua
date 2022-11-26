@@ -210,9 +210,8 @@ map_normal_leader = {
     b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy search in current buffer" },
     p = { "<cmd>Telescope live_grep<CR>", "Find in project" },
     s = { "<cmd>Telescope live_grep search_dirs=%:p:h<CR>", "Find in project" },
-    r = { function() require("telescope").extensions.live_grep_args.live_grep_args() end, "ripgrep" },
+    S = { function() require("telescope").extensions.live_grep_args.live_grep_args() end, "ripgrep" },
     c = { "<cmd>let @/ = \"\"<CR>:echo 'Search highlight cleared'<CR>", "Clear search" },
-    R = { function() require('spectre').open() end, "Search and replace in current project" },
   },
   t = {
     name = "Tabs",
@@ -226,7 +225,6 @@ map_normal_leader = {
     c = { "<cmd>ColorToggle<CR>", "Hex colors highlighting" },
     i = { "<cmd>IndentBlanklineToggle!<CR>", "Indent Guide" },
     l = { "<cmd>set invnumber<CR>", "Line numbers visibility" },
-    s = { function() if vim.opt.laststatus._value == 2 then vim.opt.laststatus = 0 else vim.opt.laststatus = 2 end end, "Toggle status line" },
     z = { "<cmd>TZAtaraxis<CR>", "Zen Mode" },
     ['Z'] = { "<cmd>Twilight<CR>", "Dim unfocused code" },
   },
