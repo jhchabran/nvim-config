@@ -403,6 +403,25 @@ return require("packer").startup(function(use)
   -- and hit star. You'll find all other runs of "!" in the file.
   use "bronson/vim-visual-star-search"
 
+  -- Treesitter based search and replace
+  use {
+    "cshuaimin/ssr.nvim",
+    module = "ssr",
+    -- Calling setup is optional.
+    config = function()
+      require("ssr").setup {
+        min_width = 50,
+        min_height = 5,
+        keymaps = {
+          close = "q",
+          next_match = "n",
+          prev_match = "N",
+          replace_all = "<leader>sR",
+        },
+      }
+    end
+  }
+
   -- stop firing vim within vim
   use "lambdalisue/guise.vim"
 
@@ -413,8 +432,7 @@ return require("packer").startup(function(use)
   use 'kaiuri/nvim-juliana'
   use 'mhartington/oceanic-next'
   use 'folke/tokyonight.nvim'
-  use 'luisiacc/gruvbox-baby'
-  use ('Tsuzat/NeoSolarized.nvim')
+  use 'gruvbox-community/gruvbox'
   use 'kvrohit/substrata.nvim'
 
   -- a small plugin to HL hex colors on the fly, it makes it easier to tweak themes
@@ -617,7 +635,8 @@ use { "vim-test/vim-test", config = function()
            require("lualine").setup({
              options = {
                icons_enabled = true,
-               theme = require('monarized.lualine'),
+               theme = "gruvbox",
+               -- theme = require('monarized.lualine'),
                -- theme = "auto",
                component_separators = {'', ''},
                section_separators = {'', ''},
