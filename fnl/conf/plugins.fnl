@@ -21,8 +21,8 @@
              "nyoom-engineering/oxocarbon.nvim"
              ;; fuzzy finders
              (opts! "junegunn/fzf" 
-                    {:init (let [install (. vim.fn :fzf#install)] 
-                             (install))})
+                    {:build (let [install (. vim.fn :fzf#install)] 
+                              (install))})
              "junegunn/fzf.vim"
              "ojroques/nvim-lspfuzzy"
              (opts! "nvim-telescope/telescope.nvim"
@@ -64,7 +64,7 @@
              ;; language agnostic utilities
              (opts! 
                "nvim-treesitter/nvim-treesitter"
-               :init (fn [] ((do-req :nvim-treesitter.install :update {:with_sync true}))) ;; TODO autocommand
+               :build (fn [] ((do-req :nvim-treesitter.install :update {:with_sync true}))) ;; TODO autocommand
                :config (fn [] 
                          (do-req :nvim-treesitter.configs
                                  :setup
