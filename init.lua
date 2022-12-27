@@ -103,8 +103,8 @@ vim.cmd([[
 -- require("colorbuddy").colorscheme("monarized")
 -- require("monarized").set_style("dark")
 
-vim.cmd[[colorscheme gruvbox]]
--- vim.cmd[[colorscheme lumona]]
+-- vim.cmd[[colorscheme gruvbox]]
+vim.cmd[[colorscheme oxocarbon]]
 vim.cmd[[packadd cfilter]]
 
 if vim.g.neovide then

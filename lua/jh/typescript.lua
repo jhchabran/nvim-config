@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 
 lspconfig.tsserver.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -13,7 +14,12 @@ lspconfig.tsserver.setup {
         border = "none"
       }
     })
-  end
+
+  end,
+  flags = {
+    debounce_text_changes = 200,
+  },
+  root_dir = util.root_pattern "tsconfig.json",
 }
 
 vim.cmd(([[

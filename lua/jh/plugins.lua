@@ -635,7 +635,7 @@ use { "vim-test/vim-test", config = function()
            require("lualine").setup({
              options = {
                icons_enabled = true,
-               theme = "gruvbox",
+               -- theme = "gruvbox",
                -- theme = require('monarized.lualine'),
                -- theme = "auto",
                component_separators = {'', ''},
@@ -685,15 +685,10 @@ use { "vim-test/vim-test", config = function()
          -- Cue will save us from YAML
          use { 'jjo/vim-cue' }
 
-         -- Browser stuff
-         use {
-           'glacambre/firenvim',
-           run = function() vim.fn['firenvim#install'](0) end
-         }
-
          use { 'camdencheek/sgbrowse' }
 
-         -- my stuff ----------------------------------
+         use {'nyoom-engineering/oxocarbon.nvim'}
+
          -- theme
          use { "~/perso/lumona" }
          use { "~/perso/monarized", config = function()
@@ -703,7 +698,6 @@ use { "vim-test/vim-test", config = function()
            vim.g.monarized_kitty_colors = true
            -- -- no italic for me
            vim.g.monarized_italic = true
-
            require('telescope').load_extension("monarized")
          end}
 
