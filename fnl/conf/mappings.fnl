@@ -1,12 +1,12 @@
 (import-macros {: do-req 
                 : let-req} :lib/require)
 
-(local m (require :lib/nvim_map))
+(local n (require :lib/nvim))
 (local wk (require :which-key))
 
 ;; Convenient way to indent stuff in visual mode
-(m.keymap [:v] "<" "<gv" {:noremap true})
-(m.keymap [:v] ">" ">gv" {:noremap true})
+(n.keymap [:v] "<" "<gv" {:noremap true})
+(n.keymap [:v] ">" ">gv" {:noremap true})
 
 (wk.register {"<C-g>" [(fn [] (do-req :FTerm :close))
                        "Close the terminal"
@@ -220,9 +220,6 @@
 (wk.register normal-map-leader {:prefix "<leader>"})
 (wk.register normal-map-g {:prefix "g"})
 
-
-;; vim.cmd(([[
-;;            autocmd FileType fugitiveblame nmap <buffer> q gq
-;;            autocmd FileType fugitive nmap <buffer> q gq
-;;            autocmd FileType fugitive nmap <buffer> <Tab> =]]))
-
+(n.autocmd "FileType" {:pattern "fugitiveblame" :command "nmap <buffer> q gq"})
+(n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> q gq"})
+(n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> <Tab> =]]"})
