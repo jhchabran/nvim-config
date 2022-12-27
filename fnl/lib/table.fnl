@@ -12,5 +12,11 @@
 (fn opts! [subject ...]
   `(sparse ,subject & ,...))
 
+(fn set! [table key value]
+  "Sets a value in a table and returns the table itself"
+  (do (tset table key value)
+      table))
+
 {: sparse
- : opts!}
+ : opts!
+ : set!}

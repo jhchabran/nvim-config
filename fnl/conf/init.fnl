@@ -41,5 +41,6 @@
 (require :conf.globals)
 (require :conf.plugins)
 (require :conf.mappings)
+(require :conf.lsp)
 
 (nvim.colorscheme :tokyonight)

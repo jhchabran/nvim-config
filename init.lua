@@ -11,7 +11,7 @@ end
 ---@param branch string? #the branch of the plugin
 local function assert_installed_plugin(plugin, branch)
 	local _, _, plugin_name = string.find(plugin, [[%S+/(%S+)]])
-	local plugin_path = vim.fn.stdpath("data") .. "/boot/" .. plugin_name
+	local plugin_path = vim.fn.stdpath("data") .. "/nvim/lazy/" .. plugin_name
 	if vim.fn.empty(vim.fn.glob(plugin_path)) ~= 0 then
 		fprint("Couldn't find '%s', cloning new copy to %s", plugin_name, plugin_path)
 		if branch ~= nil then

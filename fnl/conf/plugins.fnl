@@ -4,7 +4,10 @@
 (import-macros {: do-req 
                 : let-req} :lib/require)
 
-(lazy.setup [;; generic utilities
+(lazy.setup [;; Fennel tooling, manually installed by the bootstrap script, but still 
+             ;; added here so Lazy doesn't try to uninstall it and can update it as well.
+             (opts! "rktjmp/hotpot.nvim" {:branch "nightly"}) 
+             ;; general utilities
              "nvim-lua/plenary.nvim"
              "lambdalisue/guise.vim"
              "numtostr/FTerm.nvim"

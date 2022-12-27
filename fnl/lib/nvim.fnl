@@ -29,6 +29,7 @@
   (vim.cmd (.. "colorscheme " name)))
 
 {: autocmd
+ : clear-autocmds
  : augroup
  : keymap
  : opt
