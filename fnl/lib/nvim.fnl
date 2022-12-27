@@ -2,6 +2,10 @@
   "Create autocommand"
   (vim.api.nvim_create_autocmd events opts))
 
+(fn clear-autocmds [opts]
+  "Clear autocommands"
+  (vim.api.nvim_clear_autocmds opts))
+
 (fn augroup [name ?opts]
   "Create autocommand group"
   (vim.api.nvim_create_augroup name (or opts {})))
