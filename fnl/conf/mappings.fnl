@@ -7,10 +7,12 @@
 ;; Convenient way to indent stuff in visual mode
 (n.keymap [:v] "<" "<gv" {:noremap true})
 (n.keymap [:v] ">" ">gv" {:noremap true})
+(n.keymap [:n] "<space>" "<NOP>" {:noremap true :silent true})
 
 (wk.register {"<C-g>" [(fn [] (do-req :FTerm :close))
-                       "Close the terminal"
-                       {:mode "t"}]})
+                       "Close the terminal"]}
+  {:mode "t"})
+
 ;; Leader map 
 (local 
   normal-map-leader 
@@ -29,7 +31,7 @@
    ";" ["<cmd>Telescope commands<CR>"
         "Find commands"]
    
-   "b" {:name "-> Buffers"
+   "b" {:name "Buffers"
         :a ["<c-^"
             "Alternate buffer"]
         :b ["<cmd>Telescope buffers<CR>"
@@ -40,7 +42,7 @@
             "Next buffer"]
         :p ["<cmd>:bp<CR>"
             "Previous buffer"]}
-    "c" {:name "-> Code"
+    "c" {:name "Code"
          " " ["cmd>Telescope treesitter<CR>"
               "Find a buffer symbol (treesitter)"]
          :a [(fn [] (vim.lsp.buf.code_action))
@@ -49,7 +51,7 @@
              "Find a document symbol (LSP)"]
          :d ["<cmd>Telescope lsp_definitions<CR>"
              "Find a definition (LSP)"]
-         :e {:name "-> Errors and diagnostics"
+         :e {:name "Errors and diagnostics"
              :d ["<cmd>Telescope lsp_document_diagnostics<CR>"
                  "Find a document diagnostics (LSP)"]
              :w ["<cmd>Telescope lsp_workspace_diagnostics<CR>"
@@ -76,7 +78,7 @@
               "Go to type definition"]
           :w ["<cmd>:%s/\\s\\+$//<CR>:let @/=''<CR>``"
               "Delete trailing white spaces"]}
-      "d" {:name "-> Debugger"
+      "d" {:name "Debugger"
            :q [(fn [] (do-req :dap :terminate))
                "Quit debugging"]
            :c [(fn [] (do-req :dap :continue))
@@ -91,7 +93,7 @@
                "Step out"]
            :d [(fn [] (do-req :dapui :toggle))
                "Toggle UI"]}
-      " " {:name "-> Movements"
+      " " {:name "Movements"
            :p ["<cmd>HopPattern<CR>"
                "Hop to pattern"]
            :e ["<cmd>HopWord<CR>"
@@ -100,9 +102,9 @@
                "Hop to character"]
            :l ["<cmd>HopLineStart<CR>"
                "Hop to line start"]}
-      "f" {:name "-> Files"
+      "f" {:name "Files"
            :r ["<cmd>Telescope oldfiles<CR>"]}
-      "g" {:name "-> Git"
+      "g" {:name "Git"
            :b ["<cmd>Telescope git_branches<CR>"
                "Find branches"]
            :B ["<cmd>Telescope git_bcommits<CR>"
@@ -112,7 +114,7 @@
            :C [(fn [] (let [name (vim.fn.input "Branch name: " "")]
                         (vim.cmd (.. ":silent Gib cob " name))))
                "Create new branch"]
-           :d {:name "-> Diffing"
+           :d {:name "Diffing"
                :c ["<cmd>Git diff HEAD~1<CR>"
                    "buffer against last commit"]
                :d ["<cmd>Git diff %<CR>"
@@ -135,19 +137,19 @@
                 "Pull"]
             :w ["<cmd>:Gw<CR>"
                 "Add current buffer"]
-            :z {:name "-> Stashes"
+            :z {:name "Stashes"
                 :l ["<cmd>Telescope git_stash<CR>"
                     "List stashes"]
                 :z ["<cmd>:Git stash<CR>"
                     "Stash"]}}
-      "G" {:name "-> GitHub"
+      "G" {:name "GitHub"
            :c ["<cmd>!gh pr create -w<CR>"
                "Create pull-request in a browser window"]
            :o ["<cmd>!gh pr view -w<CR>"
                "Open pull-request in a browser window"]
            :B ["<cmd>!gh browse<CR>"
                "Open repository in a browser window"]}
-      "h" {:name "-> Help and utilities"
+      "h" {:name "Help and utilities"
            :p ["<cmd>Lazy<CR>"
                "Open package manager"]
            :h ["<cmd>Telescope help_tags<CR>"
@@ -158,19 +160,19 @@
                "Pick a theme"]
            :r [(fn [] (print "TODO"))
                "Reload config"]}
-      "o" {:name "-> Other utilities"
+      "o" {:name "Other utilities"
            :t [(fn [] (do-req :FTerm :toggle))
                "Toggle floating terminal"]
            :o ["<cmd>:terminal<CR>"
                "Open new terminal"]
            :p ["<cmd>NvimTreeToggle<CR>"
                "Toggle file tree"]}
-      "p" {:name "-> Project"
+      "p" {:name "Project"
            :f ["<cmd>Telescope find_files<CR>"
                "Find files in project"]
            :t ["<cmd>TodoTelescope<CR>"
                "Find TODOs in project"]}
-      "s" {:name "-> Search"
+      "s" {:name "Search"
            :b ["<cmd>Telescope current_buffer_fuzzy_find<CR>"
                "Fuzzy search in current buffer"]
            :p ["<cmd>Telescope live_grep<CR>"
@@ -184,7 +186,7 @@
                "ripgrep"]
            :c ["<cmd>let @/ = \"\"<CR>:echo 'Search highlight cleared'<CR>"
                "Clear search"]}
-      "t" {:name "-> Tabs"
+      "t" {:name "Tabs"
            :c ["<cmd>:tabnew<CR>"
                "Create tab"]
            :n ["<cmd>:tabn<CR>"
@@ -195,7 +197,7 @@
                "Previous tab"]
            :q ["<cmd>:tabclose<CR>"
                "Close tab"]}
-      "z" {:name "-> Toggle settings"
+      "z" {:name "Toggle settings"
            :b [(fn [] (do-req :nvim-biscuits :toggle_biscuits))
                "Toggle brackets annotations"]
            :i ["<cmd>IndentBlankLineToggle!<CR>"
