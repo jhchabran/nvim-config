@@ -225,4 +225,4 @@
 
 (n.autocmd "FileType" {:pattern "fugitiveblame" :command "nmap <buffer> q gq"})
 (n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> q gq"})
-(n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> <Tab> =]]"})
+(n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> <Tab> ="})
