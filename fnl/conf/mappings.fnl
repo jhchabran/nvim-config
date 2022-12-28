@@ -32,7 +32,7 @@
    "b" {:name "-> Buffers"
         :a ["<c-^"
             "Alternate buffer"]
-        :b ["<cmd>Telescope buffers"
+        :b ["<cmd>Telescope buffers<CR>"
             "Find buffers"]
         :d ["<cmd>:BufDel<CR>"
             "Delete current buffer (but do not close nvim!"]
@@ -98,14 +98,14 @@
                "Hop to word"]
            :i ["<cmd>HopChar1<CR"
                "Hop to character"]
-           :l ["<cmd>HopLineStart"
+           :l ["<cmd>HopLineStart<CR>"
                "Hop to line start"]}
       "f" {:name "-> Files"
            :r ["<cmd>Telescope oldfiles<CR>"]}
       "g" {:name "-> Git"
            :b ["<cmd>Telescope git_branches<CR>"
                "Find branches"]
-           :B ["<cmd>Telescope git_bcommits"
+           :B ["<cmd>Telescope git_bcommits<CR>"
                "Git blame"]
            :c ["<cmd>:Git commit<CR>"
                "Commit"]
@@ -168,7 +168,7 @@
       "p" {:name "-> Project"
            :f ["<cmd>Telescope find_files<CR>"
                "Find files in project"]
-           :t ["<cmd>TodoTelescope<CR"
+           :t ["<cmd>TodoTelescope<CR>"
                "Find TODOs in project"]}
       "s" {:name "-> Search"
            :b ["<cmd>Telescope current_buffer_fuzzy_find<CR>"
