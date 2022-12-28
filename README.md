@@ -31,6 +31,7 @@ TL;DR It's fun, it's my little LISP haven.
 
 ## General overview
 
+- Uses [hotpot](https://github.com/rktjmp/hotpot.nvim) to set up Fennel.
 - Most of the bindings are behind `<leader>` which is set to `Space`. Relies on [WhichKeys](https://github.com/folke/which-key.nvim) for discoverability.
 - Filetype specific bindings are behind `<leader>m`.
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim) and [FZF](https://github.com/junegunn/fzf.vim).
@@ -39,7 +40,7 @@ TL;DR It's fun, it's my little LISP haven.
 - [Colemak](https://colemak.com) keyboard layout; nothing is moved, but [EasyMotion](https://github.com/easymotion/vim-easymotion) keys are using Colemak home row.
 - `<C-g>` is often bound to get out of popups.
 - Organized as following:
-  - `init.lua` bootstrap Packer and Hotpot then call `fnl/init.fnl`
+  - `init.lua` bootstrap [Packer](https://github.com/wbthomason/packer.nvim) and [Hotpot](https://github.com/rktjmp/hotpot.nvim) then call `fnl/init.fnl`
   - `fnl/plugins.fnl` dependencies and their basic configuration.
   - `fnl/mappings.lua` general mappings, independant of any filetype.
 
