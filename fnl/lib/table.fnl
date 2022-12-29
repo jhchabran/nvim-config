@@ -17,6 +17,11 @@
   (do (tset table key value)
       table))
 
+(fn all [iterator]
+  "Returns a list of values taken from the `iterator`"
+  (icollect [_ v iterator] v))
+
 {: sparse
  : opts!
- : set!}
+ : set!
+ : all}
