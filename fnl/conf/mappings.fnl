@@ -18,7 +18,6 @@
   normal-map-leader 
   {"<Enter>" [(fn [] (do-req :telescope.builtin :resume))
               "Resume last picker"]
-   "<Tab>" ["<c-^>" "Alternate buffer"]
    "w" ["<cmd>:w<CR>"
         "Save current buffer"]
    "." [(fn [] ((-> (require :telescope)
@@ -35,6 +34,8 @@
    "b" {:name "Buffers"
         :a ["<c-^>"
             "Alternate buffer"]
+        "<Tab>" ["<c-^>" 
+                 "Alternate buffer"]
         :b ["<cmd>Telescope buffers<CR>"
             "Find buffers"]
         :d ["<cmd>:BufDel<CR>"
