@@ -1,8 +1,8 @@
 (local packer (require :packer))
 (import-macros {: opts!
-               : sparse} :lib/table)
+                : sparse} :lib/table)
 (import-macros {: do-req 
-               : let-req} :lib/require)
+                : let-req} :lib/require)
 
 (packer.startup 
   (fn [use] 
@@ -70,27 +70,27 @@
                      (do-req :nvim-treesitter.configs
                              :setup
                              {:auto_install true
-                             :sync_install false
-                             :highlight {:enable true}
-                             :ensure_installed [
-                                                :go
-                                                :gomod
-                                                :lua
-                                                :fennel
-                                                :zig
-                                                :rust
-                                                :typescript
-                                                :javascript
-                                                :sql
-                                                :make
-                                                :bash
-                                                :dockerfile
-                                                :vim
-                                                :json
-                                                :markdown
-                                                :html
-                                                :toml
-                                                :yaml]}))))
+                              :sync_install false
+                              :highlight {:enable true}
+                              :ensure_installed [
+                                                 :go
+                                                 :gomod
+                                                 :lua
+                                                 :fennel
+                                                 :zig
+                                                 :rust
+                                                 :typescript
+                                                 :javascript
+                                                 :sql
+                                                 :make
+                                                 :bash
+                                                 :dockerfile
+                                                 :vim
+                                                 :json
+                                                 :markdown
+                                                 :html
+                                                 :toml
+                                                 :yaml]}))))
 
 
     (use "nvim-treesitter/nvim-treesitter-context")
@@ -103,11 +103,11 @@
     (use "bronson/vim-visual-star-search")
     (use (opts! "cshuaimin/ssr.nvim"
                 :config (fn [] (do-req :ssr :setup {:min_width 50
-                                       :min_height 5
-                                       :keymaps {:close "q"
-                                       :next_match "n"
-                                       :prev_match "N"
-                                       :replace_all "<leader>sR"}}))))
+                                                    :min_height 5
+                                                    :keymaps {:close "q"
+                                                              :next_match "n"
+                                                              :prev_match "N"
+                                                              :replace_all "<leader>sR"}}))))
     (use (opts! "numToStr/Comment.nvim"
                 :config (fn [] (do-req :Comment :setup))))
     (use (opts! "vim-test/vim-test"
@@ -146,24 +146,24 @@
     (use "kosayoda/nvim-lightbulb")
     (use (opts! "simrat39/inlay-hints.nvim"
                 :config (fn [] (do-req :inlay-hints :setup {:renderer "inlay-hints/render/eol"
-                                       :hints {:parameter {:show true
-                                       :highlight "whitespace"}
-                                       :type {:show true
-                                       :highlight "whitespace"}}
-                                       :only_current_line false
-                                       :eol {:right_align true
-                                       :right_align_padding 7
-                                       :parameter {:separator ", "
-                                       :format (fn [hints]
-                                                 (string.format " <- (%s)"  hints))}
-                                       :type {:separator ", "
-                                       :format (fn [hints]
-                                                 (string.format " => (%s)"  hints))}}}))))
+                                                            :hints {:parameter {:show true
+                                                                                :highlight "whitespace"}
+                                                                    :type {:show true
+                                                                           :highlight "whitespace"}}
+                                                            :only_current_line false
+                                                            :eol {:right_align true
+                                                                  :right_align_padding 7
+                                                                  :parameter {:separator ", "
+                                                                              :format (fn [hints]
+                                                                                        (string.format " <- (%s)"  hints))}
+                                                                  :type {:separator ", "
+                                                                         :format (fn [hints]
+                                                                                   (string.format " => (%s)"  hints))}}}))))
     (use "nvim-tree/nvim-web-devicons")
     (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly" 
                 :config (fn []
                           (do-req :nvim-tree :setup {:diagnostics {:enable false}
-                                  :update_focused_file {:enable true}}))))
+                                                     :update_focused_file {:enable true}}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
                 :config (fn [] (tset _G :indent_blankline_enabled false))))
     (use "psliwka/vim-smoothie")
