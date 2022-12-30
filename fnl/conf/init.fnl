@@ -43,4 +43,4 @@
 (require :conf.mappings)
 (require :conf.lsp)
 
-(nvim.colorscheme :tokyonight)
+(nvim.colorscheme :terafox)

@@ -1,17 +1,18 @@
 (local packer (require :packer))
 (import-macros {: opts!
                 : sparse} :lib/table)
-(import-macros {: do-req 
+(import-macros {: do-req
                 : let-req} :lib/require)
 
-(packer.startup 
-  (fn [use] 
+(packer.startup
+  (fn [use]
     ;; general utilities
     (use "wbthomason/packer.nvim")
     (use (opts! "rktjmp/hotpot.nvim" :branch "nightly"))
     (use "nvim-lua/plenary.nvim")
     (use "lambdalisue/guise.vim")
     (use "numtostr/FTerm.nvim")
+
     ;; vim-fu
     (use "tpope/vim-repeat")
     (use "tpope/vim-vinegar")
@@ -20,22 +21,26 @@
                 :config (fn [] (do-req :hop :setup {:keys "arstneodhqwfpjluy"}))))
     (use "romainl/vim-qf")
     (use "ojroques/nvim-bufdel")
+
     ;; notes taking
     (use (opts! "phaazon/mind.nvim"
                 :branch "v2.2"
                 :requires "nvim-lua/plenary.nvim"
                 :config (fn [] (do-req :mind :setup))))
-                
+
     ;; themes
     (use "folke/tokyonight.nvim")
+    (use "lourenci/github-colors")
+    (use "EdenEast/nightfox.nvim")
+    (use (opts! "luisiacc/gruvbox-baby" :branch "main"))
+
     ;; fuzzy finders
-    (use (opts! "junegunn/fzf" 
-                :run (fn [] (let [install (. vim.fn "fzf#install")] 
+    (use (opts! "junegunn/fzf"
+                :run (fn [] (let [install (. vim.fn "fzf#install")]
                               (install)))))
     (use "junegunn/fzf.vim")
     (use "ojroques/nvim-lspfuzzy")
     (use "nvim-lua/popup.nvim")
-    (use "nvim-telescope/telescope-live-grep-args.nvim")
     (use (opts! "nvim-telescope/telescope-file-browser.nvim"
                 :config (fn [] (do-req :telescope :load_extension :file_browser))))
     (use (opts! "nvim-telescope/telescope-ui-select.nvim"
@@ -52,13 +57,16 @@
                            "nvim-lua/plenary.nvim"
                            "nvim-telescope/telescope-live-grep-args.nvim"]
                 :config (require :conf/plugins/telescope)))
+
     ;; lisp utilities
     (use "gpanders/nvim-parinfer")
     (use "Olical/conjure")
+
     ;; languages support and context specific utilities
     (use (opts! "ziglang/zig.vim" :ft "zig"))
     (use (opts! "folke/lua-dev.nvim" :ft "lua"))
     (use (opts! "jjo/vim-cue" :ft "cue"))
+
     ;; LSP helpers
     (use "neovim/nvim-lspconfig")
     (use "onsails/lspkind-nvim")
@@ -67,12 +75,11 @@
                 :config (fn []
                           (tset (require :lint) :linters_by_ft {:go [:golangcilint]})))) ;; TODO autocommand
 
-
     ;; language agnostic utilities
-    (use (opts! 
+    (use (opts!
            "nvim-treesitter/nvim-treesitter"
            :run (fn [] ((do-req :nvim-treesitter.install :update {:with_sync true}))) ;; TODO autocommand
-           :config (fn [] 
+           :config (fn []
                      (do-req :nvim-treesitter.configs
                              :setup
                              {:auto_install true
@@ -97,14 +104,11 @@
                                                  :html
                                                  :toml
                                                  :yaml]}))))
-
-
     (use "nvim-treesitter/nvim-treesitter-context")
     (use "code-biscuits/nvim-biscuits")
-    (use (opts! "folke/trouble.nvim" 
+    (use (opts! "folke/trouble.nvim"
                 :requires "kyazdani42/nvim-web-devicons"
                 :config (fn [] (do-req :trouble :setup))))
-
     (use "junegunn/vim-easy-align")
     (use "bronson/vim-visual-star-search")
     (use (opts! "cshuaimin/ssr.nvim"
@@ -119,6 +123,7 @@
     (use (opts! "vim-test/vim-test"
                 :config (fn []
                           (tset _G :test#strategy "neovim"))))
+
     ;; snippets
     (use "hrsh7th/vim-vsnip")
     ;; auto-completion support
@@ -128,18 +133,20 @@
                            "hrsh7th/cmp-vsnip"
                            "hrsh7th/cmp-path"
                            "hrsh7th/cmp-nvim-lua"]
-                :config (require :conf/plugins/cmp))) 
+                :config (require :conf/plugins/cmp)))
+
     ;; Debugging utilities
     (use "mfussenegger/nvim-dap")
     (use (opts! "rcarriga/nvim-dap-ui"
-                :requires ["mfussenegger/nvim-dap"] 
+                :requires ["mfussenegger/nvim-dap"]
                 "leoluz/nvim-dap-go"
-                :config (fn [] 
+                :config (fn []
                           (do-req :dap-ui :setup)
                           (do-req :dap-go :setup))))
     (use (opts! "theHamsta/nvim-dap-virtual-text"
                 :requires "mfussenegger/nvim-dap"
                 :config (fn [] (do-req :nvim-dap-virtual-text :setup))))
+
     ;; Git and Forge utilities
     (use "tpope/vim-fugitive")
     (use (opts! "ruifm/gitlinker.nvim"
@@ -166,7 +173,7 @@
                                                                          :format (fn [hints]
                                                                                    (string.format " => (%s)"  hints))}}}))))
     (use "nvim-tree/nvim-web-devicons")
-    (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly" 
+    (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly"
                 :config (fn []
                           (do-req :nvim-tree :setup {:diagnostics {:enable false}
                                                      :update_focused_file {:enable true}}))))

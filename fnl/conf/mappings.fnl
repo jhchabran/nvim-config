@@ -158,7 +158,7 @@
                "Vim help"]
            :m ["<cmd>Telescope man_pages<CR>"
                "Man pages"]
-           :t ["<cmd>Telescope colorschemes<CR>"
+           :t ["<cmd>Telescope colorscheme<CR>"
                "Pick a theme"]
            :r [(fn [] (print "TODO"))
                "Reload config"]}
