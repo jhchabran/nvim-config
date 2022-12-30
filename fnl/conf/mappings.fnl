@@ -168,12 +168,16 @@
            :o ["<cmd>:terminal<CR>"
                "Open new terminal"]
            :p ["<cmd>NvimTreeToggle<CR>"
-               "Toggle file tree"]}
+               "Toggle file tree"]
+           :m [(fn [] (do-req :mind :open_project {:global true}))
+               "Open project Mind"]}
       "p" {:name "Project"
            :f ["<cmd>Telescope find_files<CR>"
                "Find files in project"]
            :t ["<cmd>TodoTelescope<CR>"
-               "Find TODOs in project"]}
+               "Find TODOs in project"]
+           :m [(fn [] (do-req :mind :open_project {:global false}))
+               "Open project Mind"]}
       "s" {:name "Search"
            :b ["<cmd>Telescope current_buffer_fuzzy_find<CR>"
                "Fuzzy search in current buffer"]

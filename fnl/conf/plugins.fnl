@@ -20,6 +20,12 @@
                 :config (fn [] (do-req :hop :setup {:keys "arstneodhqwfpjluy"}))))
     (use "romainl/vim-qf")
     (use "ojroques/nvim-bufdel")
+    ;; notes taking
+    (use (opts! "phaazon/mind.nvim"
+                :branch "v2.2"
+                :requires "nvim-lua/plenary.nvim"
+                :config (fn [] (do-req :mind :setup))))
+                
     ;; themes
     (use "folke/tokyonight.nvim")
     ;; fuzzy finders
