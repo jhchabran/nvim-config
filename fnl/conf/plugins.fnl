@@ -175,10 +175,13 @@
     (use "nvim-tree/nvim-web-devicons")
     (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly"
                 :config (fn []
-                          (do-req :nvim-tree :setup {:diagnostics {:enable false}
-                                                     :update_focused_file {:enable true}}))))
+                            (do-req :nvim-tree :setup {:diagnostics {:enable false}}
+                                                :update_focused_file {:enable true}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
-                :config (fn [] (tset _G :indent_blankline_enabled false))))
+                :config (fn [] (do 
+                                 (do-req :indent_blankline :setup {})
+                                 (tset vim.g :indent_blankline_enabled false)))))
+
     (use "psliwka/vim-smoothie")
     (use (opts! "nvim-lualine/lualine.nvim"
                 :config (require :conf/plugins/lualine)))))

@@ -206,7 +206,7 @@
       "z" {:name "Toggle settings"
            :b [(fn [] (do-req :nvim-biscuits :toggle_biscuits))
                "Toggle brackets annotations"]
-           :i ["<cmd>IndentBlankLineToggle!<CR>"
+           :i ["<cmd>IndentBlanklineToggle!<CR>"
                "Toggle indent guides"]
            :l ["<cmd>set invnumber<CR>"
                "Toggle line numbers"]}})
