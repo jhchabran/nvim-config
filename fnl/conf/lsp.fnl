@@ -43,16 +43,18 @@
                                      (= client.name "gopls")))
                        :bufnr bufnr}))                            
 
-(fn goimports [wait-ms]
-  (let [params (vim.lsp.util.make_range_params) 
-        result (do
-                (tset params :context {:only [:source.organizeImports]})
-                (vim.lsp.buf_request_sync 0 :textDocument/codeAction params wait-ms))]
-      (each [_ res (pairs (or result {}))]
-        (each [_ r (pairs (or res.result {}))]
-          (if (not= r.edit nil)
-              (vim.lsp.util.apply_workspace_edit r.edit "utf-16")
-              (vim.lsp.buf.execute_command r.command))))))
+;; (fn goimports [wait-ms]
+;;   (let [params (vim.lsp.util.make_range_params) 
+;;         result (do
+;;                 (tset params :context {:only [:source.organizeImports]})
+;;                 (vim.lsp.buf_request_sync 0 :textDocument/codeAction params wait-ms))]
+;;       (print (dump result))
+;;       (each [_ res (pairs (or result {}))]
+;;         (each [_ r (pairs (or res.result {}))]
+;;           (print "here")
+;;           (if r.edit
+;;               (vim.lsp.util.apply_workspace_edit r.edit "utf-16")
+;;               (vim.lsp.buf.execute_command r.command))))))
 
 (fn format-lsp [bufnr]
   (vim.lsp.buf.format {:filter (fn [client] 
@@ -96,10 +98,7 @@
                           (nvim.autocmd "BufWritePre"
                                         {:group formatting-augroup
                                          :buffer bufnr
-                                         :callback (fn [_]
-                                                     (if (= filetype "go")
-                                                         (goimports 2000)
-                                                         (format-lsp bufnr)))})))
+                                         :callback (fn [_] (format-lsp bufnr))})))
                   (do-req :inlay-hints :on_attach client bufnr)
                   (do-req :lsp_signature :on_attach {:hint_prefix " "
                                                      :zindex 50
