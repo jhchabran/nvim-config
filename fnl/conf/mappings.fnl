@@ -75,7 +75,8 @@
                   "Show code lens (LSP)"]}
           :r [(fn [] vim.lsp.buf.rename)
               "Rename buffer (LSP)"]
-          :R ["<cmd>Telescope lsp_references<CR>"]
+          :R ["<cmd>Telescope lsp_references<CR>"
+              "Find references"]
           :T [(fn [] (vim.lsp.buf.type_definition))
               "Go to type definition"]
           :w ["<cmd>:%s/\\s\\+$//<CR>:let @/=''<CR>``"
