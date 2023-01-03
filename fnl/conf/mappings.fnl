@@ -58,9 +58,9 @@
                  "Find a document diagnostics (LSP)"]
              :w ["<cmd>Telescope lsp_workspace_diagnostics<CR>"
                  "Find workspace diagnostics (LSP)"]
-             :n [(fn [] (vim.diagnostics.goto_next))
+             :n [(fn [] (vim.diagnostic.goto_next))
                  "Go to next diagnostic"]
-             :p [(fn [] (vim.diagnostics.goto_prev))
+             :p [(fn [] (vim.diagnostic.goto_prev))
                  "Go to previous diagnostic"]}
           :f [(fn [] vim.lsp.buf.formatting)
               "Format buffer (LSP)"]
