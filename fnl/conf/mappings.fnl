@@ -106,7 +106,8 @@
            :l ["<cmd>HopLineStart<CR>"
                "Hop to line start"]}
       "f" {:name "Files"
-           :r ["<cmd>Telescope oldfiles<CR>"]}
+           :r ["<cmd>Telescope oldfiles<CR>"
+               "Recent files"]}
       "g" {:name "Git"
            :b ["<cmd>Telescope git_branches<CR>"
                "Find branches"]
