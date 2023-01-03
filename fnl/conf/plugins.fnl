@@ -125,11 +125,11 @@
                           (tset _G :test#strategy "neovim"))))
 
     ;; snippets
-    (use "hrsh7th/vim-vsnip")
     ;; auto-completion support
     (use (opts! "hrsh7th/nvim-cmp"
                 :requires ["hrsh7th/cmp-nvim-lsp"
                            "hrsh7th/cmp-buffer"
+                           "hrsh7th/vim-vsnip"
                            "hrsh7th/cmp-vsnip"
                            "hrsh7th/cmp-path"
                            "hrsh7th/cmp-nvim-lua"]

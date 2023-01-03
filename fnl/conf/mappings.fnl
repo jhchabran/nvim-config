@@ -62,9 +62,9 @@
                  "Go to next diagnostic"]
              :p [(fn [] (vim.diagnostic.goto_prev))
                  "Go to previous diagnostic"]}
-          :f [(fn [] vim.lsp.buf.formatting)
+          :f [vim.lsp.buf.format
               "Format buffer (LSP)"]
-          :h [(fn [] vim.lsp.buf.hover)
+          :h [vim.lsp.buf.hover
               "Show hover popup"]
           :i ["<cmd>Telescope lsp_implementations<CR>"
               "Find implementations (LSP)"]
@@ -73,11 +73,11 @@
           :l {:name "Lens"
               :l [(fn [] (vim.lsp.codelens.refresh))
                   "Show code lens (LSP)"]}
-          :r [(fn [] vim.lsp.buf.rename)
+          :r [vim.lsp.buf.rename
               "Rename buffer (LSP)"]
           :R ["<cmd>Telescope lsp_references<CR>"
               "Find references"]
-          :T [(fn [] (vim.lsp.buf.type_definition))
+          :T [vim.lsp.buf.type_definition
               "Go to type definition"]
           :w ["<cmd>:%s/\\s\\+$//<CR>:let @/=''<CR>``"
               "Delete trailing white spaces"]}

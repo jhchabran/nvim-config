@@ -12,10 +12,6 @@
          (= (: (: cur-line :sub col col) :match "%s")
             nil))))
 
-(fn expand [args]
-  (let [vsnip (. vim.fn :vsnip#anonymous)]
-     (vsnip args.body)))
-
 (fn tab [fallback]
   (let [cmp (require :cmp)]
     (if (cmp.visible)
@@ -39,7 +35,7 @@
 (fn cmp-config []
   (let [cmp (require :cmp)
         lspkind (require :lspkind)]
-      (cmp.setup {:snippet {:expand expand}
+      (cmp.setup {:snippet {:expand (fn [args] ((. vim.fn "vsnip#anonymous") args.body))}
                   :formatting {:format (lspkind.cmp_format)}
                   :sources [{:name "buffer"} {:name :path}]
                   :completion {:completeopt "menu,menuone,noinsert"}
