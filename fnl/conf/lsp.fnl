@@ -41,7 +41,6 @@
          result (do
                  (tset params :context {:only [:source.organizeImports]})
                  (vim.lsp.buf_request_sync 0 :textDocument/codeAction params wait-ms))]
-       (print (dump result))
        (each [_ res (pairs (or result {}))]
          (each [_ r (pairs (or res.result {}))]
            (if r.edit
