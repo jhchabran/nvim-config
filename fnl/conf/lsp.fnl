@@ -36,31 +36,19 @@
       (vim.lsp.with vim.lsp.handlers.hover 
                     {:focusable false :border "rounded"}))
 
-(fn lsp-format [bufnr]
-  (vim.lsp.buf.format {:filter (fn [client]
-                                 (if (= (vim.api.nvim_buf_get_option bufnr :filetype)
-                                        "go")
-                                     (= client.name "gopls")))
-                       :bufnr bufnr}))                            
+(fn goimports [wait-ms]
+  (let [params (vim.lsp.util.make_range_params) 
+         result (do
+                 (tset params :context {:only [:source.organizeImports]})
+                 (vim.lsp.buf_request_sync 0 :textDocument/codeAction params wait-ms))]
+       (print (dump result))
+       (each [_ res (pairs (or result {}))]
+         (each [_ r (pairs (or res.result {}))]
+           (if r.edit
+               (vim.lsp.util.apply_workspace_edit r.edit "utf-16")
+               (vim.lsp.buf.execute_command r.command))))
+   (vim.lsp.buf.format)))
 
-;; (fn goimports [wait-ms]
-;;   (let [params (vim.lsp.util.make_range_params) 
-;;         result (do
-;;                 (tset params :context {:only [:source.organizeImports]})
-;;                 (vim.lsp.buf_request_sync 0 :textDocument/codeAction params wait-ms))]
-;;       (print (dump result))
-;;       (each [_ res (pairs (or result {}))]
-;;         (each [_ r (pairs (or res.result {}))]
-;;           (print "here")
-;;           (if r.edit
-;;               (vim.lsp.util.apply_workspace_edit r.edit "utf-16")
-;;               (vim.lsp.buf.execute_command r.command))))))
-
-(fn format-lsp [bufnr]
-  (vim.lsp.buf.format {:filter (fn [client] 
-                                 (and (not= client.name :tsserver) ;; prettier/eslint will do it for us
-                                      (not= client.name :sumneko_lua))) ;; TODO I don't remember why I need this one
-                       :bufnr bufnr})) 
 
 (let [group (nvim.augroup "ft_go")]
   (nvim.autocmd ["BufEnter" "BufNewFile" "BufRead"] 
@@ -98,7 +86,10 @@
                           (nvim.autocmd "BufWritePre"
                                         {:group formatting-augroup
                                          :buffer bufnr
-                                         :callback (fn [_] (format-lsp bufnr))})))
+                                         :callback (fn [_] (if (= filetype "go")
+                                                               (goimports 2000)
+                                                               (vim.buf.lsp.format {:bufnr bufnr})))})))
+                                                               
                   (do-req :inlay-hints :on_attach client bufnr)
                   (do-req :lsp_signature :on_attach {:hint_prefix " "
                                                      :zindex 50
@@ -106,5 +97,6 @@
                                                      :handler_opts {:border :none}})))})
 
 (nvim.autocmd "FileType" {:pattern "go" 
-                          :callback (fn [_] (cmp.setup.buffer {:sources [{:name "vsnip"}
-                                                                         {:name "nvim_lsp"}]}))})
+                          :callback (fn [_] (let [cmp (require :cmp)]
+                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                                                           {:name "nvim_lsp"}]})))})
