@@ -105,6 +105,7 @@
                                                  :toml
                                                  :yaml]}))))
     (use "nvim-treesitter/nvim-treesitter-context")
+    (use "rcarriga/nvim-notify")
     (use "code-biscuits/nvim-biscuits")
     (use (opts! "folke/trouble.nvim"
                 :requires "kyazdani42/nvim-web-devicons"
