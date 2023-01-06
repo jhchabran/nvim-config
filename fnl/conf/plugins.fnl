@@ -175,8 +175,9 @@
     (use "nvim-tree/nvim-web-devicons")
     (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly"
                 :config (fn []
-                            (do-req :nvim-tree :setup {:diagnostics {:enable false}}
-                                                :update_focused_file {:enable true}))))
+                            (do-req :nvim-tree :setup {:diagnostics {:enable false}
+                                                       :update_focused_file {:enable true}
+                                                       :filters {:custom [ "^.git$"]}}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
                 :config (fn [] (do 
                                  (do-req :indent_blankline :setup {})
