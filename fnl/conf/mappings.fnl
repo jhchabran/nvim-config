@@ -24,7 +24,7 @@
                     (. :extensions)
                     (. :file_browser)
                     (. :file_browser))
-                {:cwd (vim.fn.expand "%:p:h:")}))
+                {:cwd (vim.fn.expand "%:p:h")}))
         "Open relative to curren buffer"]
    ":" ["<cmd>Telescope command_history<CR>"
         "Find recent commands"]
