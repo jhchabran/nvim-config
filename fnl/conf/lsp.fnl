@@ -57,8 +57,11 @@
 
 (local formatting-augroup (nvim.augroup :LspFormatting))
 
+(local lsp-capabilities
+  (do-req :cmp_nvim_lsp :default_capabilities (vim.lsp.protocol.make_client_capabilities)))
+
 (lspconfig.gopls.setup 
-  {:capabilities (do-req :cmp_nvim_lsp :default_capabilities (vim.lsp.protocol.make_client_capabilities))
+  {:capabilities lsp-capabilities
    :codelens {:generate true :gc_details true}
    :semanticTokens true
    :flags { :debounce_text_changes 200}
@@ -99,3 +102,24 @@
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
                                                                            {:name "nvim_lsp"}]})))})
+(nvim.autocmd "FileType" {:pattern "rust" 
+                          :callback (fn [_] (let [cmp (require :cmp)]
+                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                                                           {:name "nvim_lsp"}]})))})
+(local rt (require :rust-tools))
+(rt.setup {:tools {:runnables {:use_telescope true}
+                   :inlay-hints {:auto true}}
+           :server {:settings {:rust-analyzer {:checkOnSave "clippy"
+                                               :assist {:importEnforceGranularity true
+                                                        :importPrefix true}
+                                               :cargo {:allFeatures true}
+                                               :completion {:autoimport {:enable true}}
+                                               :inlayHints {:lifetimeElisionHints {:enable true
+                                                                                   :useParameterNames true}}}}
+                    ; :capabilities lsp-capabilities
+                    :on_attach (fn [client bufnr]
+                                 (do-req :inlay-hints :on_attach client bufnr)
+                                 (do-req :lsp_signature :on_attach {:hint_prefix " "
+                                                                     :zindex 50
+                                                                     :bind true
+                                                                     :handler_opts {:border :none}}))}})
