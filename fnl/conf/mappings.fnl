@@ -109,6 +109,8 @@
            :r ["<cmd>Telescope oldfiles<CR>"
                "Recent files"]}
       "g" {:name "Git"
+           :a ["<cmd>:Git commit --amend<CR>"
+               "Commit --amend"]
            :b ["<cmd>Telescope git_branches<CR>"
                "Find branches"]
            :B ["<cmd>Telescope git_bcommits<CR>"
@@ -165,12 +167,16 @@
            :r [(fn [] (print "TODO"))
                "Reload config"]}
       "o" {:name "Other utilities"
+           :c ["<cmd>:CodyToggle<CR>"
+               "Toggle Cody"]
            :t [(fn [] (do-req :FTerm :toggle))
                "Toggle floating terminal"]
-           :o ["<cmd>:terminal<CR>"
+           :s ["<cmd>:terminal<CR>"
                "Open new terminal"]
            :p ["<cmd>NvimTreeToggle<CR>"
                "Toggle file tree"]
+           :o [(fn [] (do-req :mind :open_main))
+               "Open main Mind"]
            :m [(fn [] (do-req :mind :open_project {:global true}))
                "Open project Mind"]}
       "p" {:name "Project"

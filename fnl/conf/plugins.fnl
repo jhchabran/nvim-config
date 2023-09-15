@@ -30,6 +30,7 @@
 
     ;; themes
     (use "folke/tokyonight.nvim")
+    (use "rebelot/kanagawa.nvim")
     (use "lourenci/github-colors")
     (use "EdenEast/nightfox.nvim")
     (use (opts! "luisiacc/gruvbox-baby" :branch "main"))
@@ -66,7 +67,8 @@
     (use (opts! "ziglang/zig.vim" :ft "zig"))
     (use (opts! "folke/lua-dev.nvim" :ft "lua"))
     (use (opts! "jjo/vim-cue" :ft "cue"))
-
+    (use (opts! "simrat39/rust-tools.nvim")) 
+                
     ;; LSP helpers
     (use "neovim/nvim-lspconfig")
     (use "onsails/lspkind-nvim")
@@ -178,12 +180,18 @@
                 :config (fn []
                             (do-req :nvim-tree :setup {:diagnostics {:enable false}
                                                        :update_focused_file {:enable true}
-                                                       :filters {:custom [ "^.git$"]}}))))
+                                                       :filters {:custom ["^.git$" "^bazel-.*" "^/private/var/tmp/.*"]}}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
                 :config (fn [] (do 
                                  (do-req :indent_blankline :setup {})
                                  (tset vim.g :indent_blankline_enabled false)))))
 
+    ; (use (opts! "tjdevries/sg.nvim"
+    ;             :run "cargo build --workspace"
+    ;             :requires ["nvim-lua/plenary.nvim"]))
+
     (use "psliwka/vim-smoothie")
     (use (opts! "nvim-lualine/lualine.nvim"
-                :config (require :conf/plugins/lualine)))))
+                :config (require :conf/plugins/lualine)))
+    (use (opts! "sourcegraph/sg.nvim" 
+           :run "nvim -l build/init.lua"))))

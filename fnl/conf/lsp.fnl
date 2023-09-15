@@ -3,6 +3,7 @@
 (local lspconfig (require :lspconfig))
 (local cmp (require :cmp))
 (local nvim (require :lib/nvim))
+(local sg (require :sg))
 
 (import-macros {: do-req} :lib/require)
 
@@ -101,7 +102,8 @@
 (nvim.autocmd "FileType" {:pattern "go" 
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
-                                                                           {:name "nvim_lsp"}]})))})
+                                                                           {:name "nvim_lsp"}
+                                                                           {:name "cody"}]})))})
 (nvim.autocmd "FileType" {:pattern "rust" 
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
@@ -123,3 +125,4 @@
                                                                      :zindex 50
                                                                      :bind true
                                                                      :handler_opts {:border :none}}))}})
+(sg.setup {})

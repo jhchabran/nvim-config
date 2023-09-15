@@ -44,3 +44,9 @@
 (require :conf.lsp)
 
 (nvim.colorscheme :terafox)
+; (nvim.colorscheme :terafox)
+; (nvim.opt :background :light)
+; (nvim.colorscheme :dayfox)
+
+(if (= (vim.fn.getcwd) "/Users/tech/work/other")
+ (nvim.colorscheme :github-colors))
