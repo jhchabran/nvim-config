@@ -48,9 +48,6 @@
                 :config (fn [] (do-req :telescope :load_extension :ui-select))))
     (use (opts! "nvim-telescope/telescope-live-grep-args.nvim"
                 :config (fn [] (do-req :telescope :load_extension :live_grep_args))))
-    (use (opts! "nvim-telescope/telescope-frecency.nvim"
-           :config (fn [] (do-req :telescope :load_extension :frecency))
-           :requires ["tami5/sqlite.lua"]))
     (use (opts! "nvim-telescope/telescope-dap.nvim"
                 :config (fn [] (do-req :telescope :load_extension :dap))))
     (use (opts! "nvim-telescope/telescope.nvim"
