@@ -180,7 +180,7 @@
                                                        :filters {:custom ["^.git$" "^bazel-.*" "^/private/var/tmp/.*"]}}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
                 :config (fn [] (do 
-                                 (do-req :indent_blankline :setup {})
+                                 (do-req :ibl :setup {})
                                  (tset vim.g :indent_blankline_enabled false)))))
 
     ; (use (opts! "tjdevries/sg.nvim"
