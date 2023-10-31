@@ -49,4 +49,4 @@
 ; (nvim.colorscheme :dayfox)
 
 (if (= (vim.fn.getcwd) "/Users/tech/work/other")
- (nvim.colorscheme :github-colors))
+ (nvim.colorscheme :kanagawa))
