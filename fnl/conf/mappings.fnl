@@ -107,7 +107,9 @@
                "Hop to line start"]}
       "f" {:name "Files"
            :r ["<cmd>Telescope oldfiles<CR>"
-               "Recent files"]}
+               "Recent files"]
+           :y ["<cmd>let @+ = expand(\"%\")<CR>"
+               "Yank relative path to current buffer"]}
       "g" {:name "Git"
            :a ["<cmd>:Git commit --amend<CR>"
                "Commit --amend"]
