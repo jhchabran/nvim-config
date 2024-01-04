@@ -48,5 +48,9 @@
 ; (nvim.opt :background :light)
 ; (nvim.colorscheme :dayfox)
 
+;; I like to use a different theme for some different projects, so 
+;; it's faster to understand to which term tab I'm looking at.
 (if (= (vim.fn.getcwd) "/Users/tech/work/other")
- (nvim.colorscheme :kanagawa))
+    (nvim.colorscheme :kanagawa))
+(if (= (vim.fn.getcwd) "/Users/tech/work/sratch")
+    (nvim.colorscheme :habamax))
