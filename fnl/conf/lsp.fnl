@@ -4,6 +4,7 @@
 (local cmp (require :cmp))
 (local nvim (require :lib/nvim))
 (local sg (require :sg))
+(local lsputil (require :lspconfig/util))
 
 (import-macros {: do-req} :lib/require)
 
@@ -61,6 +62,23 @@
 (local lsp-capabilities
   (do-req :cmp_nvim_lsp :default_capabilities (vim.lsp.protocol.make_client_capabilities)))
 
+(fn on-attach [client bufnr]
+              (let [filetype (vim.api.nvim_buf_get_option 0 "filetype")]
+                (if (client.supports_method "textDocument/formatting")
+                    (do (nvim.clear-autocmds {:group formatting-augroup :buffer bufnr})
+                        (nvim.autocmd "BufWritePre"
+                                      {:group formatting-augroup
+                                       :buffer bufnr
+                                       :callback (fn [_] (if (= filetype "go")
+                                                             (goimports 2000)
+                                                             (vim.lsp.buf.format {:bufnr bufnr})))})))
+                (do-req :inlay-hints :on_attach client bufnr)
+                (do-req :lsp_signature :on_attach {:hint_prefix " "
+                                                   :zindex 50
+                                                   :bind true
+                                                   :handler_opts {:border :none}})))
+
+
 (lspconfig.gopls.setup 
   {:capabilities lsp-capabilities
    :codelens {:generate true :gc_details true}
@@ -82,24 +100,14 @@
            :compositeLiteralFields true
            :parameterNames true
            :rangeVariableTypes true}
-   :on_attach (fn [client bufnr]
-                (let [filetype (vim.api.nvim_buf_get_option 0 "filetype")]
-                  (if (client.supports_method "textDocument/formatting")
-                      (do (nvim.clear-autocmds {:group formatting-augroup :buffer bufnr})
-                          (nvim.autocmd "BufWritePre"
-                                        {:group formatting-augroup
-                                         :buffer bufnr
-                                         :callback (fn [_] (if (= filetype "go")
-                                                               (goimports 2000)
-                                                               (vim.buf.lsp.format {:bufnr bufnr})))})))
-                                                               
-                  (do-req :inlay-hints :on_attach client bufnr)
-                  (do-req :lsp_signature :on_attach {:hint_prefix " "
-                                                     :zindex 50
-                                                     :bind true
-                                                     :handler_opts {:border :none}})))})
+   :on_attach on-attach})
 
 (nvim.autocmd "FileType" {:pattern "go" 
+                          :callback (fn [_] (let [cmp (require :cmp)]
+                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                                                           {:name "nvim_lsp"}
+                                                                           {:name "cody"}]})))})
+(nvim.autocmd "FileType" {:pattern "typescript" 
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
                                                                            {:name "nvim_lsp"}
@@ -125,4 +133,10 @@
                                                                      :zindex 50
                                                                      :bind true
                                                                      :handler_opts {:border :none}}))}})
+(lspconfig.tsserver.setup {:capabilities lsp-capabilities
+                           :on_attach on-attach
+                           :flags {:debounce_text_changes 200}
+                           :root_dir (lsputil.root_pattern "tsconfig.json")})
+
 (sg.setup {})
+
