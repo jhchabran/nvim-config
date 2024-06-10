@@ -187,7 +187,7 @@
     ;             :run "cargo build --workspace"
     ;             :requires ["nvim-lua/plenary.nvim"]))
 
-    (use "psliwka/vim-smoothie")
+    ; (use "psliwka/vim-smoothie")
     (use (opts! "nvim-lualine/lualine.nvim"
                 :config (require :conf/plugins/lualine)))
     (use (opts! "sourcegraph/sg.nvim" 
