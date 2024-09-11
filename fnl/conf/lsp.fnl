@@ -107,6 +107,11 @@
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
                                                                            {:name "nvim_lsp"}
                                                                            {:name "cody"}]})))})
+(nvim.autocmd "FileType" {:pattern "zig" 
+                          :callback (fn [_] (let [cmp (require :cmp)]
+                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                                                           {:name "nvim_lsp"}
+                                                                           {:name "cody"}]})))})
 (nvim.autocmd "FileType" {:pattern "typescript" 
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
@@ -137,6 +142,11 @@
                            :on_attach on-attach
                            :flags {:debounce_text_changes 200}
                            :root_dir (lsputil.root_pattern "tsconfig.json")})
+
+(lspconfig.zls.setup {:lsp-capabilities lsp-capabilities
+                      :on_attach on-attach})
+
+(lspconfig.starpls.setup {})
 
 (sg.setup {})
 
