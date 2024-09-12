@@ -23,10 +23,10 @@
     (use "ojroques/nvim-bufdel")
 
     ;; notes taking
-    (use (opts! "phaazon/mind.nvim"
-                :branch "v2.2"
-                :requires "nvim-lua/plenary.nvim"
-                :config (fn [] (do-req :mind :setup))))
+    (use (opts! "epwalsh/obsidian.nvim"
+                :config (require :conf/plugins/obsidian)))
+                ; :config (fn [] (do-req :obsidian :setup
+                ;                  {:workspaces [{:name "work" :path "~/notes/work"}]}))))
 
     ;; themes
     (use "folke/tokyonight.nvim")
