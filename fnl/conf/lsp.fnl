@@ -138,10 +138,10 @@
                                                                      :zindex 50
                                                                      :bind true
                                                                      :handler_opts {:border :none}}))}})
-(lspconfig.tsserver.setup {:capabilities lsp-capabilities
-                           :on_attach on-attach
-                           :flags {:debounce_text_changes 200}
-                           :root_dir (lsputil.root_pattern "tsconfig.json")})
+(lspconfig.ts_ls.setup {:capabilities lsp-capabilities
+                        :on_attach on-attach
+                        :flags {:debounce_text_changes 200}
+                        :root_dir (lsputil.root_pattern "tsconfig.json")})
 
 (lspconfig.zls.setup {:lsp-capabilities lsp-capabilities
                       :on_attach on-attach})
