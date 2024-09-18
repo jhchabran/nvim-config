@@ -15,6 +15,7 @@
          (if (obsidian.util.cursor_on_markdown_link) "<cmd>ObsidianFollowLink<CR>" "gf")))
 
     ;; Setup.
-    (obsidian.setup {:workspaces [{:name "work" :path "~/notes/work"}]})))
+    (obsidian.setup {:workspaces [{:name "work" :path "~/notes/work"}
+                                  {:name "brain" :path "~/perso/braincache"}]})))
   
 obsidian-config

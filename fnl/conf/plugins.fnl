@@ -191,4 +191,4 @@
     (use (opts! "nvim-lualine/lualine.nvim"
                 :config (require :conf/plugins/lualine)))
     (use (opts! "sourcegraph/sg.nvim" 
-           :run "nvim -l build/init.lua"))))
+          :run "nvim -l build/init.lua"))))

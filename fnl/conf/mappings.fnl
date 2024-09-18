@@ -35,11 +35,7 @@
          (km "<leader>w" {:desc "Save current buffer"} 
              "<cmd>:w<CR>")
          (km "<leader>." {:desc "Open relative to current buffer"}
-             (fn [] ((-> (require :telescope))
-                     (. :extensions)
-                     (. :file_browser)
-                     (. :file_browser))
-                 {:cwd (vim.fn.expand "%:p:h")}))
+             "<cmd>:Telescope file_browser path=%:p:h select_buffer=true<CR>")
           
          (km "<leader>:" {:desc "Find recent commands"} 
              "<cmd>Telescope command_history<CR>")
@@ -153,9 +149,9 @@
 
 (wk.add [(km "<leader>t" {:group "Tabs"})
          (km "<leader>tc" {:desc "Create"} "<cmd>:tabnew<CR>")
-         (km "<leader>tn" {:desc "Next"} "<cmd>:tabnCR>")
-         (km "<leader>tp" {:desc "Prev"} "<cmd>:tabpCR>")
-         (km "<leader>tN" {:desc "Prev"} "<cmd>:tabpCR>") ;; one might want to use tp here, but on Colemak it's horrible.
+         (km "<leader>tn" {:desc "Next"} "<cmd>:tabn<CR>")
+         (km "<leader>tp" {:desc "Prev"} "<cmd>:tabp<CR>")
+         (km "<leader>tN" {:desc "Prev"} "<cmd>:tabp<CR>") ;; one might want to use tp here, but on Colemak it's horrible.
          (km "<leader>tq" {:desc "Close"} "<cmd>:tabclose<CR>")])
 
 (wk.add [(km "<leader>z" {:group "Misc Toggles"})
@@ -163,11 +159,11 @@
          (km "<leader>zi" {:desc "Indent guides"} "<cmd>IndentBlanklineToggle!<CR>")
          (km "<leader>zl" {:desc "Line numbers"} "<cmd>set invnumber<CR>")])
 
-(wk.add [(km "d" {:desc "Go to definition"} (fn [] (vim.lsp.buf.definition)))
-         (km "h" {:desc "Hover"} (fn [] (vim.lsp.buf.hover)))
-         (km "i" {:desc "Go to implementation"} (fn [] (vim.lsp.buf.implementation)))
-         (km "t" {:desc "Go to type def"} (fn [] (vim.lsp.buf.type_definition)))
-         (km "r" {:desc "Find references"} "<cmd>Telescope lsp_references<CR>")])
+(wk.add [(km "gd" {:desc "Go to definition"} (fn [] (vim.lsp.buf.definition)))
+         (km "gh" {:desc "Hover"} (fn [] (vim.lsp.buf.hover)))
+         (km "gi" {:desc "Go to implementation"} (fn [] (vim.lsp.buf.implementation)))
+         (km "gt" {:desc "Go to type def"} (fn [] (vim.lsp.buf.type_definition)))
+         (km "gr" {:desc "Find references"} "<cmd>Telescope lsp_references<CR>")])
 
 (n.autocmd "FileType" {:pattern "fugitiveblame" :command "nmap <buffer> q gq"})
 (n.autocmd "FileType" {:pattern "fugitive" :command "nmap <buffer> q gq"})
