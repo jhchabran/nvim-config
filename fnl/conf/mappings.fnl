@@ -43,9 +43,13 @@
          (km "<leader>;" {:desc "Find commands"} 
              "<cmd>Telescope commands<CR>")])
 
+(wk.add [(km "<leader>a" {:group "AI"})
+         (km "<leader>ap" {:desc "Paste selection in chat"} "<cmd>:GpChatPaste popup<CR>")
+         (km "<leader>ar" {:desc "Rewrite selection based on prompt"} "<cmd>:GpRewrite<CR>")])
+
 (wk.add [(km "<leader>b" {:group "Buffers"})
          (km "<leader>ba"    {:desc "Alternate buffer"} "<c-^>")
-         (km "<leader><Tab>" {:desc "Alternate buffer"} "<c-^>")
+         (km "<leader>b<Tab>" {:desc "Alternate buffer"} "<c-^>")
          (km "<leader>bb"    {:desc "Find buffers"} "<cmd>Telescope buffers<CR>")
          (km "<leader>bd"    {:desc "Delete buffer"} "<cmd>:BufDel<CR>")
          (km "<leader>bn"    {:desc "Next buffer"} "<cmd>:bn<CR>")
@@ -120,6 +124,11 @@
          (km "<leader>Go" {:desc "Open pull-request in browser"} "<cmd>!gh pr view -w<CR>")
          (km "<leader>Gr" {:desc "Open repo in browser"} "<cmd>!gh browse<CR>")])
 
+(wk.add [(km "<leader>h" {:group "Help and utilities"})
+         (km "<leader>ht" {:desc "Pick a theme"} "<cmd>Telescope colorscheme<CR>")
+         (km "<leader>hm" {:desc "Man pages"} "<cmd>Telescope man_pages<CR>")
+         (km "<leader>hh" {:desc "Vim help"} "<cmd>Telescope help_tags<CR>")])
+
 (wk.add [(km "<leader>n" {:group "Notes"})
          (km "<leader>nd" {:desc "Dailies"} "<cmd>:ObsidianDailies<CR>")
          (km "<leader>nf" {:desc "Find"} "<cmd>:ObsidianQuickSwitch<CR>")
@@ -128,7 +137,7 @@
          (km "<leader>ns" {:desc "Search"} "<cmd>:ObsidianSearch<CR>")])
 
 (wk.add [(km "<leader>o" {:group "Others"})
-         (km "<leader>oc" {:desc "Toggle Cody"} "<cmd>:CodyToggle<CR>")
+         (km "<leader>oa" {:desc "Toggle Chat"} "<cmd>:GpChatToggle popup<CR>")
          (km "<leader>op" {:desc "File panel"} "<cmd>NvimTreeToggle<CR>")
          (km "<leader>ot" {:desc "Toggle floating term"} (fn [] (do-req :FTerm :toggle)))])
 

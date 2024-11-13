@@ -3,7 +3,7 @@
 (local lspconfig (require :lspconfig))
 (local cmp (require :cmp))
 (local nvim (require :lib/nvim))
-(local sg (require :sg))
+; (local sg (require :sg))
 (local lsputil (require :lspconfig/util))
 
 (import-macros {: do-req} :lib/require)
@@ -148,5 +148,5 @@
 
 (lspconfig.starpls.setup {})
 
-(sg.setup {})
+; (sg.setup {})
 

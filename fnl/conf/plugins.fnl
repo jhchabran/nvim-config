@@ -173,7 +173,7 @@
                                                                          :format (fn [hints]
                                                                                    (string.format " => (%s)"  hints))}}}))))
     (use "nvim-tree/nvim-web-devicons")
-    (use (opts! "nvim-tree/nvim-tree.lua" :tag "nightly"
+    (use (opts! "nvim-tree/nvim-tree.lua" :tag "nvim-tree-v1.7.1"
                 :config (fn []
                             (do-req :nvim-tree :setup {:diagnostics {:enable false}
                                                        :update_focused_file {:enable true}
@@ -190,5 +190,8 @@
     ; (use "psliwka/vim-smoothie")
     (use (opts! "nvim-lualine/lualine.nvim"
                 :config (require :conf/plugins/lualine)))
-    (use (opts! "sourcegraph/sg.nvim" 
-          :run "nvim -l build/init.lua"))))
+    (use (opts! "Robitx/gp.nvim"
+                :config (fn [] (do 
+                                 (do-req :gp :setup {:openai_api_key ["cat" "/Users/tech/.secrets/openai_api_key"]})))))))
+    ;(use (opts! "sourcegraph/sg.nvim" 
+    ;      :run "nvim -l build/init.lua"))))
