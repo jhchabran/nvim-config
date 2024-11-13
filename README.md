@@ -1,4 +1,4 @@
-# Neovim 0.8 config
+# Neovim ~0.8~ HEAD config
 
 A very opinionated configuration, with strong reminiscence of [Doom-Emacs](https://github.com/hlissner/doom-emacs), written in ~Lua~ Fennel.
 
@@ -37,10 +37,10 @@ TL;DR It's fun, it's my little LISP haven.
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim) and [FZF](https://github.com/junegunn/fzf.vim).
 - [LSP](https://microsoft.github.io/language-server-protocol/) centric.
 - [Treesitter](https://github.com/tree-sitter/tree-sitter) for syntax highlighting and manipulations.
-- [Colemak](https://colemak.com) keyboard layout; nothing is moved, but [EasyMotion](https://github.com/easymotion/vim-easymotion) keys are using Colemak home row.
-- `<C-g>` is often bound to get out of popups.
+- [Colemak](https://colemak.com) keyboard layout; nothing is moved, but [EasyMotion](https://github.com/easymotion/vim-easymotion) keys are using Colemak home row. It's merely single line to change if you don't want it.
+- `<C-g>` is often bound to get out of popups (heritage from my Emacs days).
 - Organized as following:
-  - `init.lua` bootstrap [Packer](https://github.com/wbthomason/packer.nvim) and [Hotpot](https://github.com/rktjmp/hotpot.nvim) then call `fnl/init.fnl`
+  - `init.lua` bootstrap [Packer](https://github.com/wbthomason/packer.nvim) and [Hotpot](https://github.com/rktjmp/hotpot.nvim) then call `fnl/init.fnl`.
   - `fnl/plugins.fnl` dependencies and their basic configuration.
   - `fnl/mappings.lua` general mappings, independant of any filetype.
 
@@ -50,11 +50,14 @@ List of languages that this configuration accomodates for:
 
 - Go
 - Lua
+- Zig
+- Typescript
+- Rust
 
 ## Aesthetics
 
-- Themes: I change the default theme quite often.
-- Font: `Jetbrains Mono Thin` for normal text and `Jetbrains Mono Light` for bold.
+- Themes: after years of using Solarized Dark or my own variant with less colors, these days I use [Kanagawa](https://github.com/rebelot/kanagawa.nvim) with a dark background most of the time. It's pretty neutral and relaxing for the eyes, meaning you're not assaulted by high contrast orange on blue that burns keywords on your retinas.
+- Font: [Danke Mono](https://philpl.gumroad.com/l/dank-mono) is a stellar font, which I patch with Nerd fonts additions. Yes, it's a paid font, but it's perfect. The italic variant might look a bit odd at first, but when it's seldomly used it's perfect and looks great.
 
 ## Custom mappings overview
 
