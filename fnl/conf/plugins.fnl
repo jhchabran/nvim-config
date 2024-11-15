@@ -25,8 +25,6 @@
     ;; notes taking
     (use (opts! "epwalsh/obsidian.nvim"
                 :config (require :conf/plugins/obsidian)))
-                ; :config (fn [] (do-req :obsidian :setup
-                ;                  {:workspaces [{:name "work" :path "~/notes/work"}]}))))
 
     ;; themes
     (use "folke/tokyonight.nvim")
@@ -182,15 +180,8 @@
                 :config (fn [] (do 
                                  (do-req :ibl :setup {:enabled false})))))
 
-    ; (use (opts! "tjdevries/sg.nvim"
-    ;             :run "cargo build --workspace"
-    ;             :requires ["nvim-lua/plenary.nvim"]))
-
-    ; (use "psliwka/vim-smoothie")
     (use (opts! "nvim-lualine/lualine.nvim"
                 :config (require :conf/plugins/lualine)))
     (use (opts! "Robitx/gp.nvim"
                 :config (fn [] (do 
                                  (do-req :gp :setup {:openai_api_key ["cat" "/Users/tech/.secrets/openai_api_key"]})))))))
-    ;(use (opts! "sourcegraph/sg.nvim" 
-    ;      :run "nvim -l build/init.lua"))))
