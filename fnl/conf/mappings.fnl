@@ -165,7 +165,7 @@
 
 (wk.add [(km "<leader>z" {:group "Misc Toggles"})
          (km "<leader>zb" {:desc "Bracket annotations"} (fn [] (do-req :nvim-biscuits :toggle_biscuits)))
-         (km "<leader>zi" {:desc "Indent guides"} "<cmd>IndentBlanklineToggle!<CR>")
+         (km "<leader>zi" {:desc "Indent guides"} "<cmd>IBLToggle<CR>")
          (km "<leader>zl" {:desc "Line numbers"} "<cmd>set invnumber<CR>")])
 
 (wk.add [(km "gd" {:desc "Go to definition"} (fn [] (vim.lsp.buf.definition)))

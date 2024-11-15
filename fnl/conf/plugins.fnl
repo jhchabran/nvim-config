@@ -180,8 +180,7 @@
                                                        :filters {:custom ["^.git$" "^bazel-.*" "^/private/var/tmp/.*"]}}))))
     (use (opts! "lukas-reineke/indent-blankline.nvim"
                 :config (fn [] (do 
-                                 (do-req :ibl :setup {})
-                                 (tset vim.g :indent_blankline_enabled false)))))
+                                 (do-req :ibl :setup {:enabled false})))))
 
     ; (use (opts! "tjdevries/sg.nvim"
     ;             :run "cargo build --workspace"
