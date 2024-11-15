@@ -17,7 +17,7 @@
     (use "tpope/vim-repeat")
     (use "tpope/vim-vinegar")
     (use "tpope/vim-surround")
-    (use (opts! "phaazon/hop.nvim"
+    (use (opts! "smoka7/hop.nvim"
                 :config (fn [] (do-req :hop :setup {:keys "arstneodhqwfpjluy"}))))
     (use "romainl/vim-qf")
     (use "ojroques/nvim-bufdel")
