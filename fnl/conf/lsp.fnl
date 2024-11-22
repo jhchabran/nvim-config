@@ -148,5 +148,7 @@
 
 (lspconfig.starpls.setup {})
 
-; (sg.setup {})
+(lspconfig.pyright.setup {:lsp-capabilities lsp-capabilities
+                          :on_attach on-attach})
 
+; (sg.setup {})
