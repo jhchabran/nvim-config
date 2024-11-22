@@ -16,6 +16,15 @@
 
     ;; Setup.
     (obsidian.setup {:workspaces [{:name "work" :path "~/notes/work"}
-                                  {:name "brain" :path "~/perso/braincache"}]})))
+                                  {:name "brain" :path "~/perso/braincache"}]
+                     :note_id_func (fn [title] ;; TODO rewrite in less imperative style, this is a rough translation of of the obsidian README
+                                     (var suffix "")
+                                     (if (~= title nil)
+                                         (set suffix (-> title 
+                                                         (: :gsub " " "-")
+                                                         (: :gsub "[^A-Za-z0-9-]" "")
+                                                         (: :lower)))
+                                         (set suffix (.. suffix (string.char (math.random 69 90)))))
+                                     (tostring (.. (os.time) "-" suffix)))})))
   
 obsidian-config

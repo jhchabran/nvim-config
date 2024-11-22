@@ -133,6 +133,7 @@
          (km "<leader>nd" {:desc "Dailies"} "<cmd>:ObsidianDailies<CR>")
          (km "<leader>nf" {:desc "Find"} "<cmd>:ObsidianQuickSwitch<CR>")
          (km "<leader>nl" {:desc "Links"} "<cmd>:ObsidianLinks<CR>")
+         (km "<leader>nn" {:desc "New"} "<cmd>:ObsidianNew<CR>")
          (km "<leader>nt" {:desc "Toggle checkbox"} "<cmd>:ObsidianToggleCheckbox<CR>")
          (km "<leader>ns" {:desc "Search"} "<cmd>:ObsidianSearch<CR>")])
 
