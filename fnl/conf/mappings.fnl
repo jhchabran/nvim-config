@@ -28,6 +28,10 @@
 (n.keymap [:v] ">" ">gv" {:noremap true})
 (n.keymap [:n] "<space>" "<NOP>" {:noremap true :silent true})
 
+;; Use visually selected comment as prompt for LLM and replace it by 
+;; the response we get.
+(n.keymap [:v] "<leader>ae" ":GpImplement<CR>" {:noremap true})
+
 (wk.add [(km "<C-g>" {:desc "Hide term" :mode "t"} (fn [] (do-req :FTerm :close)))])
 
 (wk.add [(km "<leader><Enter>" {:desc "Resume last picker"}
@@ -45,6 +49,7 @@
 
 (wk.add [(km "<leader>a" {:group "AI"})
          (km "<leader>ap" {:desc "Paste selection in chat"} "<cmd>:GpChatPaste popup<CR>")
+         (km "<leader>ae" {:desc "Use current line as a prompt and expand"} "V:GpImplement<CR>")
          (km "<leader>ar" {:desc "Rewrite selection based on prompt"} "<cmd>:GpRewrite<CR>")])
 
 (wk.add [(km "<leader>b" {:group "Buffers"})
