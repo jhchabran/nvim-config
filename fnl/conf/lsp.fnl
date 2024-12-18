@@ -121,6 +121,10 @@
                           :callback (fn [_] (let [cmp (require :cmp)]
                                               (cmp.setup.buffer {:sources [{:name "vsnip"}
                                                                            {:name "nvim_lsp"}]})))})
+(nvim.autocmd "FileType" {:pattern "python" 
+                          :callback (fn [_] (let [cmp (require :cmp)]
+                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                                                           {:name "nvim_lsp"}]})))})
 (local rt (require :rust-tools))
 (rt.setup {:tools {:runnables {:use_telescope true}
                    :inlay-hints {:auto true}}
