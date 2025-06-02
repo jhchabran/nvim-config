@@ -122,13 +122,10 @@
                 :config (fn []
                           (tset _G :test#strategy "neovim"))))
 
-    ;; snippets
     ;; auto-completion support
     (use (opts! "hrsh7th/nvim-cmp"
                 :requires ["hrsh7th/cmp-nvim-lsp"
                            "hrsh7th/cmp-buffer"
-                           "hrsh7th/vim-vsnip"
-                           "hrsh7th/cmp-vsnip"
                            "hrsh7th/cmp-path"
                            "hrsh7th/cmp-nvim-lua"]
                 :config (require :conf/plugins/cmp)))
@@ -180,8 +177,8 @@
                 :config (fn [] (do 
                                  (do-req :ibl :setup {:enabled false})))))
 
+    (use (opts! "GeorgesAlkhouri/nvim-aider"))
+    (use (opts! "folke/snacks.nvim"))
+                                                       
     (use (opts! "nvim-lualine/lualine.nvim"
-                :config (require :conf/plugins/lualine)))
-    (use (opts! "Robitx/gp.nvim"
-                :config (fn [] (do 
-                                 (do-req :gp :setup {:openai_api_key ["cat" "/Users/tech/.secrets/openai_api_key"]})))))))
+                :config (require :conf/plugins/lualine)))))

@@ -104,26 +104,24 @@
 
 (nvim.autocmd "FileType" {:pattern "go" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
-                                                                           {:name "nvim_lsp"}
-                                                                           {:name "cody"}]})))})
+                                              (cmp.setup.buffer {:sources [
+                                                                           {:name "nvim_lsp"}]})))})
 (nvim.autocmd "FileType" {:pattern "zig" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
-                                                                           {:name "nvim_lsp"}
-                                                                           {:name "cody"}]})))})
+                                              (cmp.setup.buffer {:sources [
+                                                                           {:name "nvim_lsp"}]})))})
 (nvim.autocmd "FileType" {:pattern "typescript" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
-                                                                           {:name "nvim_lsp"}
-                                                                           {:name "cody"}]})))})
+                                              (cmp.setup.buffer {:sources [
+                                                                           {:name "nvim_lsp"}]})))})
 (nvim.autocmd "FileType" {:pattern "rust" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                              (cmp.setup.buffer {:sources [
                                                                            {:name "nvim_lsp"}]})))})
+                                                                           
 (nvim.autocmd "FileType" {:pattern "python" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "vsnip"}
+                                              (cmp.setup.buffer {:sources [
                                                                            {:name "nvim_lsp"}]})))})
 (local rt (require :rust-tools))
 (rt.setup {:tools {:runnables {:use_telescope true}
@@ -154,5 +152,3 @@
 
 (lspconfig.pyright.setup {:lsp-capabilities lsp-capabilities
                           :on_attach on-attach})
-
-; (sg.setup {})

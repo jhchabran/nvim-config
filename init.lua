@@ -35,7 +35,7 @@ local function assert_installed_plugin(plugin, branch)
   vim.opt.runtimepath:prepend(plugin_path)
 end
 
-assert_installed_plugin("rktjmp/hotpot.nvim", "nightly")
+assert_installed_plugin("rktjmp/hotpot.nvim", "main")
 assert_installed_plugin("wbthomason/packer.nvim")
 
 if pcall(require, "hotpot") then
