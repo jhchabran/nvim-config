@@ -33,6 +33,7 @@
                             :Constant ""
                             :Struct ""}})
 
+
 (tset vim.lsp.handlers 
       :textDocument/hover 
       (vim.lsp.with vim.lsp.handlers.hover 
@@ -59,8 +60,8 @@
 
 (local formatting-augroup (nvim.augroup :LspFormatting))
 
-(local lsp-capabilities
-  (do-req :cmp_nvim_lsp :default_capabilities (vim.lsp.protocol.make_client_capabilities)))
+; (local lsp-capabilities
+;   (do-req :cmp_nvim :default_capabilities (vim.lsp.protocol.make_client_capabilities)))
 
 (fn on-attach [client bufnr]
               (let [filetype (vim.api.nvim_buf_get_option 0 "filetype")]
@@ -79,9 +80,8 @@
                                                    :handler_opts {:border :none}})))
 
 
-(lspconfig.gopls.setup 
-  {:capabilities lsp-capabilities
-   :codelens {:generate true :gc_details true}
+(tset vim.lsp.config :gopls
+  {:codelens {:generate true :gc_details true}
    :semanticTokens true
    :flags { :debounce_text_changes 200}
    :analyses {:unusedparams true
@@ -140,15 +140,18 @@
                                                                      :zindex 50
                                                                      :bind true
                                                                      :handler_opts {:border :none}}))}})
-(lspconfig.ts_ls.setup {:capabilities lsp-capabilities
-                        :on_attach on-attach
-                        :flags {:debounce_text_changes 200}
-                        :root_dir (lsputil.root_pattern "tsconfig.json")})
+(tset vim.lsp.config :ts_ls {:on_attach on-attach
+                             :flags {:debounce_text_changes 200}
+                             :root_dir (lsputil.root_pattern "tsconfig.json")})
 
-(lspconfig.zls.setup {:lsp-capabilities lsp-capabilities
-                      :on_attach on-attach})
+(tset vim.lsp.config :zls {:on_attach on-attach})
 
-(lspconfig.starpls.setup {})
+(tset vim.lsp.config :starpls {})
 
-(lspconfig.pyright.setup {:lsp-capabilities lsp-capabilities
-                          :on_attach on-attach})
+(tset vim.lsp.config :pyright {:on_attach on-attach})
+
+(vim.lsp.enable "pyright")
+(vim.lsp.enable "gopls")
+(vim.lsp.enable "starpls")
+(vim.lsp.enable "zls")
+(vim.lsp.enable "ts_ls")

@@ -16,7 +16,7 @@
             nil))))
 
 (fn tab [fallback]
-  (let [cmp (require :cmp)]
+  (let [cmp (require :blink.cmp)]
     (if (cmp.visible)
         (cmp.select_next_item
             (if (has-words-before)
@@ -24,12 +24,12 @@
                 (fallback))))))
   
 (fn stab []
-  (let [cmp (require :cmp)]
+  (let [cmp (require :blink.cmp)]
     (if (cmp.visible)
         (cmp.select_prev_item))))
                                                     
 (fn cmp-config []
-  (let [cmp (require :cmp)
+  (let [cmp (require :blink.cmp)
         lspkind (require :lspkind)]
       (cmp.setup {
                   :formatting {:format (fn [entry vim_item]
@@ -38,16 +38,19 @@
                                            (let [f (lspkind.cmp_format {})]
                                              (f entry vim_item))))}
                                            
-                  :performance {:fetching_timeout 2000}                        
-                  :sources [{:name "buffer"} {:name :path}]
+                  ; :performance {:fetching_timeout 2000}                        
+                  ; :sources [{:name "buffer"} {:name :path}]
+                  :sources {:default [:lsp :path :buffer]}
                   :completion {:completeopt "menu,menuone,noinsert"}
-                  :mapping {"<C-d>" (cmp.mapping.scroll_docs -4)
-                            "<C-u>" (cmp.mapping.scroll_docs 4)
-                            "<Up>" (cmp.mapping (cmp.mapping.select_prev_item) [:i :c])
-                            "<Down>" (cmp.mapping (cmp.mapping.select_next_item) [:i :c]) 
-                            "<C-g>" (cmp.mapping.close)
-                            "<CR>" (cmp.mapping.confirm {:select true})
-                            "<Tab>" (cmp.mapping tab [:i :s])
-                            "<S-Tab>" (cmp.mapping stab [:i :s])}})))
+                  :keymap {
+                           ; "<C-d>" (fn [cmp] cmp.mapping.scroll_docs -4)
+                           ; "<C-u>" (fn [cmp] cmp.mapping.scroll_docs 4)
+                           ; "<Up>" (fn [cmp] cmp.mapping (cmp.mapping.select_prev_item) [:i :c])
+                           ; "<Down>" (fn [cmp] cmp.mapping (cmp.mapping.select_next_item) [:i :c]) 
+                           ; "<C-g>" (fn [cmp] cmp.mapping.close)
+                           "<C-i>" [(fn [cmp] cmp.show {:providers [:minuet]})]}})))
+                           ; "<CR>" (fn [cmp] cmp.mapping.confirm {:select true})
+                           ; "<Tab>" (fn [cmp] cmp.mapping tab [:i :s])
+                           ; "<S-Tab>" (fn [cmp] cmp.mapping stab [:i :s])}})))
 
 cmp-config

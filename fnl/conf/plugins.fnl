@@ -122,13 +122,27 @@
                 :config (fn []
                           (tset _G :test#strategy "neovim"))))
 
+    (use (opts! "milanglacier/minuet-ai.nvim"
+                :config (fn [] (do-req :minuet :setup {:provider_options {:codestral {:model "codestral-latest"
+                                                                                      :end_point "https://api.mistral.ai/v1/fim/completions"
+                                                                                      :api_key "MISTRAL_API_KEY"
+                                                                                      :stream false
+                                                                                      :optional {:stop nil :max_tokens 1000}}}}))))
     ;; auto-completion support
-    (use (opts! "hrsh7th/nvim-cmp"
-                :requires ["hrsh7th/cmp-nvim-lsp"
+    (use (opts! "saghen/blink.cmp"
+                :tag "v1.4.1"
+                :requires ["hrsh7th/nvim-cmp"
                            "hrsh7th/cmp-buffer"
                            "hrsh7th/cmp-path"
-                           "hrsh7th/cmp-nvim-lua"]
+                           "hrsh7th/cmp-nvim-lua"
+                           "milanglacier/minuet-ai.nvim"]
                 :config (require :conf/plugins/cmp)))
+    ; (use (opts! "hrsh7th/nvim-cmp"
+    ;             :requires ["hrsh7th/cmp-nvim-lsp"
+    ;                        "hrsh7th/cmp-buffer"
+    ;                        "hrsh7th/cmp-path"
+    ;                        "hrsh7th/cmp-nvim-lua"]
+    ;             :config (require :conf/plugins/cmp)))
 
     ;; Debugging utilities
     (use "mfussenegger/nvim-dap")
