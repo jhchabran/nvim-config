@@ -2,12 +2,16 @@
 
 A very opinionated configuration, with strong reminiscence of [Doom-Emacs](https://github.com/hlissner/doom-emacs), written in ~Lua~ Fennel.
 
+> [!WARN]
+> Yes, I know it still uses Packer. I'm waiting on the upcoming native Neovim package management feature to transition away (LazyVim doesn't play super well with HotPot even though yes, it's doable).
+
 ## Core Principles
 
 1. Comfort: I use this everyday, it has to be nice and enjoyable.
 2. Fast: it must be extremely responsive, period.
 3. Discoverable: stuff I cannot discover has no value.
 4. Fun: I like Lisps. It's written in Fennel.
+5. AI stuff only shows up when I want it.
 
 ## Why is it written in Fennel?
 
@@ -49,8 +53,9 @@ TL;DR It's fun, it's my little LISP haven.
 List of languages that this configuration accomodates for:
 
 - Go
-- Lua
+- Lua / Fennel
 - Zig
+- Python
 - Typescript
 - Rust
 
