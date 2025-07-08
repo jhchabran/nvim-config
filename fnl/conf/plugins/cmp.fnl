@@ -10,6 +10,7 @@
                                                  :module :minuet.blink
                                                  :score_offset 100
                                                  :async true}}}
+                  :cmdline {:enabled false}
                   :completion {:trigger {:prefetch_on_insert false}}
                   :keymap {
                            :preset :enter
