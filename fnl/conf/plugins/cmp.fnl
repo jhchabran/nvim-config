@@ -15,6 +15,6 @@
                   :keymap {
                            :preset :enter
                            "<Tab>" [:fallback]
-                           "<C-i>" [(fn [cmp] (cmp.show {:providers [:minuet]}))]}})))
+                           "<C-i>" [(do-req :minuet :make_blink_map)]}})))
 
 cmp-config
