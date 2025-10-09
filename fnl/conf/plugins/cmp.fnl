@@ -5,7 +5,7 @@
   (let [cmp (require :blink.cmp)
         lspkind (require :lspkind)]
       (cmp.setup {
-                  :sources {:default [:lsp :path :buffer] 
+                  :sources {:default [:lsp :path :buffer :minuet] 
                             :providers {:minuet {:name :minuet 
                                                  :module :minuet.blink
                                                  :score_offset 100
@@ -15,6 +15,6 @@
                   :keymap {
                            :preset :enter
                            "<Tab>" [:fallback]
-                           "<C-i>" [(do-req :minuet :make_blink_map)]}})))
+                           "<C-i>" (do-req :minuet :make_blink_map)}})))
 
 cmp-config
