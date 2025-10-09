@@ -119,9 +119,10 @@
                                               (cmp.setup.buffer {:sources [
                                                                            {:name "nvim_lsp"}]})))})
                                                                            
+;; TODO somehting is fucked there, it overides stuff
 (nvim.autocmd "FileType" {:pattern "python" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [
+                                              (cmp.setup.buffer {:sources [{:name "minuet"}
                                                                            {:name "nvim_lsp"}]})))})
 (local rt (require :rust-tools))
 (rt.setup {:tools {:runnables {:use_telescope true}
@@ -150,8 +151,11 @@
 
 (tset vim.lsp.config :pyright {:on_attach on-attach})
 
+(tset vim.lsp.config :ruff {})
+
 (vim.lsp.enable "pyright")
 (vim.lsp.enable "gopls")
 (vim.lsp.enable "starpls")
 (vim.lsp.enable "zls")
 (vim.lsp.enable "ts_ls")
+(vim.lsp.enable "ruff")
