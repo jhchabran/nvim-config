@@ -121,7 +121,7 @@
 ;; TODO somehting is fucked there, it overides stuff
 (nvim.autocmd "FileType" {:pattern "python" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [
+                                              (cmp.setup.buffer {:sources [{:name "minuet"}
                                                                            {:name "nvim_lsp"}]})))})
 ; (rt.setup {:tools {:runnables {:use_telescope true}
 ;                    :inlay-hints {:auto true}}
