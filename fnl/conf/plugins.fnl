@@ -12,6 +12,7 @@
     (use "nvim-lua/plenary.nvim")
     (use "lambdalisue/guise.vim")
     (use "numtostr/FTerm.nvim")
+    ; (use "folke/snacks.nvim" :config (fn [] (do-req "snacks" :setup {:input {} :picker {}})))
 
     ;; vim-fu
     (use "tpope/vim-repeat")
@@ -62,7 +63,7 @@
     (use (opts! "ziglang/zig.vim" :ft "zig"))
     (use (opts! "folke/lua-dev.nvim" :ft "lua"))
     (use (opts! "jjo/vim-cue" :ft "cue"))
-    (use (opts! "simrat39/rust-tools.nvim")) 
+    (use (opts! "mrcjkb/rustaceanvim")) 
                 
     ;; LSP helpers
     (use "neovim/nvim-lspconfig")
@@ -129,6 +130,13 @@
     ;                                                                                   :api_key "MISTRAL_API_KEY"
     ;                                                                                   :stream false
     ;                                                                                   :optional {:stop nil :max_tokens 1000}}}}))))
+    (use (opts! "olimorris/codecompanion.nvim" 
+                :requires ["nvim-lua/plenary.nvim"
+                           "nvim-treesitter/nvim-treesitter"]
+                :config (require :conf/plugins/codecompanion)))
+    ; (use (opts! "NickvanDyke/opencode.nvim"
+    ;             :config (do (tset _G "opencode_opts" {}))))
+
     ;; auto-completion support
     (use (opts! "saghen/blink.cmp"
                 :tag "v1.4.1"

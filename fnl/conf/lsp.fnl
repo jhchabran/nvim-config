@@ -1,6 +1,5 @@
 (local lspfuzzy (require :lspfuzzy))
 (local lspkind (require :lspkind))
-(local lspconfig (require :lspconfig))
 (local cmp (require :cmp))
 (local nvim (require :lib/nvim))
 ; (local sg (require :sg))
@@ -122,25 +121,24 @@
 ;; TODO somehting is fucked there, it overides stuff
 (nvim.autocmd "FileType" {:pattern "python" 
                           :callback (fn [_] (let [cmp (require :cmp)]
-                                              (cmp.setup.buffer {:sources [{:name "minuet"}
+                                              (cmp.setup.buffer {:sources [
                                                                            {:name "nvim_lsp"}]})))})
-(local rt (require :rust-tools))
-(rt.setup {:tools {:runnables {:use_telescope true}
-                   :inlay-hints {:auto true}}
-           :server {:settings {:rust-analyzer {:checkOnSave "clippy"
-                                               :assist {:importEnforceGranularity true
-                                                        :importPrefix true}
-                                               :cargo {:allFeatures true}
-                                               :completion {:autoimport {:enable true}}
-                                               :inlayHints {:lifetimeElisionHints {:enable true
-                                                                                   :useParameterNames true}}}}
-                    ; :capabilities lsp-capabilities
-                    :on_attach (fn [client bufnr]
-                                 (do-req :inlay-hints :on_attach client bufnr)
-                                 (do-req :lsp_signature :on_attach {:hint_prefix " "
-                                                                     :zindex 50
-                                                                     :bind true
-                                                                     :handler_opts {:border :none}}))}})
+; (rt.setup {:tools {:runnables {:use_telescope true}
+;                    :inlay-hints {:auto true}}
+;            :server {:settings {:rust-analyzer {:checkOnSave "clippy"
+;                                                :assist {:importEnforceGranularity true
+;                                                         :importPrefix true}
+;                                                :cargo {:allFeatures true}
+;                                                :completion {:autoimport {:enable true}}
+;                                                :inlayHints {:lifetimeElisionHints {:enable true
+;                                                                                    :useParameterNames true}}}}
+;                     ; :capabilities lsp-capabilities
+;                     :on_attach (fn [client bufnr]
+;                                  (do-req :inlay-hints :on_attach client bufnr)
+;                                  (do-req :lsp_signature :on_attach {:hint_prefix " "
+;                                                                      :zindex 50
+;                                                                      :bind true
+;                                                                      :handler_opts {:border :none}}))}})
 (tset vim.lsp.config :ts_ls {:on_attach on-attach
                              :flags {:debounce_text_changes 200}
                              :root_dir (lsputil.root_pattern "tsconfig.json")})
