@@ -41,10 +41,16 @@
              "<cmd>Telescope command_history<CR>")
 
          (km "<leader>;" {:desc "Find commands"} 
-             "<cmd>Telescope commands<CR>")])
+             "<cmd>Telescope commands<CR>")]
 
-(wk.add [(km "<leader>a" {:group "AI"})]) ;; WIP, I mostly use aider.chat these days.
-
+ (wk.add [(km "<leader>i" {:group "AI"})]
+         (km "<leader>ic" {:desc "Chat"} "<cmd>CodeCompanionChat<CR>")
+         (km "<leader>in" {:desc "Command"} ":CodeCompanionCmd ")))
+;(wk.add [(km "<leader>i" {:group "AI"})
+;         (km "<leader>ic" {:desc "Chat"} (oc.toggle))
+;         (km "<leader>ia" {:desc "Command" :mode "nx"} (oc.prompt "@this"))
+;         (km "<leader>is" {:desc "Command" :mode "nx"} (oc.select))])
+;
 (wk.add [(km "<leader>b" {:group "Buffers"})
          (km "<leader>ba"    {:desc "Alternate buffer"} "<c-^>")
          (km "<leader>b<Tab>" {:desc "Alternate buffer"} "<c-^>")
@@ -136,7 +142,7 @@
          (km "<leader>ns" {:desc "Search"} "<cmd>:ObsidianSearch<CR>")])
 
 (wk.add [(km "<leader>o" {:group "Others"})
-         (km "<leader>oa" {:desc "Toggle Chat"} "<cmd>:Aider toggle<CR>")
+         (km "<leader>oa" {:desc "Toggle Chat"} "<cmd>:CodeCompanionChat Toggle<CR>")
          (km "<leader>op" {:desc "File panel"} "<cmd>NvimTreeToggle<CR>")
          (km "<leader>ot" {:desc "Toggle floating term"} (fn [] (do-req :FTerm :toggle)))])
 

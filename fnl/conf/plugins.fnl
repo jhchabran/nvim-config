@@ -131,6 +131,7 @@
     ;                                                                                   :stream false
     ;                                                                                   :optional {:stop nil :max_tokens 1000}}}}))))
     (use (opts! "olimorris/codecompanion.nvim" 
+                :tag "v17.33.0"
                 :requires ["nvim-lua/plenary.nvim"
                            "nvim-treesitter/nvim-treesitter"]
                 :config (require :conf/plugins/codecompanion)))
