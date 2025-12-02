@@ -50,7 +50,8 @@
 
 ;; I like to use a different theme for some different projects, so 
 ;; it's faster to understand to which term tab I'm looking at.
-(if (= (vim.fn.getcwd) "/Users/tech/work/other")
-    (nvim.colorscheme :kanagawa))
-(if (= (vim.fn.getcwd) "/Users/tech/work/sratch")
-    (nvim.colorscheme :habamax))
+(let [home (os.getenv "HOME")]
+  (if (= (vim.fn.getcwd) (string.format "%s/work/other" home))
+      (nvim.colorscheme :kanagawa))
+  (if (= (vim.fn.getcwd) (string.format "%s/work/scratch" home))
+      (nvim.colorscheme :habamax)))
